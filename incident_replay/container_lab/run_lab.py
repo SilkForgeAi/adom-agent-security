@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import hashlib
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -18,8 +19,15 @@ RUNTIME = HERE / "runtime"
 
 def docker(*args, capture=False):
     cmd = ["docker", "compose", "-p", PROJECT, "-f", str(COMPOSE), *args]
+    # Bind-mounted evidence must be writable on both Docker Desktop and native
+    # Linux runners.  Run containers with the invoking user's numeric identity
+    # instead of assuming the image's fixed lab UID owns host directories.
+    env = os.environ.copy()
+    if hasattr(os, "getuid"):
+        env.setdefault("LAB_UID", str(os.getuid()))
+        env.setdefault("LAB_GID", str(os.getgid()))
     return subprocess.run(cmd, cwd=HERE, check=True, text=True,
-                          capture_output=capture)
+                          capture_output=capture, env=env)
 
 
 def prepare():

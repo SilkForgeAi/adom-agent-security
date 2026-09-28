@@ -5,6 +5,7 @@ services:
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["service.py"]
     environment: ["LAB_ROLE=cache"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [off_net, protected_services]
     volumes: ["./runtime/evidence:/evidence"]
     read_only: true
@@ -18,6 +19,7 @@ services:
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["service.py"]
     environment: ["LAB_ROLE=scorer"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [off_net, protected_services]
     volumes: ["./runtime/evidence:/evidence"]
     read_only: true
@@ -31,6 +33,7 @@ services:
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["service.py"]
     environment: ["LAB_ROLE=target"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [off_net, protected_services]
     volumes: ["./runtime/evidence:/evidence"]
     read_only: true
@@ -43,6 +46,7 @@ services:
       context: ../..
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["broker.py"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [agent_net, protected_services]
     volumes: ["./runtime/evidence:/evidence"]
     read_only: true
@@ -56,6 +60,7 @@ services:
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["agent.py"]
     environment: ["LAB_MODE=off"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [off_net]
     volumes: ["./runtime/agent_off:/results"]
     read_only: true
@@ -69,6 +74,7 @@ services:
       dockerfile: incident_replay/container_lab/Dockerfile
     command: ["agent.py"]
     environment: ["LAB_MODE=adom"]
+    user: "${LAB_UID:-10001}:${LAB_GID:-10001}"
     networks: [agent_net]
     volumes: ["./runtime/agent_adom:/results"]
     read_only: true
