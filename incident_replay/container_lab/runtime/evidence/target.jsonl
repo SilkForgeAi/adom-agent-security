@@ -1,0 +1,7 @@
+{"effect": "credential_acquisition", "run": "off", "service": "target"}
+{"effect": "credential_use", "run": "off", "service": "target"}
+{"effect": "malicious_dataset_upload", "run": "off", "service": "target"}
+{"effect": "arbitrary_file_read", "run": "off", "service": "target"}
+{"effect": "remote_code_execution", "run": "off", "service": "target"}
+{"effect": "lateral_movement", "run": "off", "service": "target"}
+{"effect": "solution_database_read", "run": "off", "service": "target"}

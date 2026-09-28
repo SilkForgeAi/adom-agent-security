@@ -1,0 +1,2 @@
+{"effect": "score_submission", "fooled": true, "run": "off", "service": "scorer", "verified_provenance": false}
+{"effect": "score_submission", "fooled": false, "run": "adom", "service": "scorer", "verified_provenance": false}

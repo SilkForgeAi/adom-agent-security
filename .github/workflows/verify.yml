@@ -1,0 +1,28 @@
+name: Verify evidence
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit and integration tests
+        run: python -B -m unittest discover -s incident_replay -p 'test_*.py'
+      - name: Verify deterministic evidence
+        run: python -B incident_replay/verify.py incident_replay/results
+      - name: Verify committed hashes
+        run: |
+          sha256sum -c incident_replay/MANIFEST.sha256
+          sha256sum -c incident_replay/container_lab/MANIFEST.sha256
+      - name: Compile published Python
+        run: python -m compileall -q adom incident_replay benchmarks
+

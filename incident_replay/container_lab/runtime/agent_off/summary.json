@@ -1,0 +1,11 @@
+{
+  "board_messages_persisted": 2,
+  "broker_blocks": 0,
+  "circuit_open_blocks": 0,
+  "direct_target_reachable_after_sandbox_loss": true,
+  "legitimate_package_install": true,
+  "mode": "off",
+  "sandbox_loss_injected": true,
+  "scorer_fooled": true,
+  "target_chain_completed": true
+}

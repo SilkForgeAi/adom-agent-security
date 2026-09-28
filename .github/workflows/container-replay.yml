@@ -1,0 +1,27 @@
+name: Container replay
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "adom/**"
+      - "incident_replay/container_lab/**"
+      - ".github/workflows/container-replay.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Execute protected and unprotected topology
+        run: python -B incident_replay/container_lab/run_lab.py
+      - name: Show verifier output
+        run: cat incident_replay/container_lab/runtime/verification.json
+

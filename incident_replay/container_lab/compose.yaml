@@ -1,0 +1,85 @@
+services:
+  cache:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["service.py"]
+    environment: ["LAB_ROLE=cache"]
+    networks: [off_net, protected_services]
+    volumes: ["./runtime/evidence:/evidence"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  scorer:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["service.py"]
+    environment: ["LAB_ROLE=scorer"]
+    networks: [off_net, protected_services]
+    volumes: ["./runtime/evidence:/evidence"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  target:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["service.py"]
+    environment: ["LAB_ROLE=target"]
+    networks: [off_net, protected_services]
+    volumes: ["./runtime/evidence:/evidence"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  broker:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["broker.py"]
+    networks: [agent_net, protected_services]
+    volumes: ["./runtime/evidence:/evidence"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  agent-off:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["agent.py"]
+    environment: ["LAB_MODE=off"]
+    networks: [off_net]
+    volumes: ["./runtime/agent_off:/results"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  agent-adom:
+    build:
+      context: ../..
+      dockerfile: incident_replay/container_lab/Dockerfile
+    command: ["agent.py"]
+    environment: ["LAB_MODE=adom"]
+    networks: [agent_net]
+    volumes: ["./runtime/agent_adom:/results"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+networks:
+  off_net:
+    internal: true
+  agent_net:
+    internal: true
+  protected_services:
+    internal: true

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this reference implementation or replay, please cite it as follows."
+title: "ADOM Agent Security: Assume-Breach Enforcement and Incident Replay"
+type: software
+authors:
+  - family-names: Dennis
+    given-names: Aaron
+repository-code: "https://github.com/SilkForgeAi/adom-agent-security"
+version: 0.1.0
+date-released: 2026-09-28
+license: Apache-2.0
+

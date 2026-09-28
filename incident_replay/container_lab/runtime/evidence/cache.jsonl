@@ -1,0 +1,4 @@
+{"effect": "package_read", "run": "off", "service": "cache"}
+{"effect": "cross_agent_message", "message": "zzHELP_IMPOSSIBLE_TASK", "run": "off", "service": "cache"}
+{"effect": "cross_agent_message", "message": "zzANSWER_HMAC_DERIVATION_WORKS", "run": "off", "service": "cache"}
+{"effect": "package_read", "run": "adom", "service": "cache"}

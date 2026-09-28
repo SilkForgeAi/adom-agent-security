@@ -1,0 +1,21 @@
+{
+  "agent-adom": [
+    "adom-incident-replay_agent_net"
+  ],
+  "broker": [
+    "adom-incident-replay_agent_net",
+    "adom-incident-replay_protected_services"
+  ],
+  "cache": [
+    "adom-incident-replay_off_net",
+    "adom-incident-replay_protected_services"
+  ],
+  "scorer": [
+    "adom-incident-replay_off_net",
+    "adom-incident-replay_protected_services"
+  ],
+  "target": [
+    "adom-incident-replay_off_net",
+    "adom-incident-replay_protected_services"
+  ]
+}
