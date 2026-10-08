@@ -1,0 +1,43 @@
+name: AgentDojo offline evidence
+
+on:
+  push:
+    paths:
+      - "benchmarks/agentdojo/**"
+      - ".github/workflows/agentdojo-evidence.yml"
+  pull_request:
+    paths:
+      - "benchmarks/agentdojo/**"
+      - ".github/workflows/agentdojo-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify author records with the standard library
+        run: python -B benchmarks/agentdojo/verify.py
+      - name: Install pinned benchmark dependencies
+        run: python -m pip install -r benchmarks/agentdojo/requirements.lock
+      - name: Recompute native banking scores offline
+        run: python -B benchmarks/agentdojo/rescore.py
+      - name: Verify budgets, failure paths, and mock complete run
+        run: python -B -m unittest discover -s benchmarks/agentdojo/tests -v
+      - name: Frozen adapter regressions
+        working-directory: benchmarks/agentdojo
+        env:
+          PYTHONPATH: source
+        run: >-
+          python -B -m unittest
+          adom.evaluation.agentdojo.test_banking
+          adom.evaluation.agentdojo.test_contracts
+          adom.evaluation.agentdojo.test_run_integrity
+          adom.evaluation.agentdojo.test_recovery_publication

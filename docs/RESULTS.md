@@ -6,7 +6,7 @@ Updated October 8, 2026. ADOM has strong scoped enforcement results and real rem
 
 The public reference implementation includes the deterministic incident replay and the Docker topology replay. Their source, saved records, verifiers and manifests are committed. Follow [REPRODUCIBILITY.md](../REPRODUCIBILITY.md).
 
-The later workflow lab and AgentDojo implementations are separate local snapshots. The aggregate summaries published here document their recorded results; they do not make those experiments reproducible from this checkout. Source/raw-record review and unaffiliated reproduction remain next steps.
+The [AgentDojo package](../benchmarks/agentdojo/README.md) publishes the frozen v6 adapter dependency subset and all 320 historical banking episode/trace pairs. Its verifier checks record consistency and its offline scorer recomputes native banking scores without API calls. This preserves the failed clean gate and exploratory classification. Other suite raw records, later corrections and the workflow lab remain separately retained; unaffiliated fresh reproduction remains outstanding.
 
 ## GPT-4o exploratory AgentDojo evaluation
 

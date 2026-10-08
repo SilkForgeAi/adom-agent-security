@@ -12,3 +12,5 @@ build/
 benchmarks/**/runs/
 incident_replay/live-results/
 
+
+.venv-agentdojo/
