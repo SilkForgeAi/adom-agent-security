@@ -19,7 +19,7 @@ python3.12 -m venv .venv-agentdojo
 .venv-agentdojo/bin/python -m pip install -r benchmarks/agentdojo/requirements.lock
 .venv-agentdojo/bin/python -B benchmarks/agentdojo/rescore.py
 .venv-agentdojo/bin/python -B -m unittest discover -s benchmarks/agentdojo/tests -v
-PYTHONPATH=benchmarks/agentdojo/source .venv-agentdojo/bin/python -B -m unittest \
+PYTHONPATH=benchmarks/agentdojo/source .venv-agentdojo/bin/python -P -B -m unittest \
   adom.evaluation.agentdojo.test_banking \
   adom.evaluation.agentdojo.test_contracts \
   adom.evaluation.agentdojo.test_run_integrity \

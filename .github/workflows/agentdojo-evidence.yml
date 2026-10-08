@@ -32,8 +32,9 @@ jobs:
       - name: Verify budgets, failure paths, and mock complete run
         run: python -B -m unittest discover -s benchmarks/agentdojo/tests -v
       - name: Frozen adapter regressions
+        working-directory: benchmarks/agentdojo
         env:
-          PYTHONPATH: benchmarks/agentdojo/source
+          PYTHONPATH: source
         run: >-
           python -B -m unittest
           adom.evaluation.agentdojo.test_banking
