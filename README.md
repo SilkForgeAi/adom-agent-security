@@ -15,7 +15,29 @@ not claim to align a model, prevent every sandbox escape, or stop an unknown ker
 vulnerability. It tests whether a compromised agent can turn access into prohibited effects when
 the control boundary remains outside the compromised trust domain.
 
-## Verified headline result
+## Current work and evaluation status
+
+Updated October 8, 2026. Start with [results and limitations](docs/RESULTS.md),
+[engineering status](docs/ENGINEERING_STATUS.md), and [project contributions](CONTRIBUTIONS.md).
+
+- **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
+  idempotency, explicit unknown outcomes and service-side revocation fences.
+- **Measured security and utility:** exploratory GPT-4o banking recorded 87/144 baseline native
+  attack successes versus 0/144 with ADOM; attacked-task utility was 126/144 versus 143/144.
+  Clean utility fell from 16/16 to 15/16 and the clean gate failed. Travel retained 4/140 native
+  attack successes, Slack 8/105, and Workspace is partial. See the complete matrix and earlier
+  high-utility configurations before interpreting the banking result.
+- **Scoped stop evidence:** 2,000 independent scripted OS workers completed legitimate reads;
+  2,000 post-stop publications were denied with zero receiver effects. One container, 24 admitted
+  at a time; this is not 2,000 LLM agents or a production fleet guarantee.
+
+**Source availability:** this checkout remains the bounded public reference implementation.
+The newer workflow-lab and AgentDojo source snapshots are not included here. Their
+[aggregate summaries](evidence/2026-10-08/README.md) are historical author-run records, not
+experiments reproducible from this reference checkout or third-party validation. No production
+readiness, universal containment or matched superiority over another defense is claimed.
+
+## Committed reference replay result
 
 The included safe replay models the publicly reported control failures in the 2026 OpenAI–Hugging
 Face incident. Sandbox loss is explicitly injected into both arms; ADOM receives no credit for
@@ -55,7 +77,7 @@ The deployment property matters more than the classifier: the agent must have no
 to the executor, credentials, or protected network. See [the architecture](docs/ARCHITECTURE.md)
 and [threat model](docs/THREAT_MODEL.md).
 
-## Run in under a minute
+## Run the reference replay
 
 Requirements: Python 3.10+ and Docker for the topology replay. No model or API key is required.
 
@@ -115,7 +137,9 @@ Read [Security claims](docs/SECURITY_CLAIMS.md) before citing the results.
 - [`adom/`](adom/) — exercised reference enforcement core.
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
 - [`benchmarks/`](benchmarks/) — cross-provider and unscripted live-model harnesses.
-- [`docs/`](docs/) — architecture, threat model, claims, evidence, and reproduction guide.
+- [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
+- [`evidence/2026-10-08/`](evidence/2026-10-08/) — newer aggregate summaries with source identifiers and limitations.
+- [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources
 

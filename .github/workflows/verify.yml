@@ -23,6 +23,7 @@ jobs:
         run: |
           sha256sum -c incident_replay/MANIFEST.sha256
           sha256sum -c incident_replay/container_lab/MANIFEST.sha256
+          sha256sum -c evidence/2026-10-08/MANIFEST.sha256
       - name: Compile published Python
         run: python -m compileall -q adom incident_replay benchmarks
 

@@ -7,6 +7,7 @@ verify:
 	python3 -B incident_replay/verify.py incident_replay/results
 	sha256sum -c incident_replay/MANIFEST.sha256
 	sha256sum -c incident_replay/container_lab/MANIFEST.sha256
+	sha256sum -c evidence/2026-10-08/MANIFEST.sha256
 
 container:
 	python3 -B incident_replay/container_lab/run_lab.py

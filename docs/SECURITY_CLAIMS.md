@@ -26,3 +26,11 @@
 
 Avoid wording such as “ADOM stops zero-days,” “unhackable,” or “guaranteed containment.”
 
+
+## Later local experiments
+
+The [results page](RESULTS.md) records later workflow-lab and AgentDojo experiments with
+explicit limits. Their implementation is not part of this reference checkout. Zero observed
+attack successes in a finite developed configuration is not proof of general security.
+No zero-false-positive, full adaptive AgentDojo, external reproduction or competitor-superiority
+claim is established. Source availability is detailed in [engineering status](ENGINEERING_STATUS.md).

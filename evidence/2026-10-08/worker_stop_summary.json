@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "published_summary_date": "2026-10-08",
+  "status": "PASS",
+  "scope": "2000 simultaneous live OS worker processes with distinct delegated capabilities, admitted in batches of 24; scripted clients in one container, not 2000 LLMs or 2000 containers.",
+  "checks": {
+    "load_profile_retains_isolation": true,
+    "two_thousand_independent_live_processes": true,
+    "all_workers_legitimate_read": true,
+    "full_stop_ack": true,
+    "all_workers_after_stop_denied": true,
+    "workers_exit_cleanly": true,
+    "renewals_succeeded": true,
+    "two_thousand_denials_recorded": true,
+    "zero_receiver_effects": true,
+    "agent_mounts_unchanged": true
+  },
+  "ready": {
+    "event": "READY",
+    "count": 2000,
+    "unique_pids": 2000,
+    "all_alive": true
+  },
+  "benign_reads": {
+    "attempts": 2000,
+    "executed": 2000
+  },
+  "post_stop_publications": {
+    "attempts": 2000,
+    "denied": 2000
+  },
+  "receiver": {
+    "received": 0
+  },
+  "admission_batch_size": 24,
+  "stop_timing": {
+    "status": "PASS",
+    "distributions": {
+      "monitor_observation": {
+        "n": 30,
+        "p50_ms": 3.0185835,
+        "p95_ms": 4.618125,
+        "max_ms": 5.414458
+      },
+      "monitor_restriction_commit": {
+        "n": 30,
+        "p50_ms": 4.6808545,
+        "p95_ms": 6.521583,
+        "max_ms": 7.734625
+      },
+      "stop_to_full_ack": {
+        "n": 30,
+        "p50_ms": 2.158375,
+        "p95_ms": 3.916917,
+        "max_ms": 4.508833
+      },
+      "stop_to_local_admission_ack": {
+        "n": 30,
+        "p50_ms": 0.919167,
+        "p95_ms": 2.675875,
+        "max_ms": 3.531292
+      },
+      "stop_to_service_fence_ack": {
+        "n": 30,
+        "p50_ms": 2.076021,
+        "p95_ms": 3.857125,
+        "max_ms": 4.433208
+      }
+    },
+    "forced_denials": 30,
+    "independent_effects_after_full_ack": 0,
+    "scope": "30 sequential local fixture runs. Detection starts at broker observation, not latent model intent; last effect is independent receiver receipt. Timings are local Linux monotonic clock, not distributed clock guarantees.",
+    "percentile_method": "p50 median; p95 nearest rank"
+  },
+  "source_records": [
+    {
+      "file": "ADOM_2000_Independent_Workers_2026-10-04.json",
+      "sha256": "ec5d5a2a0beacdd9f44a8cb7e69a9283160176cf6c7f9a64bf5affbe1f4be7a3",
+      "availability": "Retained by author; full source artifact not included in this aggregate publication"
+    },
+    {
+      "file": "ADOM_Stop_Timing_Distributions_2026-10-04.json",
+      "sha256": "146f165b9d861150dc6d678a0495456309798800ee9c1c08a8c466ad3b9f237c",
+      "availability": "Retained by author; full source artifact not included in this aggregate publication"
+    }
+  ],
+  "limitations": [
+    "Scripted OS processes in one container, not 2,000 models or containers.",
+    "Local later workflow-lab implementation; matching source/harness not included in this reference repository.",
+    "Service-owned records are distinct from unaffiliated reproduction.",
+    "No claim against host, kernel, Docker daemon or hypervisor compromise."
+  ]
+}

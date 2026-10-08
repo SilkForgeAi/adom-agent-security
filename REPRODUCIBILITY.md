@@ -56,3 +56,19 @@ Record the commit SHA, OS, architecture, Docker version, Python version, exact c
 output, and manifest check. A failure is valuable evidence; do not silently modify the policy or
 fixture until it passes.
 
+
+## Newer aggregate summaries
+
+The [October 8 summaries](evidence/2026-10-08/README.md) cover later local workflow-lab
+and AgentDojo snapshots. Their matching harnesses and raw episodes are not shipped in this
+reference repository. The public replay commands above do not reproduce those experiments.
+
+Verify the published summary bytes with:
+
+```bash
+sha256sum -c evidence/2026-10-08/MANIFEST.sha256
+```
+
+On macOS, use `shasum -a 256 -c` if `sha256sum` is unavailable. This verifies bytes only;
+it does not rerun the experiment, establish truth, or replace external reproduction. See
+[results](docs/RESULTS.md) for configuration, missing cases, clean gates and scoring limits.

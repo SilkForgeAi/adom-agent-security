@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "published_summary_date": "2026-10-08",
+  "evaluation": "AgentDojo exploratory v6",
+  "evaluation_class": "EXPLORATORY_AFTER_FAILED_CLEAN_GATE",
+  "status": "STOPPED_BY_USER",
+  "clean_gate_passed": false,
+  "model": "gpt-4o-2024-05-13",
+  "agentdojo_version": "0.1.35",
+  "benchmark_version": "1.2.2",
+  "attack_family": "important_instructions",
+  "repeats": 1,
+  "planned_episodes": 2092,
+  "completed_episodes": 1873,
+  "valid_episodes": 1873,
+  "tables": {
+    "banking": {
+      "baseline": {
+        "clean": {
+          "completed": 16,
+          "valid": 16,
+          "utility_successes": 16,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 144,
+          "valid": 144,
+          "utility_successes": 126,
+          "raw_attack_successes": 87
+        }
+      },
+      "adom": {
+        "clean": {
+          "completed": 16,
+          "valid": 16,
+          "utility_successes": 15,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 144,
+          "valid": 144,
+          "utility_successes": 143,
+          "raw_attack_successes": 0
+        }
+      },
+      "missing_count": 0
+    },
+    "travel": {
+      "baseline": {
+        "clean": {
+          "completed": 20,
+          "valid": 20,
+          "utility_successes": 14,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 140,
+          "valid": 140,
+          "utility_successes": 64,
+          "raw_attack_successes": 50
+        }
+      },
+      "adom": {
+        "clean": {
+          "completed": 20,
+          "valid": 20,
+          "utility_successes": 14,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 140,
+          "valid": 140,
+          "utility_successes": 82,
+          "raw_attack_successes": 4
+        }
+      },
+      "missing_count": 0
+    },
+    "slack": {
+      "baseline": {
+        "clean": {
+          "completed": 21,
+          "valid": 21,
+          "utility_successes": 20,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 105,
+          "valid": 105,
+          "utility_successes": 70,
+          "raw_attack_successes": 100
+        }
+      },
+      "adom": {
+        "clean": {
+          "completed": 21,
+          "valid": 21,
+          "utility_successes": 20,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 105,
+          "valid": 105,
+          "utility_successes": 53,
+          "raw_attack_successes": 8
+        }
+      },
+      "missing_count": 0
+    },
+    "workspace": {
+      "baseline": {
+        "clean": {
+          "completed": 40,
+          "valid": 40,
+          "utility_successes": 26,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 560,
+          "valid": 560,
+          "utility_successes": 191,
+          "raw_attack_successes": 163
+        }
+      },
+      "adom": {
+        "clean": {
+          "completed": 40,
+          "valid": 40,
+          "utility_successes": 23,
+          "raw_attack_successes": null
+        },
+        "attack": {
+          "completed": 341,
+          "valid": 341,
+          "utility_successes": 195,
+          "raw_attack_successes": 0
+        }
+      },
+      "missing_count": 219
+    }
+  },
+  "workspace_matched_attack_subset": {
+    "pairs": 341,
+    "baseline_utility_successes": 154,
+    "adom_utility_successes": 195,
+    "baseline_native_attack_successes": 97,
+    "adom_native_attack_successes": 0,
+    "source": "same-pair table in the dated all-results review"
+  },
+  "limitations": [
+    "Developed policies with task/fixture exposure and privileged clean snapshots.",
+    "Exploratory after a failed clean gate; not qualified benchmark success.",
+    "Workspace is partial; missing cases receive no security credit.",
+    "Native Slack ASR is retained despite denied-call diagnostics.",
+    "No full adaptive AgentDojo evaluation, matched competitor comparison, blind authoring or unaffiliated reproduction established.",
+    "Published aggregate only; matching AgentDojo harness and raw episodes are not included in this reference repository."
+  ],
+  "source_records": [
+    {
+      "file": "ADOM_Full_V6_Audit_2026-10-07.json",
+      "sha256": "95c7eea804f0e6767514542d1c765d73833307356b63d7c46d762d9442fe6a6a",
+      "availability": "Retained by author; full source artifact not included in this aggregate publication"
+    },
+    {
+      "file": "ADOM_Full_V6_2026-10-07.md",
+      "sha256": "663919f3dc6e21c876c316e95f34a6b5f3186f7217264237fd6d8df844338535",
+      "availability": "Retained by author; full source artifact not included in this aggregate publication"
+    },
+    {
+      "file": "ADOM_All_Results_2026-10-08.md",
+      "sha256": "ae436459cc8c690fffd810c06aabbbc0c5a184cdeb8e2a652c1ffc2d995cd93b",
+      "availability": "Retained by author; full source artifact not included in this aggregate publication"
+    }
+  ]
+}
