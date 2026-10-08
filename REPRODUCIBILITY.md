@@ -59,9 +59,9 @@ fixture until it passes.
 
 ## Newer aggregate summaries
 
-The [October 8 summaries](evidence/2026-10-08/README.md) cover later local workflow-lab
-and AgentDojo snapshots. Their matching harnesses and raw episodes are not shipped in this
-reference repository. The public replay commands above do not reproduce those experiments.
+The [AgentDojo evaluation package](benchmarks/agentdojo/README.md) now ships the exact v6 adapter dependency subset and all 320 historical banking episode/trace pairs. Run `python -B benchmarks/agentdojo/verify.py` for free standard-library verification; the package README also documents offline native rescoring and a separate paid validation runner. Public availability does not establish unaffiliated reproduction.
+
+The [October 8 summaries](evidence/2026-10-08/README.md) also cover other suites, later corrections and the workflow lab. Their remaining raw records and later source snapshots are not shipped here. The incident replay commands above do not reproduce those experiments.
 
 Verify the published summary bytes with:
 

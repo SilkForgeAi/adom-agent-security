@@ -30,3 +30,7 @@ and SHA-256 manifests beneath ignored `runs/` directories.
 Live runs consume paid API calls and have no automatic retries. All credentials and targets in the
 scenario world are synthetic. Review model names and provider pricing before running.
 
+
+## AgentDojo reproducibility package
+
+See [the AgentDojo package](agentdojo/README.md) for a free historical banking verifier and offline native scorer, the exact v6 adapter subset, pinned dependencies, and a separately gated paid validation runner. The historical clean gate failed; its attack result remains exploratory. No new model result or independent reproduction is implied.

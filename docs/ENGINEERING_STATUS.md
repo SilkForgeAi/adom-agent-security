@@ -37,3 +37,7 @@ The agent must not possess direct service credentials, administrative sockets, b
 ## Next reviewable engineering work
 
 Publish a carefully scoped, licensed subset of the later lifecycle implementation with its own pinned build and tests; reproduce it outside the author's machine; evaluate a narrow external integration; improve utility and final-output coverage; and connect implementation traces to an explicit model. No implementation proof or completed outside reproduction is claimed.
+
+## AgentDojo reproducibility release
+
+The [public evaluation package](../benchmarks/agentdojo/README.md) now includes the exact required v6 adapter source, dependency lock, 320 historical banking episodes and traces, standard-library verifier, offline native scorer and separate paid banking validation runner. Historical native scores recompute locally; the failed clean gate and exploratory classification remain unchanged. The old global dispatch log also includes checker/reference calls and is not independent effect evidence; the scorer uses executor audit/native tool results, and the new logger captures only agent-query dispatches. This release does not include later private corrections or establish unaffiliated reproduction.

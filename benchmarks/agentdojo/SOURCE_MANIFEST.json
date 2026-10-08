@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "source": "Exact required subset of historical v6 adapter snapshot; not latest private corrections.",
+  "files": {
+    "adom/evaluation/agentdojo/autodojo_plugin.py": "55b2404c941320d2c625e9fbb03b109db20ce9e17473aaa3371701715a9dd19e",
+    "adom/evaluation/agentdojo/test_contracts.py": "f1e57de6fa4a61976326887ed862f89ac1f844e7344d4282a34ca7b881c57f87",
+    "adom/evaluation/agentdojo/workspace_policy.py": "26496fb360b139db4998c97e319ae7d281efce01885a75ec0e9f648179f46dca",
+    "adom/evaluation/agentdojo/measure.py": "d279a0b83ba4357b4543f9bdcd82ecb943ab1eb96b02cc52429de5189c17d45d",
+    "adom/evaluation/agentdojo/run.py": "b3c748a49cdb56d5a15ecdbcf7160fc2b58bb1cd9cde1f553528c9f89b27860f",
+    "adom/evaluation/agentdojo/task_policy.py": "432ffa778e4e33f4f57b54626673131ba68c48014aeda7129197d106c23f8dd3",
+    "adom/evaluation/agentdojo/test_recovery_publication.py": "c95c6f66474c1005738caab4bb9f6db3f6da02b145f85c57761e65ce5b9bb3c7",
+    "adom/evaluation/agentdojo/export_bundle.py": "91cd28f61be98d1f0e3dc7a8bf47f9eb7242ce4a9fb64f99635e1d4dbeecb393",
+    "adom/evaluation/agentdojo/__init__.py": "5d801c164fe6ad0403fa6428bdbaf1b4d69da856c840894c0b3971f0b519a484",
+    "adom/evaluation/agentdojo/test_banking.py": "25da6d61a2448e66d362a2de22739badfa2b1304744c8d93654ea976b3ecedfb",
+    "adom/evaluation/agentdojo/travel_policy.py": "abb0a2afc3dc6811b2256b4c0f7f1f64104c46ea7510974a96072e896f9ca9a7",
+    "adom/evaluation/agentdojo/test_autodojo_plugin.py": "46836199fdaf4f77ce8c532fc9b029d2e5fbb14007f0fbb7ebc86348694a54c7",
+    "adom/evaluation/agentdojo/publication.py": "b5faa18820f1c1d9d4445f89c78d21e0fe7e0865874dbb425363a7336d7a59a1",
+    "adom/evaluation/agentdojo/contracts.py": "fa4b5980f5881397bbcd25b55b384890b16d1707c22f7c66a26c56c44422a910",
+    "adom/evaluation/agentdojo/slack_policy.py": "210804d893e18e6d055f6c9f4414fe606dd6ddc6ba1f161f83e03e3bf6a21851",
+    "adom/evaluation/agentdojo/openai_backend.py": "01214543d8bc4f218d0ad334adac77b75c30ef24bdd9c9cb805999d75f657d66",
+    "adom/evaluation/agentdojo/run_integrity.py": "84b49b80a1887d0bcb5deee9d57ee3089cdbaca93c02b734315453ec01a6638c",
+    "adom/evaluation/agentdojo/provenance.py": "59c8077722ef8bbf88b3bccd01a942d7ec7aaefdef6136447cbb0b393b028027",
+    "adom/evaluation/agentdojo/executor.py": "63196735ed9495762bda565d7877ff2a038015ab52b4689e3cde0eddc7432541",
+    "adom/evaluation/agentdojo/test_run_integrity.py": "a524451b4efb1c8a940c0b0ab86d591246f8093e4ec56bec8a92582e155a7af6",
+    "adom/__init__.py": "524f8e02ab410eb64c331d1c90e78334d0006b27b429d70a9d11ae92c7af7320",
+    "adom/api/__init__.py": "884af04afe84db0a66b6bd499fe9cbe3a12981d1092e3b55841fc98a330a3d4e",
+    "adom/enforcement/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "adom/evaluation/__init__.py": "01dd1c170474d65937b526221616874eb374d829f11ac1110128e09598a68a96",
+    "adom/api/model_proxy.py": "0ee27e91405a19efe3c1fb6aaf878053030b8a139d4ebfa3b6c0ffe576a1158d",
+    "adom/enforcement/action_kernel.py": "ae68cf8dab8c1f1c5fce702d8a05092bc3cfa7ad504ad78e7c31c27d6815c38f",
+    "adom/enforcement/egress_proxy.py": "773f9f0e458732b0a4f41b816cf09345353c49e252d0f3052fdfb44a13a77a76"
+  }
+}

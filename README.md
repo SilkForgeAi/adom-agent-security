@@ -31,11 +31,14 @@ Updated October 8, 2026. Start with [results and limitations](docs/RESULTS.md),
   2,000 post-stop publications were denied with zero receiver effects. One container, 24 admitted
   at a time; this is not 2,000 LLM agents or a production fleet guarantee.
 
-**Source availability:** this checkout remains the bounded public reference implementation.
-The newer workflow-lab and AgentDojo source snapshots are not included here. Their
-[aggregate summaries](evidence/2026-10-08/README.md) are historical author-run records, not
-experiments reproducible from this reference checkout or third-party validation. No production
-readiness, universal containment or matched superiority over another defense is claimed.
+**AgentDojo reproducibility:** the [evaluation package](benchmarks/agentdojo/README.md) now
+publishes the frozen v6 adapter, pinned dependencies, all 320 historical banking episode/trace pairs,
+a free verifier, an offline native scorer, and a separate paid validation runner. The historical banking
+scores recompute offline; its failed clean gate and exploratory classification remain visible.
+This is publicly executable evidence, not an unaffiliated reproduction or provider attestation.
+Later source corrections, the newer workflow lab, and other suites remain separate
+[author-run aggregate records](evidence/2026-10-08/README.md). No production readiness, universal
+containment or matched superiority over another defense is claimed.
 
 ## Committed reference replay result
 
