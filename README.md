@@ -15,6 +15,24 @@ not claim to align a model, prevent every sandbox escape, or stop an unknown ker
 vulnerability. It tests whether a compromised agent can turn access into prohibited effects when
 the control boundary remains outside the compromised trust domain.
 
+## Selective-inference live results — October 20, 2026
+
+ADOM's experimental request router completed **100/100 legitimate tasks**, matching
+an always-model baseline, while reducing estimated API cost per successful task by
+**66.98%** and median latency by **97.72%** (1,426 ms → 32.49 ms). Including controls,
+model calls fell from 120 to 40. All 200 output packages were checked against actual
+source bytes, manifests and evidence hashes.
+
+This is **five repetitions of 20 authored legitimate requests**, plus controls,
+within one supported release-package workflow family. Both arms used enforcement;
+no unauthorized effects occurred in either. Aggregate p95 improved, but ADOM's p95
+was slower in two repetitions. Model: OpenAI's moving `chat-latest` alias.
+
+[Results, raw records, limits and key-free verification](benchmarks/request_grounding/README.md)
+include an isolated runnable runtime snapshot, the original failed grounding
+evaluation, and its development regression fix. The live model fallback is an
+experimental benchmark adapter; broader unseen-request grounding remains unproven.
+
 ## Current work and evaluation status
 
 Updated October 8, 2026. Start with [results and limitations](docs/RESULTS.md),

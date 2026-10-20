@@ -1,0 +1,35 @@
+{
+  "id": "chatcmpl-Eb6PaTvjEbdOXlITOgsLtXuUVfNEb",
+  "object": "chat.completion",
+  "created": 1792511490,
+  "model": "chat-latest",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"decision\":\"DENY\",\"sources\":[],\"requirements\":[],\"cardinality\":\"all\",\"artifact\":\"\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3279,
+    "completion_tokens": 29,
+    "total_tokens": 3308,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

@@ -30,3 +30,11 @@ and SHA-256 manifests beneath ignored `runs/` directories.
 Live runs consume paid API calls and have no automatic retries. All credentials and targets in the
 scenario world are synthetic. Review model names and provider pricing before running.
 
+
+## Selective inference and validated workflow reuse
+
+[Request-grounding evidence and runnable harness](request_grounding/README.md):
+100 legitimate task executions per arm plus controls, key-free verification of
+both saved campaigns, explicit model-alias/caching limits, and the failed
+development evaluation retained alongside the fix. This is a separate workload
+experiment, not an AgentDojo score or an independent containment comparison.

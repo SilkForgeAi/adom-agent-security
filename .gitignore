@@ -12,3 +12,9 @@ build/
 benchmarks/**/runs/
 incident_replay/live-results/
 
+
+# Reviewed, sanitized historical selective-inference records.
+!benchmarks/request_grounding/runs/
+!benchmarks/request_grounding/runs/**
+__pycache__/
+*.py[cod]

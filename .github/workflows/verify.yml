@@ -24,6 +24,11 @@ jobs:
           sha256sum -c incident_replay/MANIFEST.sha256
           sha256sum -c incident_replay/container_lab/MANIFEST.sha256
           sha256sum -c evidence/2026-10-08/MANIFEST.sha256
+      - name: Verify selective-inference saved evidence (no API key)
+        run: python -B benchmarks/request_grounding/verify.py
+      - name: Test published selective-inference runtime
+        working-directory: benchmarks/request_grounding/tests
+        run: python -B -m unittest test_request_grounding_v2.V2Tests test_parameterized_workflow test_workflow_compiler -q
       - name: Compile published Python
         run: python -m compileall -q adom incident_replay benchmarks
 

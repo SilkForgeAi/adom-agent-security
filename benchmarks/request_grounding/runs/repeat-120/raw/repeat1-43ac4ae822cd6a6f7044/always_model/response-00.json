@@ -1,0 +1,35 @@
+{
+  "id": "chatcmpl-Eb6OgZZP4lcmBi9uGbjb7D8JN6VMD",
+  "object": "chat.completion",
+  "created": 1792511434,
+  "model": "chat-latest",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"decision\":\"EXECUTE\",\"sources\":[\"mediated_gateway.py\",\"task_router.py\",\"external_delivery.py\",\"action_kernel.py\"],\"requirements\":[],\"cardinality\":\"all\",\"artifact\":\"release.zip\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3277,
+    "completion_tokens": 47,
+    "total_tokens": 3324,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

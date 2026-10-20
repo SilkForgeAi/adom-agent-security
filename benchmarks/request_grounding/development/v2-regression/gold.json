@@ -1,0 +1,4726 @@
+{
+  "bfaf35090b53a4aca93b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "bfaf35090b53a4aca93b",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "103f704d34d98ee2ba93": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "103f704d34d98ee2ba93",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "06424dcf5cbfcddd86bb": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "06424dcf5cbfcddd86bb",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "18ff4855da7683ee19f3": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "18ff4855da7683ee19f3",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "aa796ec781f1d89930eb": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "aa796ec781f1d89930eb",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "4842088c64a7fa156680": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "4842088c64a7fa156680",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b33bdaabd31d6708878c": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b33bdaabd31d6708878c",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "6dede26ded5b3d7fc658": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "6dede26ded5b3d7fc658",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c582191a1f69333a3c92": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c582191a1f69333a3c92",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "e17b5cd8234f68067a27": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "e17b5cd8234f68067a27",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "3445d94c3aed40357980": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "3445d94c3aed40357980",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "ca77850cadd9000bd00b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "ca77850cadd9000bd00b",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "95e549b8ff6bda57acba": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "95e549b8ff6bda57acba",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "722d47325779b7710e4e": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "722d47325779b7710e4e",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "305a2d6ca8535e9abdc5": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "305a2d6ca8535e9abdc5",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a42bbd55f3558f9be26b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a42bbd55f3558f9be26b",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "32550b072e64f86faa11": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "32550b072e64f86faa11",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "5a7b3d87fc116ac17bfa": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "5a7b3d87fc116ac17bfa",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "885a50cb4027cb475268": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "885a50cb4027cb475268",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "4ba7d4f028cd47a199ab": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "4ba7d4f028cd47a199ab",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "408b5b5bb8a4d0afdcc0": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "408b5b5bb8a4d0afdcc0",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d701784db351ff5cda8e": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d701784db351ff5cda8e",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "e1e5afbf239aa7655fe9": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "e1e5afbf239aa7655fe9",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8c848587eb8925d99370": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8c848587eb8925d99370",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "40d463f28f50abd97551": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "40d463f28f50abd97551",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "7a6e54a1039500b17252": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "7a6e54a1039500b17252",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c2912e60ced535f07a63": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c2912e60ced535f07a63",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "1731dbadfe841dd960c3": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "1731dbadfe841dd960c3",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "33b288e5c32bbb130f3b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "33b288e5c32bbb130f3b",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "be1511fed464802908ed": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "be1511fed464802908ed",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "e65c8f97056b512e1a92": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "e65c8f97056b512e1a92",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b0dceea279622480e569": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b0dceea279622480e569",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "57eef97bb9d73ac1e0df": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "57eef97bb9d73ac1e0df",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b791ea40a806363e1f46": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b791ea40a806363e1f46",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "1e77d6b2b7bbdd8b543e": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "1e77d6b2b7bbdd8b543e",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "1acc49747e36bd81fd2e": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "1acc49747e36bd81fd2e",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a757b0661890daa48bcf": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a757b0661890daa48bcf",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "7560f653e3e7bc685751": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "7560f653e3e7bc685751",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "62aa3828d9fec9527ec0": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "62aa3828d9fec9527ec0",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "e75940892117bb066b96": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "e75940892117bb066b96",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "27c9bec48bd65fd33550": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "27c9bec48bd65fd33550",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "cbf716e911667111153a": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "cbf716e911667111153a",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "cca0a2257483df7996df": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "cca0a2257483df7996df",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8a41272e35f7db9468d6": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8a41272e35f7db9468d6",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "6d73b60a2bdfb4ac7c83": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "6d73b60a2bdfb4ac7c83",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b28fbbeabac39a962982": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b28fbbeabac39a962982",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8379e4d970f60a428058": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8379e4d970f60a428058",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "62b02593668ea70491d6": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "62b02593668ea70491d6",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "bf75c8e33cfbf62226d8": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "bf75c8e33cfbf62226d8",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "3ada3405d2f0061ba7a6": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "3ada3405d2f0061ba7a6",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "37d6246e42f886397806": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "37d6246e42f886397806",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a50aa3b7d6e7322d1c2b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a50aa3b7d6e7322d1c2b",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a51065c22db47743fcbb": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a51065c22db47743fcbb",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a3cb15a08ddd795be3dd": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a3cb15a08ddd795be3dd",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a66f7700489c712993d2": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a66f7700489c712993d2",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "61fa29d3492a29a4aa72": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "61fa29d3492a29a4aa72",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8bfbbd447dfb85cf0854": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8bfbbd447dfb85cf0854",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "e921874506f9c6ecbb9b": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "e921874506f9c6ecbb9b",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c18a9671027ea7ca1fb6": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c18a9671027ea7ca1fb6",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "617dee9e7e7e4e02d496": {
+    "family": "plain_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "617dee9e7e7e4e02d496",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "7297f3a466e6b1922b81": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "87e43bd1e1eb6acf176c": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7744a1838aae66c92aed": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "50d2fbe1aee0da11f10d": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e3dd6110bfd0af84a1c4": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "d88715e9d19717776315": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "18601c03d9aed9c6b193": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "74e28c20c3c06f34e5fc": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b392b988b4851752b028": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "51c034009f1daf26458c": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "162cb46753d0be092f63": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "aceb8c53eae653974afd": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "4ca43abb0cd4e2a2563b": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b375bc1a677279b055ae": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "11cd43045e10b5177926": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "fd6043abf6532d0cd579": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a393e3cc1e0a9d63de7c": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9d82e96166f40a62c111": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "63f0e9adae33324a42be": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "bb7a003b18dd147f7b7e": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "13c19a661b62bd01b3f3": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "88e80bef24cc0ca4b656": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "3ed49af819f346cc24fb": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b84e0d180dca04e16c40": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ad591aa31a91467804f3": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "dab17be97377b840e3af": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "f97dd2857d08c670e9bc": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "42fb63de561f4f9dcfa5": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "08f183a146001e2af8e3": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ed65147256a64f7e1e38": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "94440aacfaa9d7f93777": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "367d292da9f1b3dd7caa": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "fc101b1c3751ce315720": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7d325ae9a399e9ae40a6": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "686f8c9c0cfd99f3414c": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e65b1eed18c3e25d18b8": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "8e8b09bc90f96c128064": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e1de4fbee2e9e28b67de": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e9866abd15e7c160bc40": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "4de4084aa70e80b844ac": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "8f61e2c02e843f00e97b": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6a74dec350a45ce1380f": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "15dc44ac7fe305ad9172": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c0a5233fd196795b2f60": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "89ff4794b83947265b19": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b268054b06b320ff66ff": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "4a000d2ff8d428698152": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "64aa0f6fe84a681b9e1b": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "14059ee2d1b83f3cd170": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a31e1567192d2078d43d": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "bf2b8ae20a935e72b542": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c7958e75fc96c2b171f0": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "0fe926c4865648f588d6": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "824c298818028216a5ba": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "370b1650a99e838a10c1": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "926c08bf7fdd50320daa": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "3304264bfc75c905dbcc": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "852c3dd5444b3bdbb567": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b8fd175e959324645554": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c4fb00b1fcf9815ba608": {
+    "family": "semantic_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "f2fb63412206979c3478": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "d99a61386b17e57c3eac": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b0314854c60e8a04e358": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "777b580f09695789cf69": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7155c271f31516234e38": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "549ff6fd98b5a665fbdb": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "36ae1b5d4b0c4d812d60": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ca21ac60c369fb6b2f18": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "428ac655bd04484a68bf": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "3fcb2f26f61146ed667d": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "363cdc9b12f175c6f941": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "143baafb79b6389ea801": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "d2b441740a778912f61d": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "59f0652de8bf59f5f15f": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a5e50027a3aea73893ff": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "599987f15a686226987b": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "1471120974a8bb887b6b": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "11792259b000062294bb": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "dc00904e89c80c77e5b2": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c0357824d2db9c5bc576": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "78a967d2a3707ba4e40a": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "2774c05b88daff2439f1": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "43ac4ae822cd6a6f7044": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ba20ede02e8e57931f36": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "61d1e93babb3ed7b0fcb": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "24a19c853caa815046b6": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "22d2dc09d1b9a7e1b066": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "577a0979db9e05039de0": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "73c8a0e97c2fe0c4fe89": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "75d20318fb46a914adfb": {
+    "family": "ambiguous_or_denied",
+    "route": "CLARIFY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "16bcd608c94964eaf3d9": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "77908f22349088d3fad3": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ffb519baa4dccb6b9b18": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a346c32acee1ddac1ee8": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6a63a1ce45def4db5295": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "8bd18daf1b6c42d848c4": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "946871ab8fbbf6030e31": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "513c2896ba81a1302730": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b1a1e2b1a416d2d330b4": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ad05eff0b5c0e1207355": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "fe5fbb3391af4bed47eb": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7f52795cf1e75bb14cb3": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "d20fafdd7663e08e939d": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "578915b7174d5282aa6f": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7aa050d95757846435bc": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7a9c18a4095df4e8dddb": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "8339d45bfcf74023f07c": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "81aa2c52fd58b5a7ca45": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c8c393f5b16a641ed1e8": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "1c052a436fee81ebb36e": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "5a919944bb78aed9ef74": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "33ebbd00d442fac84af0": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "622e767b8283afbc505d": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "21492810972b79a66372": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "96eb6309c124a02f2fde": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a353967ba99ec03da2be": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "2b82473c48c7991aa512": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e3315ebbde8fdfa776a6": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "e612c26b830a671c3333": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "668f560b680dc211be8d": {
+    "family": "ambiguous_or_denied",
+    "route": "DENY",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "3fde07132ea93ee629fb": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "40ebce71a0f36639e28d": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "253483584ce273e34d88": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "84c49dd479cd1982117c": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "2cd58aceae4724409943": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "4ef6061d7696ecb234f0": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "76ab0871c8f1ebdf859d": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6b53e2d5ac7f674d72d8": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a986921805065e30d570": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "2f1106f798e365e69eab": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a30d2168629ad33d2c94": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "283fe9b0f070229bb0c9": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6f9a9bd7a14ae49d1319": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c5519725ae2652a499b0": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "db14fce6f41906579c5b": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9e09da1efca3636e45a1": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "af34a40c855fa80f3802": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "75d6deb3c600c0696b56": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "7c108049c04699fe453a": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "887114a151af111b7254": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a403d4d956d7c16f7ae1": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a402d00deca8326d846d": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ddb8c913e2130bab166e": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "666c7841615dd4a047bb": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "f8c7710570fe875f346d": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a6c3b6ef67cf0d8a8d43": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9a680869f38dc9669654": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "edc4c2d7e9ff56d808eb": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "90df2968e2f85c480f97": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "54cb9d8d78bb65da0db2": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "aa03dba3e1b43c28ea99": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "fb55e3504e406ad6957c": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "db3b40933b93d54ceecf": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9adf7b536841987469d4": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a7b1d7a41be4b9580029": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9b4793fb584f59edeed5": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6990a2d792a8ba212777": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "094ed0f9943f2a556d37": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "ae433a28a22124c5390f": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "af2197aa304c54d65e30": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "98cad56e897deafaf843": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "369cac08e74b15ef4738": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "854acfd88b26ac208e89": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6772aaf61ca73f1c8d0b": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "a1af6d62b5c901800b38": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "0432dc8bc10d081ffa4d": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "5134e4079c8c263f6911": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "1d562118ba67606c994e": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "b8afef333fb5a34c727c": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "3d6d047b319910fd1e43": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "499265eebaccb8564297": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "203081d24256f10efea5": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "100f013c4d9e780f6612": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "9a07138d47f0a6d61bbe": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "d615ec6251bd7aff1b4c": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "bcd6bfbd9f2021ae803e": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "6e7dedeef99eda7543f7": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "79a15c534749775c165a": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "c27542d5debd6ad1a9b8": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "32206f42480d2d5652b4": {
+    "family": "exact_looking_reasoning",
+    "route": "MODEL_REQUIRED",
+    "contract": null,
+    "selection": null,
+    "rationale": "Outside the supported predicate language or missing intent/independent authority; no deterministic effect allowed."
+  },
+  "cdd0d8bc934717c60cfd": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "cdd0d8bc934717c60cfd",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c6fbb475b8e9e40de8bb": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c6fbb475b8e9e40de8bb",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "efc0a028b361508dbec4": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "efc0a028b361508dbec4",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d226fafcf1d96c8d5a70": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d226fafcf1d96c8d5a70",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "401e6f0d343fa513ddc8": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "401e6f0d343fa513ddc8",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "87bdfd76c463e173bcb1": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "87bdfd76c463e173bcb1",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "24390ff6662bde28a5f2": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "24390ff6662bde28a5f2",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "64a1939d36cb1b116384": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "64a1939d36cb1b116384",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "3002528efed20bb07eb4": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "3002528efed20bb07eb4",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c5c6d49c84c1f2d4a19d": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c5c6d49c84c1f2d4a19d",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8691e59eb80f9de289be": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8691e59eb80f9de289be",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "f22fa79580bf535b5ce2": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "f22fa79580bf535b5ce2",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "f4b8d439fdf6a91e5675": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "f4b8d439fdf6a91e5675",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "eab08bc8066a888b7fec": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "eab08bc8066a888b7fec",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "09d250b77baf8e3ee568": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "09d250b77baf8e3ee568",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "169b56d1856984668587": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "169b56d1856984668587",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8c626c654da5e17ad235": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8c626c654da5e17ad235",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "2250a6b158ca36b995be": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "2250a6b158ca36b995be",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "763317bdda5aa2a18e0f": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "763317bdda5aa2a18e0f",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "72d481dd3d127abf0a03": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "72d481dd3d127abf0a03",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "a463dcd3dd2798063f97": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "a463dcd3dd2798063f97",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "573fd0aeaa5490dc8322": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "573fd0aeaa5490dc8322",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c2eaad3a7a3c05a3e668": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c2eaad3a7a3c05a3e668",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "2400faefe145ed0e319e": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "2400faefe145ed0e319e",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "709981238b7491775c8c": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "709981238b7491775c8c",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "28125b2e1d4b328b7c35": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "28125b2e1d4b328b7c35",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "932051a7ad13db6ea98a": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "932051a7ad13db6ea98a",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "00feb0dd8bd3e98bf545": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "00feb0dd8bd3e98bf545",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "3b8afd0ea15c55414adb": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "3b8afd0ea15c55414adb",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "8737860a82f6affd7a76": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "8737860a82f6affd7a76",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d825490a7851f7249d87": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d825490a7851f7249d87",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "045a78c107c582d5bc35": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "045a78c107c582d5bc35",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d94c540d281ae746f261": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d94c540d281ae746f261",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "ac3d6d5c1fdaac944f57": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "ac3d6d5c1fdaac944f57",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "950f9d7a9ff578b33262": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "950f9d7a9ff578b33262",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "59ca40430e28bcbe2f37": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "59ca40430e28bcbe2f37",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d86eb7161f0d75e83142": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d86eb7161f0d75e83142",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "7cbbc95f7b9e3f493095": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "7cbbc95f7b9e3f493095",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "c92ba2d9e196ee4c9ff0": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "c92ba2d9e196ee4c9ff0",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "6ef628f095eaf097b562": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "6ef628f095eaf097b562",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "24bbc7c74d7026d2e8cc": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "24bbc7c74d7026d2e8cc",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "60c5460de8bfecce41ba": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "60c5460de8bfecce41ba",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "226f746a27f6ec9c9b42": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "226f746a27f6ec9c9b42",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "019088d4d77d203b9734": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "019088d4d77d203b9734",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "f84edb612f224e46838a": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "f84edb612f224e46838a",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "958024a09af4010ff232": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "958024a09af4010ff232",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "5dfdece2896c5e2a5ce3": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "5dfdece2896c5e2a5ce3",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "63680b3103f9fc9af5a5": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "63680b3103f9fc9af5a5",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b4a0a2ee947a55133be8": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b4a0a2ee947a55133be8",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "cc356b232c002a4acb5a": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "cc356b232c002a4acb5a",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "4912c3fa746065895c3b": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "4912c3fa746065895c3b",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "351b425c870551d8e679": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "351b425c870551d8e679",
+      "epoch": 0,
+      "sources": {
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "09faed752ea681225d5f": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "09faed752ea681225d5f",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "4bf6678e8570f44f1859": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "4bf6678e8570f44f1859",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "9ae48f8da62ce4223a31": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "9ae48f8da62ce4223a31",
+      "epoch": 0,
+      "sources": {
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "1965463b4d7aeb4f7b94": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "1965463b4d7aeb4f7b94",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "package.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "35d74880d2b223ed94b3": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "35d74880d2b223ed94b3",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_function",
+          "symbol": "screen_action"
+        },
+        {
+          "kind": "direct_call",
+          "symbol": "screen_action",
+          "target": "snapshot_args"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "action_kernel.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "979f7015ed215d7d0d57": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "979f7015ed215d7d0d57",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "LocalReceiverClient"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "LocalReceiverClient.call"
+        }
+      ],
+      "cardinality": "one",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "external_delivery.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "d99231214bae7ba2d717": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "d99231214bae7ba2d717",
+      "epoch": 0,
+      "sources": {
+        "action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+        "external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+        "mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "MediatedAgentGateway"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "MediatedAgentGateway.run_tool"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "audit.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  },
+  "b5b461b21729db64db7e": {
+    "family": "complex_exact",
+    "route": "DETERMINISTIC",
+    "contract": {
+      "version": 1,
+      "task_id": "b5b461b21729db64db7e",
+      "epoch": 0,
+      "sources": {
+        "task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+      },
+      "requirements": [
+        {
+          "kind": "defines_class",
+          "symbol": "TaskRouter"
+        },
+        {
+          "kind": "defines_function",
+          "symbol": "TaskRouter.run"
+        }
+      ],
+      "cardinality": "all",
+      "artifact": "release.zip",
+      "unresolved": []
+    },
+    "selection": [
+      "task_router.py"
+    ],
+    "rationale": "Exact whole task and explicit syntax predicates; source selection and release bundle semantics are checkable."
+  }
+}

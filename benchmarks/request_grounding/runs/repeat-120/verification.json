@@ -1,0 +1,107 @@
+{
+  "verified_artifacts": 200,
+  "api_responses": 160,
+  "returned_models": [
+    "chat-latest"
+  ],
+  "legitimate_usage": {
+    "always_model": {
+      "prompt_tokens": 329840,
+      "cached_tokens": 57600,
+      "completion_tokens": 6407,
+      "uncached_cost_usd": 1.8414099999999989
+    },
+    "adom": {
+      "prompt_tokens": 132580,
+      "cached_tokens": 48000,
+      "completion_tokens": 2520,
+      "uncached_cost_usd": 0.7385
+    }
+  },
+  "uncached_cost_savings": 0.5989486317550136,
+  "exact_model_contract_mismatches": [],
+  "failures": [
+    {
+      "id": "repeat5-43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat3-73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat1-73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat5-73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat1-43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat3-43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat4-73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat2-43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat4-43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "repeat2-73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    }
+  ],
+  "combined_spend_usd": 3.63496,
+  "new_spend_usd": 2.453985
+}

@@ -1,0 +1,91 @@
+{
+  "verified": true,
+  "n": 300,
+  "unique_request_texts": 280,
+  "routing_agreement": 300,
+  "confusion": {
+    "DETERMINISTIC": {
+      "DETERMINISTIC": 120,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "MODEL_REQUIRED": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 120,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "CLARIFY": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 30,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "DENY": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 0,
+      "DENY": 30,
+      "REVIEW_REQUIRED": 0
+    },
+    "REVIEW_REQUIRED": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    }
+  },
+  "false_deterministic": {
+    "numerator": 0,
+    "denominator": 180
+  },
+  "wrong_derived_contracts": 0,
+  "exact_tasks_completed": {
+    "correct": 120,
+    "eligible": 120,
+    "coverage": 1.0
+  },
+  "false_model": {
+    "numerator": 0,
+    "denominator": 120,
+    "rate": 0.0
+  },
+  "ambiguity_clarification": {
+    "correct": 30,
+    "n": 30
+  },
+  "nonexact_effects": 0,
+  "grounded_executions": 120,
+  "new_local_compilations": 12,
+  "IR_reuses": 108,
+  "distinct_programs": 12,
+  "successful_grounded_latency": {
+    "n": 120,
+    "p50_ms": 22.104875,
+    "p95_ms": 31.514792,
+    "max_ms": 41.12775
+  },
+  "escalation_or_refusal_latency": {
+    "n": 180,
+    "p50_ms": 0.012479,
+    "p95_ms": 0.03,
+    "max_ms": 0.236916
+  },
+  "model_required_not_executed": 120,
+  "api_calls": 0,
+  "new_api_cost_usd": 0,
+  "criteria": {
+    "zero_false_deterministic": true,
+    "zero_wrong_derived_contracts": true,
+    "exact_coverage_at_least_70_percent": true,
+    "ambiguity_clarification_at_least_90_percent": true,
+    "zero_nonexact_effects": true,
+    "all_selected_exact_outputs_correct": true
+  },
+  "all_targets_met": true
+}
