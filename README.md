@@ -35,7 +35,7 @@ experimental benchmark adapter; broader unseen-request grounding remains unprove
 
 ## Current work and evaluation status
 
-Updated October 8, 2026. Start with [results and limitations](docs/RESULTS.md),
+Updated October 20, 2026. Start with [results and limitations](docs/RESULTS.md),
 [engineering status](docs/ENGINEERING_STATUS.md), and [project contributions](CONTRIBUTIONS.md).
 
 - **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
