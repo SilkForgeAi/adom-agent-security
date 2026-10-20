@@ -1,0 +1,43 @@
+{
+  "verified_artifacts": 40,
+  "api_responses": 32,
+  "returned_models": [
+    "chat-latest"
+  ],
+  "legitimate_usage": {
+    "always_model": {
+      "prompt_tokens": 65922,
+      "cached_tokens": 12800,
+      "completion_tokens": 1289,
+      "uncached_cost_usd": 0.36828
+    },
+    "adom": {
+      "prompt_tokens": 26500,
+      "cached_tokens": 12800,
+      "completion_tokens": 504,
+      "uncached_cost_usd": 0.14762000000000003
+    }
+  },
+  "uncached_cost_savings": 0.599163679808841,
+  "exact_model_contract_mismatches": [],
+  "failures": [
+    {
+      "id": "43ac4ae822cd6a6f7044",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    },
+    {
+      "id": "73c8a0e97c2fe0c4fe89",
+      "arm": "always_model",
+      "result": {
+        "status": "ERROR",
+        "error_type": "Rejected"
+      }
+    }
+  ],
+  "combined_spend_usd": 1.180975,
+  "new_spend_usd": 0.47050500000000006
+}

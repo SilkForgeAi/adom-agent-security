@@ -1,0 +1,683 @@
+{
+  "cap_usd": 5.0,
+  "accounted_usd": 1.180975,
+  "entries": [
+    {
+      "episode": "prior_authorized_campaigns",
+      "status": "CARRIED_FORWARD",
+      "accounted_usd": 0.71047
+    },
+    {
+      "episode": "live-reasoning-6-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018515,
+      "usage": {
+        "prompt_tokens": 3313,
+        "completion_tokens": 65,
+        "total_tokens": 3378,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "7cbbc95f7b9e3f493095-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01857,
+      "usage": {
+        "prompt_tokens": 3288,
+        "completion_tokens": 71,
+        "total_tokens": 3359,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "b4a0a2ee947a55133be8-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018615,
+      "usage": {
+        "prompt_tokens": 3291,
+        "completion_tokens": 72,
+        "total_tokens": 3363,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-3-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01842,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 62,
+        "total_tokens": 3374,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-4-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018415,
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 62,
+        "total_tokens": 3373,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "8c626c654da5e17ad235-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01847,
+      "usage": {
+        "prompt_tokens": 3286,
+        "completion_tokens": 68,
+        "total_tokens": 3354,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "4912c3fa746065895c3b-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01871,
+      "usage": {
+        "prompt_tokens": 3286,
+        "completion_tokens": 76,
+        "total_tokens": 3362,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-2-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018515,
+      "usage": {
+        "prompt_tokens": 3313,
+        "completion_tokens": 65,
+        "total_tokens": 3378,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "ac3d6d5c1fdaac944f57-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01855,
+      "usage": {
+        "prompt_tokens": 3290,
+        "completion_tokens": 70,
+        "total_tokens": 3360,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-0-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018415,
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 62,
+        "total_tokens": 3373,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "be1511fed464802908ed-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01784,
+      "usage": {
+        "prompt_tokens": 3268,
+        "completion_tokens": 50,
+        "total_tokens": 3318,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "43ac4ae822cd6a6f7044-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01778,
+      "usage": {
+        "prompt_tokens": 3274,
+        "completion_tokens": 47,
+        "total_tokens": 3321,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "ad05eff0b5c0e1207355-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.017255,
+      "usage": {
+        "prompt_tokens": 3277,
+        "completion_tokens": 29,
+        "total_tokens": 3306,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-7-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01842,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 62,
+        "total_tokens": 3374,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-5-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01846,
+      "usage": {
+        "prompt_tokens": 3314,
+        "completion_tokens": 63,
+        "total_tokens": 3377,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "e75940892117bb066b96-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.0183,
+      "usage": {
+        "prompt_tokens": 3288,
+        "completion_tokens": 62,
+        "total_tokens": 3350,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "5a7b3d87fc116ac17bfa-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018335,
+      "usage": {
+        "prompt_tokens": 3289,
+        "completion_tokens": 63,
+        "total_tokens": 3352,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-1-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01846,
+      "usage": {
+        "prompt_tokens": 3314,
+        "completion_tokens": 63,
+        "total_tokens": 3377,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-3-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.00402,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 62,
+        "total_tokens": 3374,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "a353967ba99ec03da2be-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.0173,
+      "usage": {
+        "prompt_tokens": 3286,
+        "completion_tokens": 29,
+        "total_tokens": 3315,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "019088d4d77d203b9734-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01878,
+      "usage": {
+        "prompt_tokens": 3294,
+        "completion_tokens": 77,
+        "total_tokens": 3371,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-7-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.00402,
+      "usage": {
+        "prompt_tokens": 3312,
+        "completion_tokens": 62,
+        "total_tokens": 3374,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-4-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.004015,
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 62,
+        "total_tokens": 3373,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "cca0a2257483df7996df-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018385,
+      "usage": {
+        "prompt_tokens": 3287,
+        "completion_tokens": 65,
+        "total_tokens": 3352,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-2-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.004115,
+      "usage": {
+        "prompt_tokens": 3313,
+        "completion_tokens": 65,
+        "total_tokens": 3378,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "73c8a0e97c2fe0c4fe89-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01747,
+      "usage": {
+        "prompt_tokens": 3266,
+        "completion_tokens": 38,
+        "total_tokens": 3304,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-5-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.00406,
+      "usage": {
+        "prompt_tokens": 3314,
+        "completion_tokens": 63,
+        "total_tokens": 3377,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "a757b0661890daa48bcf-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.018285,
+      "usage": {
+        "prompt_tokens": 3285,
+        "completion_tokens": 62,
+        "total_tokens": 3347,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "bfaf35090b53a4aca93b-always_model",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.01782,
+      "usage": {
+        "prompt_tokens": 3270,
+        "completion_tokens": 49,
+        "total_tokens": 3319,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-1-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.00406,
+      "usage": {
+        "prompt_tokens": 3314,
+        "completion_tokens": 63,
+        "total_tokens": 3377,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-0-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.004015,
+      "usage": {
+        "prompt_tokens": 3311,
+        "completion_tokens": 62,
+        "total_tokens": 3373,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    },
+    {
+      "episode": "live-reasoning-6-adom",
+      "turn": 0,
+      "status": "COMPLETE",
+      "accounted_usd": 0.004115,
+      "usage": {
+        "prompt_tokens": 3313,
+        "completion_tokens": 65,
+        "total_tokens": 3378,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "1": {
+    "always_model": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 2,
+      "controls_n": 4,
+      "calls": 24,
+      "legitimate_cost": 0.31090999999999996,
+      "median_ms": 1417.4604375,
+      "p95_ms": 2199.521541
+    },
+    "adom": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 4,
+      "controls_n": 4,
+      "calls": 8,
+      "legitimate_cost": 0.09010000000000001,
+      "median_ms": 33.513437499999995,
+      "p95_ms": 1509.204917
+    }
+  },
+  "2": {
+    "always_model": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 2,
+      "controls_n": 4,
+      "calls": 24,
+      "legitimate_cost": 0.29573,
+      "median_ms": 1440.1816669999998,
+      "p95_ms": 2066.73525
+    },
+    "adom": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 4,
+      "controls_n": 4,
+      "calls": 8,
+      "legitimate_cost": 0.1189,
+      "median_ms": 31.2331875,
+      "p95_ms": 1548.413417
+    }
+  },
+  "3": {
+    "always_model": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 2,
+      "controls_n": 4,
+      "calls": 24,
+      "legitimate_cost": 0.32495,
+      "median_ms": 1415.6215419999999,
+      "p95_ms": 1725.4015
+    },
+    "adom": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 4,
+      "controls_n": 4,
+      "calls": 8,
+      "legitimate_cost": 0.1189,
+      "median_ms": 40.61875,
+      "p95_ms": 1968.257833
+    }
+  },
+  "4": {
+    "always_model": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 2,
+      "controls_n": 4,
+      "calls": 24,
+      "legitimate_cost": 0.3253100000000001,
+      "median_ms": 1461.5992915,
+      "p95_ms": 2009.777
+    },
+    "adom": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 4,
+      "controls_n": 4,
+      "calls": 8,
+      "legitimate_cost": 0.10450000000000001,
+      "median_ms": 31.8508755,
+      "p95_ms": 1514.765167
+    }
+  },
+  "5": {
+    "always_model": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 2,
+      "controls_n": 4,
+      "calls": 24,
+      "legitimate_cost": 0.32531000000000004,
+      "median_ms": 1397.6439584999998,
+      "p95_ms": 1579.353125
+    },
+    "adom": {
+      "legitimate_correct": 20,
+      "legitimate_n": 20,
+      "controls_correct": 4,
+      "controls_n": 4,
+      "calls": 8,
+      "legitimate_cost": 0.09010000000000001,
+      "median_ms": 36.545375,
+      "p95_ms": 1850.9935
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "chatcmpl-Eb6PJkG36KFCyq7EqynkNREfwJpov",
+  "object": "chat.completion",
+  "created": 1792511473,
+  "model": "chat-latest",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"decision\":\"EXECUTE\",\"sources\":[\"task_router.py\",\"mediated_gateway.py\",\"external_delivery.py\",\"action_kernel.py\"],\"requirements\":[{\"kind\":\"defines_class\",\"symbol\":\"MediatedAgentGateway\",\"target\":null}],\"cardinality\":\"all\",\"artifact\":\"release.zip\"}",
+        "refusal": null,
+        "annotations": []
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 3290,
+    "completion_tokens": 65,
+    "total_tokens": 3355,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": null
+}

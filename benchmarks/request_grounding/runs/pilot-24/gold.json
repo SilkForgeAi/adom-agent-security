@@ -1,0 +1,186 @@
+{
+  "4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  }
+}

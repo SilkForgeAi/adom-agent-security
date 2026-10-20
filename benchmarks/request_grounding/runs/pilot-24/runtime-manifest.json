@@ -1,0 +1,29 @@
+{
+  "purpose": "Relocated public runtime; distinct from measured pre-run freeze",
+  "hashes": {
+    "runs/pilot-24/api_client.py": "9ecd587d746e209f0e1182acfb5c95995135c70910020a71c56dd8ca00935119",
+    "runs/pilot-24/campaign.py": "256a255475cb97979f0110a91c57ba51a6e792e3282f65e3b3534de4ea270f75",
+    "runs/pilot-24/gold.json": "5b834fdafe343765294fe0603db7baa093ba9386b2479045ab67f8ee4ab88330",
+    "runs/pilot-24/inputs/action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+    "runs/pilot-24/inputs/external_delivery.py": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b",
+    "runs/pilot-24/inputs/mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+    "runs/pilot-24/inputs/task_router.py": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f",
+    "runs/pilot-24/requests.json": "f30593841fbcc74ed0f1d4de46a06672b3f0186e0104575729b10790fa03082c",
+    "runs/pilot-24/source_excerpts.json": "f14623896915f730dae19dce6b661b84b84ee5265e85b7de70d79ec54366e300",
+    "runs/pilot-24/verify_saved.py": "a30a7d080299623b4787225fc23abe13e4818dde78cd0c13c70e114797248d19",
+    "vendor/adom/__init__.py": "524f8e02ab410eb64c331d1c90e78334d0006b27b429d70a9d11ae92c7af7320",
+    "vendor/adom/api/__init__.py": "884af04afe84db0a66b6bd499fe9cbe3a12981d1092e3b55841fc98a330a3d4e",
+    "vendor/adom/api/model_proxy.py": "e2ad81ade3a9a9ba87414d56314fa65e7d0c876324e0155b6e1b0b5ee9456092",
+    "vendor/adom/enforcement/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/adom/enforcement/action_kernel.py": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b",
+    "vendor/adom/enforcement/egress_proxy.py": "773f9f0e458732b0a4f41b816cf09345353c49e252d0f3052fdfb44a13a77a76",
+    "vendor/adom/enforcement/fleet_control.py": "7b99f7057319d58a2f17fa983749dd8d14c2f63225a5b3f18e17175c70ff99cf",
+    "vendor/adom/enforcement/mediated_gateway.py": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9",
+    "vendor/adom/enforcement/parameterized_workflow.py": "c56dd43dc25e5fa69be6a2bf42f2aad5ee081949c7d9116eeeadec0d3a9a6bf2",
+    "vendor/adom/enforcement/request_grounding.py": "0e74caa3274de21a2105287e1143544aa8802e99b79e828758da4ba31e1a1e57",
+    "vendor/adom/enforcement/workflow_authority.py": "4a513020f146e745500b00be3c441bd04ba9948bdf4afcf2316de562216836d6",
+    "vendor/adom/enforcement/workflow_compiler.py": "2dc4f9f88e72d770d674fda50b64d37787a8036e86ef34af9e472f98815192f5",
+    "vendor/adom/enforcement/workflow_controls.py": "bb44c7c69c73f700caeb3fb7e831e6e784411bbbf209f57824910cccbf6faebf",
+    "vendor/adom/enforcement/read_observation.py": "84fbc2caf48ae12311297b440c88fd4a4ae88292fd93d422bccc60756ada42a8"
+  }
+}

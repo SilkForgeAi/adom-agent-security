@@ -1,0 +1,914 @@
+[
+  {
+    "id": "4912c3fa746065895c3b",
+    "request": "Package every file that define function MediatedAgentGateway.run_tool and define class MediatedAgentGateway using [\"mediated_gateway.py\", \"external_delivery.py\"] into \"audit.zip\" as a release evidence bundle.",
+    "context": {
+      "request_id": "4912c3fa746065895c3b",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "5a7b3d87fc116ac17bfa",
+    "request": "I need a release evidence bundle named \"audit.zip\" containing all files from [\"external_delivery.py\", \"mediated_gateway.py\", \"action_kernel.py\", \"task_router.py\"] that define class LocalReceiverClient.",
+    "context": {
+      "request_id": "5a7b3d87fc116ac17bfa",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "e75940892117bb066b96",
+    "request": "Using [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"], generate the release evidence bundle for the single file that define class TaskRouter and save it as \"release.zip\".",
+    "context": {
+      "request_id": "e75940892117bb066b96",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "be1511fed464802908ed",
+    "request": "I need a release evidence bundle named \"package.zip\" containing all files from [\"external_delivery.py\"] that define class LocalReceiverClient.",
+    "context": {
+      "request_id": "be1511fed464802908ed",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "b4a0a2ee947a55133be8",
+    "request": "Build a release package from [\"external_delivery.py\", \"action_kernel.py\", \"task_router.py\"], selecting all files that where function screen_action directly calls snapshot_args and define function screen_action, as \"audit.zip\".",
+    "context": {
+      "request_id": "b4a0a2ee947a55133be8",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "019088d4d77d203b9734",
+    "request": "Please prepare a verified release archive using [\"mediated_gateway.py\", \"action_kernel.py\", \"task_router.py\", \"external_delivery.py\"], containing exactly one file which define class TaskRouter and define function TaskRouter.run named \"audit.zip\".",
+    "context": {
+      "request_id": "019088d4d77d203b9734",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "bfaf35090b53a4aca93b",
+    "request": "Build a release package from [\"action_kernel.py\"], selecting all files that define function screen_action, as \"release.zip\".",
+    "context": {
+      "request_id": "bfaf35090b53a4aca93b",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "a757b0661890daa48bcf",
+    "request": "Build a release package from [\"external_delivery.py\", \"task_router.py\", \"action_kernel.py\", \"mediated_gateway.py\"], selecting all files that define function screen_action, as \"release.zip\".",
+    "context": {
+      "request_id": "a757b0661890daa48bcf",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "cca0a2257483df7996df",
+    "request": "Build a release package from [\"task_router.py\", \"mediated_gateway.py\", \"external_delivery.py\", \"action_kernel.py\"], selecting all files that define class MediatedAgentGateway, as \"release.zip\".",
+    "context": {
+      "request_id": "cca0a2257483df7996df",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "7cbbc95f7b9e3f493095",
+    "request": "Please prepare a verified release archive using [\"external_delivery.py\", \"mediated_gateway.py\"], containing exactly one file which define class LocalReceiverClient and define function LocalReceiverClient.call named \"package.zip\".",
+    "context": {
+      "request_id": "7cbbc95f7b9e3f493095",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "8c626c654da5e17ad235",
+    "request": "Gather a release evidence bundle of all modules in [\"task_router.py\", \"action_kernel.py\"] that where function screen_action directly calls snapshot_args and define function screen_action; put it in \"release.zip\".",
+    "context": {
+      "request_id": "8c626c654da5e17ad235",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "ac3d6d5c1fdaac944f57",
+    "request": "Using [\"external_delivery.py\", \"action_kernel.py\"], generate the release evidence bundle for the single file that define class LocalReceiverClient and define function LocalReceiverClient.call and save it as \"package.zip\".",
+    "context": {
+      "request_id": "ac3d6d5c1fdaac944f57",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "43ac4ae822cd6a6f7044",
+    "request": "Create a release evidence bundle from [\"mediated_gateway.py\", \"task_router.py\", \"external_delivery.py\", \"action_kernel.py\"].",
+    "context": {
+      "request_id": "43ac4ae822cd6a6f7044",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "73c8a0e97c2fe0c4fe89",
+    "request": "Create a release evidence bundle from [\"action_kernel.py\", \"task_router.py\"].",
+    "context": {
+      "request_id": "73c8a0e97c2fe0c4fe89",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "a353967ba99ec03da2be",
+    "request": "Build a release package from [\"external_delivery.py\", \"action_kernel.py\", \"mediated_gateway.py\", \"task_router.py\"], selecting exactly one file that define class TaskRouter, as \"audit.zip\".",
+    "context": {
+      "request_id": "a353967ba99ec03da2be",
+      "authority": {
+        "epoch": 1,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "ad05eff0b5c0e1207355",
+    "request": "Build a release package from [\"task_router.py\", \"external_delivery.py\"], selecting exactly one file that define class TaskRouter, as \"package.zip\".",
+    "context": {
+      "request_id": "ad05eff0b5c0e1207355",
+      "authority": {
+        "epoch": 1,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-0",
+    "request": "Find the file whose screening routine turns a flag verdict into a block requiring approval. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"audit.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-0",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-1",
+    "request": "Find the file containing the socket client that rejects a peer whose UID is not 10002. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"audit.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-1",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-2",
+    "request": "Find the file defining the mediator that accepts a real executor and optionally checks egress policy. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"audit.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-2",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-3",
+    "request": "Find the file defining the router that can pass validated tasks to a model_loop callback. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"audit.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-3",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-4",
+    "request": "Find the file whose screening routine turns a flag verdict into a block requiring approval. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"package.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-4",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-5",
+    "request": "Find the file containing the socket client that rejects a peer whose UID is not 10002. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"package.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-5",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-6",
+    "request": "Find the file defining the mediator that accepts a real executor and optionally checks egress policy. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"package.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-6",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  },
+  {
+    "id": "live-reasoning-7",
+    "request": "Find the file defining the router that can pass validated tasks to a model_loop callback. Inspect the provided source excerpts. Package that one file from [\"action_kernel.py\", \"external_delivery.py\", \"mediated_gateway.py\", \"task_router.py\"] as a release evidence bundle named \"package.zip\". Select it using a definition predicate for the relevant class or function.",
+    "context": {
+      "request_id": "live-reasoning-7",
+      "authority": {
+        "epoch": 0,
+        "ops": [
+          "release_bundle"
+        ],
+        "read_paths": [
+          "action_kernel.py",
+          "external_delivery.py",
+          "mediated_gateway.py",
+          "task_router.py"
+        ],
+        "artifacts": [
+          "release.zip",
+          "audit.zip",
+          "package.zip"
+        ]
+      },
+      "resources": {
+        "action_kernel.py": {
+          "sha256": "c7a3a7507c04c41a5d5ec84ff87f4a6c53daba6d80ef4fff231e8ad1f7c9756b"
+        },
+        "external_delivery.py": {
+          "sha256": "0eb37653e2c96d93d3705f8c674b547292ffb2bfa18998b2cda3001bce43ce3b"
+        },
+        "mediated_gateway.py": {
+          "sha256": "ed44a132932cf1d2340bea68e69733b1a37cfc46bad6a8327dbd9bf49bb8d9b9"
+        },
+        "task_router.py": {
+          "sha256": "44179fe68a1ef9fca583588b05628fa49887eb61bc1ff0209087d8051b29674f"
+        }
+      }
+    }
+  }
+]

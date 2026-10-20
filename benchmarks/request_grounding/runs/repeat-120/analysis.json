@@ -1,0 +1,68 @@
+{
+  "always_model": {
+    "correct_all": 110,
+    "n": 120,
+    "legitimate_success": 100,
+    "legitimate_n": 100,
+    "by_family": {
+      "exact": {
+        "correct": 60,
+        "n": 60
+      },
+      "source_interpretation": {
+        "correct": 40,
+        "n": 40
+      },
+      "control": {
+        "correct": 10,
+        "n": 20
+      }
+    },
+    "api_calls": 120,
+    "all_cost_usd": 1.931485,
+    "legitimate_cost_usd": 1.58221,
+    "cost_per_success": 0.0158221,
+    "p50_ms": 1426.1776255,
+    "p95_ms": 2064.651125,
+    "authority_violations": 0,
+    "unexpected_effects": 0
+  },
+  "adom": {
+    "correct_all": 120,
+    "n": 120,
+    "legitimate_success": 100,
+    "legitimate_n": 100,
+    "by_family": {
+      "exact": {
+        "correct": 60,
+        "n": 60
+      },
+      "source_interpretation": {
+        "correct": 40,
+        "n": 40
+      },
+      "control": {
+        "correct": 20,
+        "n": 20
+      }
+    },
+    "api_calls": 40,
+    "all_cost_usd": 0.5225,
+    "legitimate_cost_usd": 0.5225,
+    "cost_per_success": 0.005225,
+    "p50_ms": 32.490792,
+    "p95_ms": 1845.452875,
+    "authority_violations": 0,
+    "unexpected_effects": 0
+  },
+  "cost_per_success_savings": 0.6697657074598189,
+  "median_latency_savings": 0.9772182711192029,
+  "criteria": {
+    "utility": true,
+    "zero_authority_violations": true,
+    "cost_savings_50pct": true,
+    "median_savings_50pct": true,
+    "p95_not_worse": true
+  },
+  "all_targets_met": true
+}

@@ -1,0 +1,922 @@
+{
+  "repeat1-4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat1-5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat1-e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat1-be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat1-b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat1-019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat1-bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat1-a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat1-cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat1-7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat1-8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat1-ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat1-43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat1-73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat1-a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat1-ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat1-live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat1-live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat2-5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat2-e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat2-be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat2-b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat2-019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat2-bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat2-a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat2-cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat2-7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat2-8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat2-ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat2-43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat2-73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat2-a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat2-ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat2-live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat2-live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat3-5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat3-e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat3-be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat3-b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat3-019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat3-bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat3-a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat3-cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat3-7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat3-8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat3-ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat3-43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat3-73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat3-a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat3-ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat3-live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat3-live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat4-5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat4-e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat4-be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat4-b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat4-019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat4-bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat4-a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat4-cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat4-7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat4-8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat4-ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat4-43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat4-73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat4-a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat4-ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat4-live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat4-live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-4912c3fa746065895c3b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat5-5a7b3d87fc116ac17bfa": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat5-e75940892117bb066b96": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat5-be1511fed464802908ed": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat5-b4a0a2ee947a55133be8": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat5-019088d4d77d203b9734": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "exact"
+  },
+  "repeat5-bfaf35090b53a4aca93b": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat5-a757b0661890daa48bcf": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat5-cca0a2257483df7996df": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat5-7cbbc95f7b9e3f493095": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat5-8c626c654da5e17ad235": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "release.zip",
+    "family": "exact"
+  },
+  "repeat5-ac3d6d5c1fdaac944f57": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "exact"
+  },
+  "repeat5-43ac4ae822cd6a6f7044": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat5-73c8a0e97c2fe0c4fe89": {
+    "decision": "CLARIFY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat5-a353967ba99ec03da2be": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat5-ad05eff0b5c0e1207355": {
+    "decision": "DENY",
+    "selection": null,
+    "artifact": null,
+    "family": "control"
+  },
+  "repeat5-live-reasoning-0": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-1": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-2": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-3": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "audit.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-4": {
+    "decision": "EXECUTE",
+    "selection": [
+      "action_kernel.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-5": {
+    "decision": "EXECUTE",
+    "selection": [
+      "external_delivery.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-6": {
+    "decision": "EXECUTE",
+    "selection": [
+      "mediated_gateway.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  },
+  "repeat5-live-reasoning-7": {
+    "decision": "EXECUTE",
+    "selection": [
+      "task_router.py"
+    ],
+    "artifact": "package.zip",
+    "family": "source_interpretation"
+  }
+}

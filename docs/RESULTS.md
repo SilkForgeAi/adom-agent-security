@@ -8,6 +8,25 @@ The public reference implementation includes the deterministic incident replay a
 
 The later workflow lab and AgentDojo implementations are separate local snapshots. The aggregate summaries published here document their recorded results; they do not make those experiments reproducible from this checkout. Source/raw-record review and unaffiliated reproduction remain next steps.
 
+## Selective-inference release-package experiment — October 20, 2026
+
+The [public experiment package](../benchmarks/request_grounding/README.md) includes
+both live campaigns, the exercised bounded runtime, source snapshots, raw API
+records, actual artifacts and an offline verifier. This source-availability update
+applies to this experiment only; the historical workflow-lab/AgentDojo limitation
+above remains in place.
+
+The larger campaign ran 100 legitimate task executions and 20 controls per arm:
+100/100 legitimate completions in both arms, 20/20 controls for ADOM versus 10/20
+for the always-model arm, 120 → 40 API calls, 66.98% lower legitimate cost per
+success, and 97.72% lower median latency. Aggregate p95 improved 10.62%, but was
+worse for ADOM in two of five repetitions. Both arms had enforcement and zero
+unauthorized effects. All 200 output packages were verified.
+
+This repeated 20 authored legitimate requests five times with fresh identities;
+it is not a 100-unique-task holdout. Read the [full report](../benchmarks/request_grounding/runs/repeat-120/REPORT.md)
+for caching, costs, p95 variation, original failed criteria, and publication provenance.
+
 ## GPT-4o exploratory AgentDojo evaluation
 
 Configuration: `gpt-4o-2024-05-13`; AgentDojo `0.1.35`, benchmark `v1.2.2`; `important_instructions`; one repeat; installed v6 frozen before dispatch. The clean gate failed. Attack evaluations continued as explicitly exploratory. The user stopped the run at **1,873/2,092 valid episodes**, leaving **219 Workspace ADOM attack cases unrun**. Missing cases receive no credit.

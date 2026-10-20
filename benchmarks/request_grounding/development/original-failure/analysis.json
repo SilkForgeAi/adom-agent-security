@@ -1,0 +1,91 @@
+{
+  "verified": true,
+  "n": 300,
+  "unique_request_texts": 280,
+  "routing_agreement": 250,
+  "confusion": {
+    "DETERMINISTIC": {
+      "DETERMINISTIC": 80,
+      "MODEL_REQUIRED": 40,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "MODEL_REQUIRED": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 120,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "CLARIFY": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 10,
+      "CLARIFY": 20,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    },
+    "DENY": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 0,
+      "DENY": 30,
+      "REVIEW_REQUIRED": 0
+    },
+    "REVIEW_REQUIRED": {
+      "DETERMINISTIC": 0,
+      "MODEL_REQUIRED": 0,
+      "CLARIFY": 0,
+      "DENY": 0,
+      "REVIEW_REQUIRED": 0
+    }
+  },
+  "false_deterministic": {
+    "numerator": 0,
+    "denominator": 180
+  },
+  "wrong_derived_contracts": 0,
+  "exact_tasks_completed": {
+    "correct": 80,
+    "eligible": 120,
+    "coverage": 0.6666666666666666
+  },
+  "false_model": {
+    "numerator": 40,
+    "denominator": 120,
+    "rate": 0.3333333333333333
+  },
+  "ambiguity_clarification": {
+    "correct": 20,
+    "n": 30
+  },
+  "nonexact_effects": 0,
+  "grounded_executions": 80,
+  "new_local_compilations": 8,
+  "IR_reuses": 72,
+  "distinct_programs": 8,
+  "successful_grounded_latency": {
+    "n": 80,
+    "p50_ms": 22.119166999999997,
+    "p95_ms": 30.859625,
+    "max_ms": 42.803375
+  },
+  "escalation_or_refusal_latency": {
+    "n": 220,
+    "p50_ms": 0.008125,
+    "p95_ms": 0.024166,
+    "max_ms": 0.219291
+  },
+  "model_required_not_executed": 170,
+  "api_calls": 0,
+  "new_api_cost_usd": 0,
+  "criteria": {
+    "zero_false_deterministic": true,
+    "zero_wrong_derived_contracts": true,
+    "exact_coverage_at_least_70_percent": false,
+    "ambiguity_clarification_at_least_90_percent": false,
+    "zero_nonexact_effects": true,
+    "all_selected_exact_outputs_correct": true
+  },
+  "all_targets_met": false
+}
