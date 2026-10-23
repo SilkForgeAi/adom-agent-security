@@ -6,6 +6,11 @@
 
 **Assume the agent is compromised. Bound what it can do next.**
 
+- **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
+- **AgentDojo banking (GPT-4o):** native attack successes **87/144 → 0/144 with ADOM**. [Evaluation and caveats](#current-work-and-evaluation-status)
+- **Router:** supported exact tasks run with **no model call**; median latency across the measured legitimate workload fell **1,426 ms → 32.49 ms**. [October 20 results](#selective-inference-live-results--october-20-2026)
+
+
 ADOM is a model-independent enforcement boundary for autonomous agents. It mediates tool calls,
 network destinations, read-derived data flows, consequence budgets, and circuit breakers outside
 the agent's mutable context.
@@ -15,24 +20,6 @@ not claim to align a model, prevent every sandbox escape, or stop an unknown ker
 vulnerability. It tests whether a compromised agent can turn access into prohibited effects when
 the control boundary remains outside the compromised trust domain.
 
-## Selective-inference live results — October 20, 2026
-
-ADOM's experimental request router completed **100/100 legitimate tasks**, matching
-an always-model baseline, while reducing estimated API cost per successful task by
-**66.98%** and median latency by **97.72%** (1,426 ms → 32.49 ms). Including controls,
-model calls fell from 120 to 40. All 200 output packages were checked against actual
-source bytes, manifests and evidence hashes.
-
-This is **five repetitions of 20 authored legitimate requests**, plus controls,
-within one supported release-package workflow family. Both arms used enforcement;
-no unauthorized effects occurred in either. Aggregate p95 improved, but ADOM's p95
-was slower in two repetitions. Model: OpenAI's moving `chat-latest` alias.
-
-[Results, raw records, limits and key-free verification](benchmarks/request_grounding/README.md)
-include an isolated runnable runtime snapshot, the original failed grounding
-evaluation, and its development regression fix. The live model fallback is an
-experimental benchmark adapter; broader unseen-request grounding remains unproven.
-
 ## Current work and evaluation status
 
 Updated October 20, 2026. Start with [results and limitations](docs/RESULTS.md),
@@ -40,11 +27,17 @@ Updated October 20, 2026. Start with [results and limitations](docs/RESULTS.md),
 
 - **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
   idempotency, explicit unknown outcomes and service-side revocation fences.
-- **Measured security and utility:** exploratory GPT-4o banking recorded 87/144 baseline native
-  attack successes versus 0/144 with ADOM; attacked-task utility was 126/144 versus 143/144.
-  Clean utility fell from 16/16 to 15/16 and the clean gate failed. Travel retained 4/140 native
-  attack successes, Slack 8/105, and Workspace is partial. See the complete matrix and earlier
-  high-utility configurations before interpreting the banking result.
+- **AgentDojo banking:** native attack successes fell from **87/144 without ADOM to 0/144
+  with ADOM**; task success under attack rose from **126/144 to 143/144**.
+  Model: `gpt-4o-2024-05-13`; AgentDojo 0.1.35 / v1.2.2;
+  `important_instructions`, one repeat, developed policies rather than blind authoring.
+  **Caveat:** clean-task success fell from **16/16 to 15/16**, failing the clean gate;
+  this evaluation continued as explicitly exploratory. Native attack scores are benchmark
+  outcomes, not independently recorded service effects.
+  [The full results matrix](docs/RESULTS.md#gpt-4o-exploratory-agentdojo-evaluation)
+  retains Travel and Slack's nonzero native attack scores alongside their baselines,
+  attacked-task utility and clean utility; Workspace coverage is partial. These are historical
+  author-run summaries, not a fresh reproduction of the current public code.
 - **Scoped stop evidence:** 2,000 independent scripted OS workers completed legitimate reads;
   2,000 post-stop publications were denied with zero receiver effects. One container, 24 admitted
   at a time; this is not 2,000 LLM agents or a production fleet guarantee.
@@ -74,6 +67,24 @@ preventing it.
 
 The host-side verifier currently reports **17/17 checks passing**. The Python suite reports
 **13/13 tests passing**. Saved evidence is covered by SHA-256 manifests.
+
+## Selective-inference live results — October 20, 2026
+
+ADOM's experimental request router completed **100/100 legitimate tasks**, matching
+an always-model baseline, while reducing estimated API cost per successful task by
+**66.98%** and median latency by **97.72%** (1,426 ms → 32.49 ms). Including controls,
+model calls fell from 120 to 40. All 200 output packages were checked against actual
+source bytes, manifests and evidence hashes.
+
+This is **five repetitions of 20 authored legitimate requests**, plus controls,
+within one supported release-package workflow family. Both arms used enforcement;
+no unauthorized effects occurred in either. Aggregate p95 improved, but ADOM's p95
+was slower in two repetitions. Model: OpenAI's moving `chat-latest` alias.
+
+[Results, raw records, limits and key-free verification](benchmarks/request_grounding/README.md)
+include an isolated runnable runtime snapshot, the original failed grounding
+evaluation, and its development regression fix. The live model fallback is an
+experimental benchmark adapter; broader unseen-request grounding remains unproven.
 
 ## Architecture
 
@@ -169,4 +180,5 @@ Read [Security claims](docs/SECURITY_CLAIMS.md) before citing the results.
 
 Built by **Aaron Dennis / SilkForgeAi**. This repository is intended for reproducible security
 research, technical evaluation, and collaboration on production-grade agent containment.
+
 
