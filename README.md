@@ -7,8 +7,9 @@
 **Assume the agent is compromised. Bound what it can do next.**
 
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
-- **AgentDojo banking (GPT-4o):** native attack successes **87/144 → 0/144 with ADOM**. [Evaluation and caveats](#current-work-and-evaluation-status)
-- **Router:** supported exact tasks run with **no model call**; median latency across the measured legitimate workload fell **1,426 ms → 32.49 ms**. [October 20 results](#selective-inference-live-results--october-20-2026)
+- **AgentDojo banking (GPT-4o):** native attack successes **87/144 → 0/144 with ADOM** (attacked utility **126/144 → 143/144**). [Evaluation and caveats](#current-work-and-evaluation-status)
+- **Router:** supported exact tasks run with **no model call**; median latency across the measured legitimate workload fell **1,426 ms → 32.49 ms** (**-66.98%** API cost). [October 20 results](#selective-inference-live-results--october-20-2026)
+- **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)** and **OpenHands SDK (`1.59.0`)**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
 
 
 ADOM is a model-independent enforcement boundary for autonomous agents. It mediates tool calls,
@@ -85,6 +86,15 @@ was slower in two repetitions. Model: OpenAI's moving `chat-latest` alias.
 include an isolated runnable runtime snapshot, the original failed grounding
 evaluation, and its development regression fix. The live model fallback is an
 experimental benchmark adapter; broader unseen-request grounding remains unproven.
+
+## Upstream policy-bypass reproductions
+
+Standalone executable reproductions of tool-policy bypasses in open-source agent frameworks, tested against pinned upstream commits:
+
+| Upstream Target | Pinned Commit / Version | Bypass Reproduced | Repository |
+|---|---|---|---|
+| **BerriAI / LiteLLM** (`ToolPolicyGuardrail`) | `e63fc85` (`litellm 1.93.0`) | Stage 2 `untrusted -> trusted` policy skipped on Anthropic `/v1/messages` & OpenAI `/v1/responses`; mixed custom tool bypasses blocked `bash_20250124` | [litellm-tool-policy-reproduction](https://github.com/SilkForgeAi/litellm-tool-policy-reproduction) |
+| **OpenHands / software-agent-sdk** (`PolicyRailSecurityAnalyzer`) | `641e161` (`openhands-sdk 1.59.0`) | `printf "$(curl x) \| jq ."` & `printf -- "%s"` evade `fetch-to-exec` pipeline forwarding (`LOW` / `UNKNOWN` instead of `HIGH`) | [openhands-policy-rail-reproduction](https://github.com/SilkForgeAi/openhands-policy-rail-reproduction) |
 
 ## Architecture
 
