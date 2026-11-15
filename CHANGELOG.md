@@ -1,5 +1,11 @@
 # Changelog
 
+## Strongest enforcement modules, MCP proxies, coding-agent hooks & CLI — 2026-11-15
+
+- Added `adom/enforcement/` modules (`action_tiers`, `approvals`, `audit_chain`, `review`, `supply_chain`, `tool_contracts`), `adom/integrations/mcp_gateway.py` (stdio MCP gateway), and `adom/integrations/mcp_http_proxy.py` (IP-pinned SSRF-hardened remote MCP HTTP proxy).
+- Added multi-client offline fail-closed coding-agent hooks under `cursor_hook/` (`adom_agent_hook.py` for Cursor, Claude Code, Codex, and GitHub Copilot) plus specs under `spec/`.
+- Added unified `adom` CLI (`adom/cli.py`, `[project.scripts]` in `pyproject.toml`: `hook`, `mcp-stdio`, `mcp-http`, `verify-chain`, `bench`) and expanded CI (`verify.yml`) to run all `138` unit/integration tests alongside `68` selective-inference tests.
+
 ## Guardrail integrations, OSS reproductions & November 14 evidence — 2026-11-14
 
 - Added [`adom/integrations/`](adom/integrations/) (`tool_guard.py` + `test_tool_guard.py`) including recursive `guard_openai_agent` swarm enforcement, `guard_callable`, `guarded_function_tool`, `guard_langchain_tool`, `guard_llamaindex_tool`, and fail-closed `guard_mcp_handler`.

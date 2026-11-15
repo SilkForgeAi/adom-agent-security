@@ -17,6 +17,9 @@ classifiers = [
   "Topic :: Security",
 ]
 
+[project.scripts]
+adom = "adom.cli:main"
+
 [tool.setuptools.packages.find]
-include = ["adom*"]
+include = ["adom*", "cursor_hook*"]
 

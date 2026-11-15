@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Key-free latency, benign utility, and multi-encoding exfiltration benchmark for ADOM.
 
-Runs against the published reference enforcement core in this repository without API keys.
+Measures real wall-clock latency (p50/p95/p99 ms) across ADOM's deterministic
+enforcement engine, integrations, MCP gateway Decider, and offline coding-agent hooks.
 """
 from __future__ import annotations
 
 import base64
 import json
 import sys
+import tempfile
 import time
 import urllib.parse
 from pathlib import Path
@@ -16,10 +18,14 @@ from typing import Callable, List, Tuple
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+if str(ROOT / "cursor_hook") not in sys.path:
+    sys.path.insert(0, str(ROOT / "cursor_hook"))
 
 from adom.api.model_proxy import ModelProxyPolicy
 from adom.enforcement.action_kernel import screen_action
+from adom.integrations.mcp_gateway import Decider
 from adom.integrations.tool_guard import ToolBlocked, guard_callable
+import adom_cursor_checks as hook_checks
 
 
 def _percentiles(samples_ms: List[float]) -> Tuple[float, float, float]:
@@ -61,26 +67,50 @@ def main() -> int:
         strict_deny_unknown=True,
     )
     clean_pol.seal()
-
     guarded_status = guard_callable(lambda service: f"ok:{service}", name="get_status", policy=clean_pol)
 
-    latencies = [
-        _bench(
-            "ModelProxyPolicy.score_tool_call (benign)",
-            1000,
-            lambda: clean_pol.score_tool_call("get_status", {"service": "billing"}),
-        ),
-        _bench(
-            "action_kernel.screen_action (sealed policy)",
-            1000,
-            lambda: screen_action(clean_pol, "get_status", {"service": "billing"}),
-        ),
-        _bench(
-            "integrations.guard_callable (end-to-end)",
-            1000,
-            lambda: guarded_status(service="billing"),
-        ),
-    ]
+    with tempfile.TemporaryDirectory() as td:
+        reg = Path(td) / "tool_tiers.json"
+        reg.write_text(json.dumps({
+            "version": 1,
+            "tools": {
+                "mcp__bench__get_status": {"tier": "observe"},
+                "mcp__bench__send_email": {
+                    "tier": "consequential",
+                    "agent_approval": True,
+                    "approved_outbound": ["corp.com"],
+                },
+            },
+        }))
+        decider = Decider("bench", reg, client_prompts_confirmed=True)
+
+        latencies = [
+            _bench(
+                "ModelProxyPolicy.score_tool_call (benign)",
+                1000,
+                lambda: clean_pol.score_tool_call("get_status", {"service": "billing"}),
+            ),
+            _bench(
+                "action_kernel.screen_action (sealed policy)",
+                1000,
+                lambda: screen_action(clean_pol, "get_status", {"service": "billing"}),
+            ),
+            _bench(
+                "integrations.guard_callable (end-to-end)",
+                1000,
+                lambda: guarded_status(service="billing"),
+            ),
+            _bench(
+                "MCP Decider.decide (tier + kernel)",
+                500,
+                lambda: decider.decide("get_status", {"service": "billing"}),
+            ),
+            _bench(
+                "Coding-agent hooks (run_all offline)",
+                500,
+                lambda: hook_checks.run_all("beforeShellExecution", {"command": "git status && pytest -q"}),
+            ),
+        ]
 
     tainted = ModelProxyPolicy(
         taint_values=[canary, raw_aws],

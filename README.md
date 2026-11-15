@@ -170,9 +170,27 @@ and effect evidence in a separate trust domain.
 
 Read [Security claims](docs/SECURITY_CLAIMS.md) before citing the results.
 
+## Quickstart (`pip install` / CLI)
+
+Zero external runtime dependencies (Python `3.10+` standard library):
+
+```bash
+git clone https://github.com/SilkForgeAi/adom-agent-security.git
+cd adom-agent-security
+pip install -e .
+
+adom bench                                                      # 5-component latency + encoding benchmark
+adom hook --client codex < payload.json                         # offline fail-closed hook (cursor|claude-code|codex|github-copilot)
+adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
+adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
+adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
+```
+
 ## Repository map
 
-- [`adom/`](adom/) — exercised reference enforcement core and zero-dependency framework integrations (`adom/integrations/`).
+- [`adom/`](adom/) — enforcement core (`action_tiers`, `approvals`, `audit_chain`, `blast_radius`, `egress_proxy`, `mediated_gateway`, `review`, `supply_chain`, `tool_contracts`), unified CLI (`adom/cli.py`), and SDK/MCP proxies (`adom/integrations/`).
+- [`cursor_hook/`](cursor_hook/) — offline fail-closed coding-agent hooks for Cursor, Claude Code, Codex, and GitHub Copilot.
+- [`spec/`](spec/) — action-tier and MCP gateway interface specifications.
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
 - [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
 - [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.

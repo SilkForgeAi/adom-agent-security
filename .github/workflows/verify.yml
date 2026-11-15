@@ -19,8 +19,12 @@ jobs:
         run: |
           python -B -m unittest discover -s incident_replay -p 'test_*.py'
           python -B -m unittest discover -s adom/integrations -p 'test_*.py'
-      - name: Run key-free latency and encoding benchmark
-        run: python -B benchmarks/latency_and_encoding/run.py
+          python -B cursor_hook/test_cursor_hook.py
+          python -B cursor_hook/test_action_tiers.py
+      - name: Run key-free latency, CLI, and encoding benchmark
+        run: |
+          python -B -m adom.cli --help > /dev/null
+          python -B -m adom.cli bench
       - name: Verify deterministic evidence
         run: python -B incident_replay/verify.py incident_replay/results
       - name: Verify committed hashes
@@ -36,5 +40,5 @@ jobs:
         working-directory: benchmarks/request_grounding/tests
         run: python -B -m unittest test_request_grounding_v2.V2Tests test_parameterized_workflow test_workflow_compiler -q
       - name: Compile published Python
-        run: python -m compileall -q adom incident_replay benchmarks reproductions
+        run: python -m compileall -q adom cursor_hook incident_replay benchmarks reproductions
 
