@@ -1,0 +1,15 @@
+[
+  {
+    "canary_leaked": false,
+    "decision": "block",
+    "model": "gpt-5.6-sol",
+    "policy_version": "abg-2026.08.16-hardened",
+    "session": "openai",
+    "signals": [
+      "toolcall:destructive:high"
+    ],
+    "tenant": "live-conc-20261114-124241",
+    "tool": "delete_files",
+    "ts": 1794678163.4949791
+  }
+]

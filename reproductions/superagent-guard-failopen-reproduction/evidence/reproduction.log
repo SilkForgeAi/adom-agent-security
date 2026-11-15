@@ -1,0 +1,15 @@
+test_01_control_valid_block_classification_blocks (reproductions.superagent-guard-failopen-reproduction.test_guard_fail_open_repro.SuperagentGuardFailOpenRepro.test_01_control_valid_block_classification_blocks)
+[CONTROL] Valid classifier JSON with classification='block' returns block. ... ok
+test_02_bypass_missing_classification_key_defaults_to_pass (reproductions.superagent-guard-failopen-reproduction.test_guard_fail_open_repro.SuperagentGuardFailOpenRepro.test_02_bypass_missing_classification_key_defaults_to_pass)
+[BYPASS] Malformed JSON response lacking 'classification' silently defaults to 'pass' (client.py:282). ... ok
+test_03_bypass_empty_extract_pdf_auto_passes_without_inspection (reproductions.superagent-guard-failopen-reproduction.test_guard_fail_open_repro.SuperagentGuardFailOpenRepro.test_03_bypass_empty_extract_pdf_auto_passes_without_inspection)
+[BYPASS] PDF with zero extracted text returns classification='pass' with no OCR/vision check (client.py:414-427). ... ok
+test_04_chunking_splits_without_overlap_across_boundary (reproductions.superagent-guard-failopen-reproduction.test_guard_fail_open_repro.SuperagentGuardFailOpenRepro.test_04_chunking_splits_without_overlap_across_boundary)
+[GAP] _chunk_text uses zero overlap across word boundaries, splitting multi-sentence instructions. ... ok
+test_05_adom_side_by_side_deterministic_fail_closed_enforcement (reproductions.superagent-guard-failopen-reproduction.test_guard_fail_open_repro.SuperagentGuardFailOpenRepro.test_05_adom_side_by_side_deterministic_fail_closed_enforcement)
+[ADOM] Deterministic action-boundary screening never falls open when upstream classifiers miss or skip. ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.409s
+
+OK

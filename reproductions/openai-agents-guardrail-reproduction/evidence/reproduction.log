@@ -1,0 +1,16 @@
+test_01_control_direct_invocation_triggers_input_guardrail (reproductions.openai-agents-guardrail-reproduction.test_handoff_guardrail_repro.OpenAIAgentsHandoffGuardrailRepro.test_01_control_direct_invocation_triggers_input_guardrail)
+[CONTROL] Direct Runner.run on privileged agent executes input_guardrail and blocks. ... ok
+test_02_bypass_handoff_skips_destination_agent_input_guardrails (reproductions.openai-agents-guardrail-reproduction.test_handoff_guardrail_repro.OpenAIAgentsHandoffGuardrailRepro.test_02_bypass_handoff_skips_destination_agent_input_guardrails)
+[BYPASS] Handing off from triage agent to privileged agent skips PrivilegedOps input_guardrails. ... ok
+test_03_gap_built_in_and_hosted_tools_have_no_tool_input_guardrails (reproductions.openai-agents-guardrail-reproduction.test_handoff_guardrail_repro.OpenAIAgentsHandoffGuardrailRepro.test_03_gap_built_in_and_hosted_tools_have_no_tool_input_guardrails)
+[GAP] LocalShellTool/ShellTool/ApplyPatchTool/HostedMCPTool/ComputerTool lack tool_input_guardrails. ... ok
+test_04_adom_blocks_action_regardless_of_handoff_and_encoding (reproductions.openai-agents-guardrail-reproduction.test_handoff_guardrail_repro.OpenAIAgentsHandoffGuardrailRepro.test_04_adom_blocks_action_regardless_of_handoff_and_encoding)
+[ADOM] Action-boundary enforcement + taint tracking holds across handoffs and encodings. ... ok
+test_05_adom_guard_openai_agent_closes_live_handoff_skip (reproductions.openai-agents-guardrail-reproduction.test_handoff_guardrail_repro.OpenAIAgentsHandoffGuardrailRepro.test_05_adom_guard_openai_agent_closes_live_handoff_skip)
+[ADOM] Recursive guard_openai_agent closes the exact Runner.run NextStepHandoff bypass. ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.032s
+
+OK
+OPENAI_API_KEY is not set, skipping trace export

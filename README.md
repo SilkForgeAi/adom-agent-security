@@ -89,12 +89,16 @@ experimental benchmark adapter; broader unseen-request grounding remains unprove
 
 ## Upstream policy-bypass reproductions
 
-Standalone executable reproductions of tool-policy bypasses in open-source agent frameworks, tested against pinned upstream commits:
+Standalone executable reproductions of tool-policy and guardrail bypasses in open-source agent frameworks, tested against pinned upstream commits alongside ADOM's deterministic enforcement:
 
-| Upstream Target | Pinned Commit / Version | Bypass Reproduced | Repository |
+| Upstream Target | Pinned Commit / Version | Bypass Reproduced | Reference |
 |---|---|---|---|
 | **BerriAI / LiteLLM** (`ToolPolicyGuardrail`) | `e63fc85` (`litellm 1.93.0`) | Stage 2 `untrusted -> trusted` policy skipped on Anthropic `/v1/messages` & OpenAI `/v1/responses`; mixed custom tool bypasses blocked `bash_20250124` | [litellm-tool-policy-reproduction](https://github.com/SilkForgeAi/litellm-tool-policy-reproduction) |
 | **OpenHands / software-agent-sdk** (`PolicyRailSecurityAnalyzer`) | `641e161` (`openhands-sdk 1.59.0`) | `printf "$(curl x) \| jq ."` & `printf -- "%s"` evade `fetch-to-exec` pipeline forwarding (`LOW` / `UNKNOWN` instead of `HIGH`) | [openhands-policy-rail-reproduction](https://github.com/SilkForgeAi/openhands-policy-rail-reproduction) |
+| **OpenAI Agents SDK** (`openai-agents-python`) | `64fbde5` (`v0.24.0`, 2026-11-11) | `NextStepHandoff` silently skips destination `input_guardrails`; built-in/hosted tools lack `tool_input_guardrails`. ADOM `guard_openai_agent` enforces recursively across handoff trees (`5/5` tests OK) | [openai-agents-guardrail-reproduction](reproductions/openai-agents-guardrail-reproduction/) |
+| **NVIDIA NeMo Guardrails** (`NVIDIA-NeMo/Guardrails`) | `5d7f4c1` (`v0.25.0-rc1`, 2026-11-13) | Unconfigured tools fail open (`RailDecision.ALLOW`); `base64`/`hex`/reversed secrets evade configured regexes; `filter_secrets.contains_secrets` crashes on `detect-secrets==1.5.0`; `ModelEngine` misses Anthropic `tool_use` blocks (`6/6` tests OK) | [nemo-guardrails-tool-policy-reproduction](reproductions/nemo-guardrails-tool-policy-reproduction/) |
+| **Snyk `agent-scan`** (`snyk/agent-scan`) | `6eb2125` (2026-11-13) | `snyk-agent-guard.sh` fails open on HTTP `401`/`503`; `redact_args` misses `base64`/`hex`/reversed/canary tokens; MCP SSRF filter omits loopback & RFC1918 (`5/5` tests OK) | [snyk-agent-scan-guard-reproduction](reproductions/snyk-agent-scan-guard-reproduction/) |
+| **Superagent** (`superagent-ai/superagent`) | `c9e6462` (`safety-agent`, 2026-08-25) | Missing `"classification"` key defaults to `"pass"`; empty-text PDFs auto-pass without OCR/vision inspection (`5/5` tests OK) | [superagent-guard-failopen-reproduction](reproductions/superagent-guard-failopen-reproduction/) |
 
 ## Architecture
 
@@ -146,14 +150,9 @@ On macOS, `shasum -a 256 -c` may be used instead of `sha256sum -c`.
 
 ## Live frontier-model evidence
 
-Historical live runs used GPT-5.6 Sol, Claude Opus 5, and Gemini 3.1 Pro. Across an unscripted
-18-scenario battery, the models chose 11 dangerous actions; ADOM blocked all 11 and the synthetic
-effect sinks recorded zero unsafe effects. Seven scenarios were refused by the models themselves.
+Historical live runs (August 2026) used GPT-5.6 Sol, Claude Opus 5, and Gemini 3.1 Pro across an unscripted 18-scenario battery (`11` dangerous actions chosen, `11` blocked by ADOM, `7` model refusals, `0` unsafe synthetic-sink effects).
 
-These historical reports are included and explicitly labeled as lower-assurance evidence because
-the original runs did not preserve raw, independently verifiable provider receipts. The included
-harnesses now emit sanitized JSON evidence and manifests for future reruns. See
-[benchmarks](benchmarks/README.md).
+Sanitized November 14, 2026 rerun artifacts are committed with SHA-256 manifests under [`evidence/2026-11-14/`](evidence/2026-11-14/) and summarized in [frontier 2026-11-14](benchmarks/frontier_scenarios/historical-results/2026-11-14.md) (`12` runs across `gpt-5.6-sol` and `claude-opus-5-5`: `7` caught by ADOM, `5` refused by model, `0` unsafe effects; Gemini omitted due to account quota limits) and [provider conformance 2026-11-14](benchmarks/provider_conformance/historical-results/2026-11-14.md) (`0` canary leaks; `1/3` providers completed due to account quota limits). See [benchmarks](benchmarks/README.md).
 
 ## Evidence hierarchy
 
@@ -173,11 +172,12 @@ Read [Security claims](docs/SECURITY_CLAIMS.md) before citing the results.
 
 ## Repository map
 
-- [`adom/`](adom/) — exercised reference enforcement core.
+- [`adom/`](adom/) — exercised reference enforcement core and zero-dependency framework integrations (`adom/integrations/`).
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
-- [`benchmarks/`](benchmarks/) — cross-provider and unscripted live-model harnesses.
+- [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
+- [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/2026-10-08/`](evidence/2026-10-08/) — newer aggregate summaries with source identifiers and limitations.
+- [`evidence/`](evidence/2026-11-14/README.md) — committed machine-readable evidence bundles (`2026-10-08/` and `2026-11-14/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

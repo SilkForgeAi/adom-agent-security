@@ -1,0 +1,9 @@
+{
+  "cross_session_canary_leaks": 0,
+  "providers_attempted": 3,
+  "providers_blocked_without_leak": 1,
+  "providers_completed": 1,
+  "schema_version": 1,
+  "test_id": "live-conc-20261114-124241",
+  "verified": true
+}

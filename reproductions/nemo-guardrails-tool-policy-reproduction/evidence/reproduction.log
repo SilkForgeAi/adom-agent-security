@@ -1,0 +1,19 @@
+test_01_control_configured_tool_blocks_raw_secret (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_01_control_configured_tool_blocks_raw_secret)
+[CONTROL] Configured tool `send_email` blocks raw AWS key matching regex. ... /tmp/oss_audit/nemo-guardrails/nemoguardrails/library/jailbreak_detection/rail_config.py:77: DeprecationWarning: Use 'nim_base_url' instead. This field will be removed in a future version.
+  if self.nim_url and not self.nim_base_url:
+ok
+test_02_bypass_unconfigured_tool_fails_open (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_02_bypass_unconfigured_tool_fails_open)
+[BYPASS] Unconfigured tool `http_post` carrying raw AWS key silently returns ALLOW. ... ok
+test_03_bypass_encoded_secrets_evade_configured_tool_regex (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_03_bypass_encoded_secrets_evade_configured_tool_regex)
+[BYPASS] Configured `send_email` allows base64, hex, and reversed AWS keys. ... ok
+test_04_bug_contains_secrets_crashes_on_detect_secrets_api_mismatch (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_04_bug_contains_secrets_crashes_on_detect_secrets_api_mismatch)
+[BUG] filter_secrets.contains_secrets raises AttributeError against detect-secrets==1.5.0. ... ok
+test_05_gap_iorails_model_engine_misses_anthropic_tool_use_blocks (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_05_gap_iorails_model_engine_misses_anthropic_tool_use_blocks)
+[GAP] ModelEngine falls back to OpenAI Chat parser, returning [] on Anthropic tool_use/tool_result. ... ok
+test_06_adom_side_by_side_blocks_unconfigured_and_encoded_exfil (reproductions.nemo-guardrails-tool-policy-reproduction.test_tool_call_regex_and_secrets_repro.NeMoGuardrailsToolPolicyRepro.test_06_adom_side_by_side_blocks_unconfigured_and_encoded_exfil)
+[ADOM] ModelProxyPolicy fails closed on unknown tool and detects encoded secrets. ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.048s
+
+OK
