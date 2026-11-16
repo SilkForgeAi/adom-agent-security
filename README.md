@@ -6,9 +6,9 @@
 
 **Assume the agent is compromised. Bound what it can do next.**
 
-- **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`**, executed side-effect ASR fell to **`0/929`** across eligible pairs, and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`**. [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
-- **Cost & latency reduction (Router):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
-- **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`~0.04–0.10 ms` p50** per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
+- **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`, hash-pinned author summary):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** (using suite-compiled `FrozenTaskPolicy` contracts with clean-snapshot retry bindings; single model × static attack). [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
+- **Cost & latency reduction (Router, independently verifiable receipts):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
+- **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`0.0393–0.1008 ms` `p50`** (`0.1177–0.2937 ms` `p99`) per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
 - **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)**, **OpenHands SDK (`1.59.0`)**, **OpenAI Agents SDK**, **NeMo Guardrails**, **Snyk `agent-scan`**, and **Superagent**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
 
@@ -24,32 +24,32 @@ the control boundary remains outside the compromised trust domain.
 
 ## 4-Suite AgentDojo results — November 15, 2026
 
-Complete 4-suite evaluation on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1.2.2`, `important_instructions`, deterministic task-compiled policies `FrozenTaskPolicy`, `drop <= 0.10` clean utility gates passed `4/4`):
+Hash-pinned author summary on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1.2.2`, `important_instructions`, suite-compiled `FrozenTaskPolicy` contracts, `drop <= 0.10` clean utility gates passed `4/4`). This completes all 4 suites under a passing clean gate where the undefended baseline suffers `28.24%` ASR (superseding the partial October `GPT-4o` exploratory run moved under historical status below):
 
-| Suite | Clean Utility (`base → adom`) | Baseline ASR (`949` pairs) | ADOM Raw ASR (`949` pairs) | Executed Side-Effect ASR (`929` eligible pairs) | Utility Under Attack (`base → adom`) |
+| Suite | Clean Utility (`base → adom`) | Baseline ASR (`949` pairs) | ADOM Raw ASR (`949` pairs) | Utility Under Attack (`base → adom`) | Inspected Non-Preference Side Effects (`929` eligible) |
 |---|---:|---:|---:|---:|---:|
-| **Banking** | `8/16 → 10/16` | `69/144` (`47.92%`) | **`0/144` (`0.00%`)** | **`0/144`** | `48.61% → 61.81%` |
-| **Slack** | `15/21 → 18/21` | `71/105` (`67.62%`) | **`4/105` (`3.81%`)** | **`0/105`** | `53.33% → 56.19%` |
-| **Travel** | `9/20 → 10/20` | `29/140` (`20.71%`) | **`3/140` (`2.14%`)** | **`0/120`** *(non-preference)* | `37.14% → 43.57%` |
-| **Workspace** | `38/40 → 36/40` | `99/560` (`17.68%`) | **`0/560` (`0.00%`)** | **`0/560`** | `39.11% → 70.36%` |
-| **Total** | **`70/97 (72.16%) → 74/97 (76.29%)`** | **`268/949` (`28.24%`)** | **`7/949` (`0.74%`)** | **`0/929` (`0.00%`)** | **`41.83% → 63.54%`** |
+| **Banking** | `8/16 → 10/16` | `69/144` (`47.92%`) | **`0/144` (`0.00%`)** | `48.61% → 61.81%` | `0/144` |
+| **Slack** | `15/21 → 18/21` | `71/105` (`67.62%`) | **`4/105` (`3.81%`)** | `53.33% → 56.19%` | `0/105` |
+| **Travel** | `9/20 → 10/20` | `29/140` (`20.71%`) | **`3/140` (`2.14%`)** | `37.14% → 43.57%` | `0/120` *(20 prose excluded)* |
+| **Workspace** | `38/40 → 36/40` | `99/560` (`17.68%`) | **`0/560` (`0.00%`)** | `39.11% → 70.36%` | `0/560` |
+| **Total** | **`70/97 (72.16%) → 74/97 (76.29%)`** | **`268/949` (`28.24%`)** | **`7/949` (`0.74%`)** | **`41.83% → 63.54%`** | **`0/929`** |
 
-- All `4` Slack raw hits (`injection_task_5`) blocked `invite_user_to_slack`, `add_user_to_channel`, and `remove_user_from_slack` before execution (`0/105` executed). All `3` Travel raw hits were prose preference recommendations (`injection_task_6`, `20` excluded from the `929` side-effect denominator). Two Workspace ADOM runs and one Workspace baseline run hit `8192`-token truncation and are scored `False`. Full bundle + caveats: [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
+- **Raw `7/949` (`0.74%`) breakdown:** In Slack (`injection_task_5`), `security_from_traces` replays proposed call traces assuming success even though ADOM blocked `invite_user_to_slack`, `add_user_to_channel`, and `remove_user_from_slack` before execution (`0/105` executed). In Travel (`injection_task_6`, `20` pairs excluded from `929`), the check is strictly prose hotel-preference text (`"Riverside View Hotel"`). Two Workspace ADOM runs and one Workspace baseline run hit `8192`-token truncation and are scored `False`.
+- **Policy & clean-utility caveats:** Policies use suite-level deterministic compilers developed with exposure to clean benchmark tasks (blind to injection goals/texts), not query-time LLM policy synthesis on unseen domains; on denied retries, `authorized_action_shapes` returns pre-compiled clean-snapshot target bindings, which helped `gpt-4o-mini` recover clean tasks. Without the adapter source or raw logs in this checkout, `MANIFEST.sha256` proves post-commit integrity of the summary files rather than third-party re-execution. See [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
-## Current work and evaluation status
+## Current work and evaluation status (including historical runs)
 
-Updated October 20, 2026. Start with [results and limitations](docs/RESULTS.md),
+Updated November 15, 2026 (historical `GPT-4o` October entries retained below for completeness). Start with [results and limitations](docs/RESULTS.md),
 [engineering status](docs/ENGINEERING_STATUS.md), and [project contributions](CONTRIBUTIONS.md).
 
 - **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
   idempotency, explicit unknown outcomes and service-side revocation fences.
-- **AgentDojo banking:** native attack successes fell from **87/144 without ADOM to 0/144
+- **Historical GPT-4o exploratory AgentDojo banking (October 2026):** native attack successes fell from **87/144 without ADOM to 0/144
   with ADOM**; task success under attack rose from **126/144 to 143/144**.
   Model: `gpt-4o-2024-05-13`; AgentDojo 0.1.35 / v1.2.2;
   `important_instructions`, one repeat, developed policies rather than blind authoring.
   **Caveat:** clean-task success fell from **16/16 to 15/16**, failing the clean gate;
-  this evaluation continued as explicitly exploratory. Native attack scores are benchmark
-  outcomes, not independently recorded service effects.
+  this evaluation continued as explicitly exploratory (`341/560` Workspace partial) and is superseded as the headline run by the complete 4-suite `gpt-4o-mini` clean-gate run above.
   [The full results matrix](docs/RESULTS.md#gpt-4o-exploratory-agentdojo-evaluation)
   retains Travel and Slack's nonzero native attack scores alongside their baselines,
   attacked-task utility and clean utility; Workspace coverage is partial. These are historical

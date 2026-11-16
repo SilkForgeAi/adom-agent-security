@@ -1,10 +1,10 @@
 # Changelog
 
-## Verified 4-suite AgentDojo & cost-reduction evidence — 2026-11-15
+## Hash-pinned 4-suite AgentDojo & cost-reduction summary — 2026-11-15
 
-- Added complete 4-suite AgentDojo `v1.2.2` summary (`gpt-4o-mini-2024-07-18`, `important_instructions`, `949` task×injection pairs per condition) and `latency_and_encoding_summary.json` under [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) with SHA-256 manifest verification in CI:
-  - Clean gates passed `4/4` (`70/97 → 74/97`); raw native ASR `268/949 (28.24%) → 7/949 (0.74%)`; executed side-effect ASR `0/929` across eligible pairs (`144` Banking + `105` Slack + `120` Travel non-preference + `560` Workspace); utility under attack `397/949 (41.83%) → 603/949 (63.54%)`.
-- Updated `README.md` and `docs/RESULTS.md` to spotlight the verified 4-suite AgentDojo results alongside the `-66.98%` API cost reduction (`benchmarks/request_grounding`) and `$0` judge-LLM runtime enforcement overhead (`~0.04–0.10 ms` p50).
+- Added hash-pinned AgentDojo `v1.2.2` summary (`gpt-4o-mini-2024-07-18`, `important_instructions`, `949` task×injection pairs per condition) and `latency_and_encoding_summary.json` under [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) with SHA-256 manifest checks in CI:
+  - Clean gates passed `4/4` (`70/97 → 74/97`, with `authorized_action_shapes` clean-snapshot target recovery on denied retries); raw native ASR `268/949 (28.24%) → 7/949 (0.74%)` (`0/929` non-preference executed attacker side effects across eligible pairs); utility under attack `397/949 (41.83%) → 603/949 (63.54%)`.
+- Updated `README.md` and `docs/RESULTS.md` to align all latency figures with `latency_and_encoding_summary.json` (`0.0393–0.1008 ms` `p50`, `0.1177–0.2937 ms` `p99`), define AgentDojo's 4-attack Paper-Max metric, and highlight the `-66.98%` API cost reduction (`benchmarks/request_grounding`).
 
 ## Strongest enforcement modules, MCP proxies, coding-agent hooks & CLI — 2026-11-15
 
