@@ -34,6 +34,7 @@ jobs:
           sha256sum -c evidence/2026-10-08/MANIFEST.sha256
           (cd evidence/2026-11-14/frontier_scenarios && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-14/provider_conformance && sha256sum -c MANIFEST.sha256)
+          (cd evidence/2026-11-15 && sha256sum -c MANIFEST.sha256)
       - name: Verify selective-inference saved evidence (no API key)
         run: python -B benchmarks/request_grounding/verify.py
       - name: Test published selective-inference runtime

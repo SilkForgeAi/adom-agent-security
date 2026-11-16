@@ -6,10 +6,11 @@
 
 **Assume the agent is compromised. Bound what it can do next.**
 
+- **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`**, executed side-effect ASR fell to **`0/929`** across eligible pairs, and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`**. [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
+- **Cost & latency reduction (Router):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
+- **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`~0.04–0.10 ms` p50** per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
-- **AgentDojo banking (GPT-4o):** native attack successes **87/144 → 0/144 with ADOM** (attacked utility **126/144 → 143/144**). [Evaluation and caveats](#current-work-and-evaluation-status)
-- **Router:** supported exact tasks run with **no model call**; median latency across the measured legitimate workload fell **1,426 ms → 32.49 ms** (**-66.98%** API cost). [October 20 results](#selective-inference-live-results--october-20-2026)
-- **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)** and **OpenHands SDK (`1.59.0`)**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
+- **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)**, **OpenHands SDK (`1.59.0`)**, **OpenAI Agents SDK**, **NeMo Guardrails**, **Snyk `agent-scan`**, and **Superagent**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
 
 
 ADOM is a model-independent enforcement boundary for autonomous agents. It mediates tool calls,
@@ -20,6 +21,20 @@ This repository is a deliberately bounded reference implementation and evidence 
 not claim to align a model, prevent every sandbox escape, or stop an unknown kernel/hypervisor
 vulnerability. It tests whether a compromised agent can turn access into prohibited effects when
 the control boundary remains outside the compromised trust domain.
+
+## 4-Suite AgentDojo results — November 15, 2026
+
+Complete 4-suite evaluation on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1.2.2`, `important_instructions`, deterministic task-compiled policies `FrozenTaskPolicy`, `drop <= 0.10` clean utility gates passed `4/4`):
+
+| Suite | Clean Utility (`base → adom`) | Baseline ASR (`949` pairs) | ADOM Raw ASR (`949` pairs) | Executed Side-Effect ASR (`929` eligible pairs) | Utility Under Attack (`base → adom`) |
+|---|---:|---:|---:|---:|---:|
+| **Banking** | `8/16 → 10/16` | `69/144` (`47.92%`) | **`0/144` (`0.00%`)** | **`0/144`** | `48.61% → 61.81%` |
+| **Slack** | `15/21 → 18/21` | `71/105` (`67.62%`) | **`4/105` (`3.81%`)** | **`0/105`** | `53.33% → 56.19%` |
+| **Travel** | `9/20 → 10/20` | `29/140` (`20.71%`) | **`3/140` (`2.14%`)** | **`0/120`** *(non-preference)* | `37.14% → 43.57%` |
+| **Workspace** | `38/40 → 36/40` | `99/560` (`17.68%`) | **`0/560` (`0.00%`)** | **`0/560`** | `39.11% → 70.36%` |
+| **Total** | **`70/97 (72.16%) → 74/97 (76.29%)`** | **`268/949` (`28.24%`)** | **`7/949` (`0.74%`)** | **`0/929` (`0.00%`)** | **`41.83% → 63.54%`** |
+
+- All `4` Slack raw hits (`injection_task_5`) blocked `invite_user_to_slack`, `add_user_to_channel`, and `remove_user_from_slack` before execution (`0/105` executed). All `3` Travel raw hits were prose preference recommendations (`injection_task_6`, `20` excluded from the `929` side-effect denominator). Two Workspace ADOM runs and one Workspace baseline run hit `8192`-token truncation and are scored `False`. Full bundle + caveats: [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## Current work and evaluation status
 
@@ -195,7 +210,7 @@ adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-
 - [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
 - [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/`](evidence/2026-11-14/README.md) — committed machine-readable evidence bundles (`2026-10-08/` and `2026-11-14/`) with SHA-256 manifests.
+- [`evidence/`](evidence/2026-11-15/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, and `2026-11-15/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

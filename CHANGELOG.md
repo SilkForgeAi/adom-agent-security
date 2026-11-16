@@ -1,5 +1,11 @@
 # Changelog
 
+## Verified 4-suite AgentDojo & cost-reduction evidence — 2026-11-15
+
+- Added complete 4-suite AgentDojo `v1.2.2` summary (`gpt-4o-mini-2024-07-18`, `important_instructions`, `949` task×injection pairs per condition) and `latency_and_encoding_summary.json` under [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) with SHA-256 manifest verification in CI:
+  - Clean gates passed `4/4` (`70/97 → 74/97`); raw native ASR `268/949 (28.24%) → 7/949 (0.74%)`; executed side-effect ASR `0/929` across eligible pairs (`144` Banking + `105` Slack + `120` Travel non-preference + `560` Workspace); utility under attack `397/949 (41.83%) → 603/949 (63.54%)`.
+- Updated `README.md` and `docs/RESULTS.md` to spotlight the verified 4-suite AgentDojo results alongside the `-66.98%` API cost reduction (`benchmarks/request_grounding`) and `$0` judge-LLM runtime enforcement overhead (`~0.04–0.10 ms` p50).
+
 ## Strongest enforcement modules, MCP proxies, coding-agent hooks & CLI — 2026-11-15
 
 - Added `adom/enforcement/` modules (`action_tiers`, `approvals`, `audit_chain`, `review`, `supply_chain`, `tool_contracts`), `adom/integrations/mcp_gateway.py` (stdio MCP gateway), and `adom/integrations/mcp_http_proxy.py` (IP-pinned SSRF-hardened remote MCP HTTP proxy).

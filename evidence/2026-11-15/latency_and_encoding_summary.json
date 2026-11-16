@@ -1,0 +1,41 @@
+{
+  "latencies": [
+    {
+      "component": "ModelProxyPolicy.score_tool_call (benign)",
+      "iterations": 1000,
+      "p50_ms": 0.0537,
+      "p95_ms": 0.0711,
+      "p99_ms": 0.1177
+    },
+    {
+      "component": "action_kernel.screen_action (sealed policy)",
+      "iterations": 1000,
+      "p50_ms": 0.0543,
+      "p95_ms": 0.1188,
+      "p99_ms": 0.2105
+    },
+    {
+      "component": "integrations.guard_callable (end-to-end)",
+      "iterations": 1000,
+      "p50_ms": 0.06,
+      "p95_ms": 0.1606,
+      "p99_ms": 0.2937
+    },
+    {
+      "component": "MCP Decider.decide (tier + kernel)",
+      "iterations": 500,
+      "p50_ms": 0.1008,
+      "p95_ms": 0.1735,
+      "p99_ms": 0.2607
+    },
+    {
+      "component": "Coding-agent hooks (run_all offline)",
+      "iterations": 500,
+      "p50_ms": 0.0393,
+      "p95_ms": 0.087,
+      "p99_ms": 0.1433
+    }
+  ],
+  "encoding_exfil_caught": "9/9",
+  "benign_non_outbound_allowed": "5/5"
+}
