@@ -1,5 +1,11 @@
 # Changelog
 
+## Adaptive AutoDojo & Unseen AgentDyn Evaluation Summary — 2026-11-16
+
+- Added hash-pinned adaptive attack and unseen-suite generalization summary under [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) with CI manifest verification:
+  - **AutoDojo adaptive black-box attack (`banking`, `144` pairs, `gpt-4o-2024-11-20` optimizer vs. `gpt-4o-mini-2024-07-18`):** `0/144` (`0.00%`) ASR under both live ADOM-targeted optimization (`56.94%` vs `46.53%` utility) and AutoDojo's shipped `no_defense` adaptive cache (`84/144 = 58.33%` baseline ASR → `0/144`, `59.72%` vs `41.67%` utility).
+  - **Unseen AgentDyn suites (`shopping`, `github`, `dailylife`, zero per-suite rules):** query-time `adom_query` cut `shopping` `important_instructions` ASR from `43/180 (23.89%)` to `6/180 (3.33%)` while doubling clean utility (`3/20 → 7/20`), and documented multi-step unseen clean-utility drops (`1/20` on `github`/`dailylife`; `0/60` on zero-LLM `adom_generic`) explicitly as an open research frontier.
+
 ## Hash-pinned 4-suite AgentDojo & cost-reduction summary — 2026-11-15
 
 - Added hash-pinned AgentDojo `v1.2.2` summary (`gpt-4o-mini-2024-07-18`, `important_instructions`, `949` task×injection pairs per condition) and `latency_and_encoding_summary.json` under [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) with SHA-256 manifest checks in CI:

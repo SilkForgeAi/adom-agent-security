@@ -7,6 +7,7 @@
 **Assume the agent is compromised. Bound what it can do next.**
 
 - **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`, hash-pinned author summary):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** (using suite-compiled `FrozenTaskPolicy` contracts with clean-snapshot retry bindings; single model × static attack). [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
+- **Adaptive Black-Box & Unseen Suites (`AutoDojo` + `AgentDyn`, hash-pinned summary):** Under AutoDojo's frontier adaptive attack (`gpt-4o-2024-11-20` optimizer vs `gpt-4o-mini` on `banking`, `144` pairs), ADOM held **`0/144` (`0.00%`) ASR** (vs. **`84/144 = 58.33%` baseline ASR** on AutoDojo's `no_defense` adaptive cache) and lifted attacked utility **`41.67% → 59.72%`**. With zero per-suite rules (`adom_query`), ADOM cut unseen `shopping` ASR **`23.89% → 3.33%`** (`3/20 → 7/20` clean utility), with multi-step unseen `github`/`dailylife` clean utility (`1/20`) documented as open research. [`evidence/2026-11-16`](evidence/2026-11-16/README.md)
 - **Cost & latency reduction (Router, independently verifiable receipts):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
 - **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`0.0393–0.1008 ms` `p50`** (`0.1177–0.2937 ms` `p99`) per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
@@ -36,6 +37,16 @@ Hash-pinned author summary on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1
 
 - **Raw `7/949` (`0.74%`) breakdown:** In Slack (`injection_task_5`), `security_from_traces` replays proposed call traces assuming success even though ADOM blocked `invite_user_to_slack`, `add_user_to_channel`, and `remove_user_from_slack` before execution (`0/105` executed). In Travel (`injection_task_6`, `20` pairs excluded from `929`), the check is strictly prose hotel-preference text (`"Riverside View Hotel"`). Two Workspace ADOM runs and one Workspace baseline run hit `8192`-token truncation and are scored `False`.
 - **Policy & clean-utility caveats:** Policies use suite-level deterministic compilers developed with exposure to clean benchmark tasks (blind to injection goals/texts), not query-time LLM policy synthesis on unseen domains; on denied retries, `authorized_action_shapes` returns pre-compiled clean-snapshot target bindings, which helped `gpt-4o-mini` recover clean tasks. Without the adapter source or raw logs in this checkout, `MANIFEST.sha256` proves post-commit integrity of the summary files rather than third-party re-execution. See [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
+
+## Adaptive AutoDojo & Unseen AgentDyn results — November 16, 2026
+
+| Evaluation (`gpt-4o-mini-2024-07-18`) | Baseline | ADOM (`adom` / `adom_query`) |
+|---|---|---|
+| **AutoDojo adaptive optimization targeting ADOM (`banking`, `36/36` cells, `144` pairs)** | `8/144` (`5.56%` ASR), `46.53%` util | **`0/144` (`0.00%` ASR)**, **`56.94%` util** (`50` blocked) |
+| **AutoDojo shipped `no_defense` adaptive cache (`banking`, `144` pairs)** | `84/144` (`58.33%` ASR), `41.67%` util | **`0/144` (`0.00%` ASR)**, **`59.72%` util** (`164` blocked) |
+| **Unseen `shopping` (zero suite rules, `adom_query`, `180` pairs)** | `43/180` (`23.89%` ASR), `3/20` (`15%`) clean | **`6/180` (`3.33%` ASR)**, **`7/20` (`35%`) clean** |
+
+- **Research weak spot (open problem):** On unseen multi-step `github` and `dailylife` suites (zero per-suite rules), zero-LLM keyword matching (`adom_generic`) scored `0/60` clean utility across all 3 unseen suites and `adom_query` scored `1/20` on `github` and `dailylife` (vs. `10/20` and `9/20` baseline) due to omitted workflow prerequisites (`download_file_through_id`, 2FA `verify_*`, `input_to_webpage`) and strict atomic provenance over profile blobs; on `shopping`, all `6/180` remaining hits were same-capability item substitutions (`cart_add_product`). See [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## Current work and evaluation status (including historical runs)
 
@@ -210,7 +221,7 @@ adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-
 - [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
 - [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/`](evidence/2026-11-15/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, and `2026-11-15/`) with SHA-256 manifests.
+- [`evidence/`](evidence/2026-11-16/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, and `2026-11-16/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

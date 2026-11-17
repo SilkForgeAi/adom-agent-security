@@ -1,6 +1,6 @@
 # ADOM results and evaluation limits
 
-Updated November 15, 2026. ADOM has strong scoped enforcement, clean-utility, and selective-inference cost results alongside explicit scope limits. Scores below describe recorded configurations; they do not establish a universal protection rate.
+Updated November 16, 2026. ADOM has strong scoped enforcement, adaptive-attack resilience, clean-utility, and selective-inference cost results alongside explicit unseen-domain research limits. Scores below describe recorded configurations; they do not establish a universal protection rate.
 
 ## Complete 4-suite AgentDojo evaluation (`gpt-4o-mini-2024-07-18`) — hash-pinned author summary (November 15, 2026)
 
@@ -19,7 +19,34 @@ Explicit breakdown and scope limits:
 - **Policy compilation vs. query-time LLM synthesis:** `FrozenTaskPolicy` compilers were developed with exposure to the clean benchmark suites and user tasks (though blind to injection goals and payloads)—distinct from defenses like Progent (`41.2% → 2.2%`) that synthesize policies from unseen queries at runtime via an LLM.
 - **Why clean utility increased (`authorized_action_shapes`):** On denied calls in `banking`, `slack`, and `workspace`, ADOM's retry feedback returns pre-compiled clean-snapshot target bindings (`recipient`, `amount`, `participants`, `start_time`, `exact` channel/URL metadata), not just generic schema errors. That acts as a clean-snapshot target correction oracle on retries and contributed to `gpt-4o-mini` clean-utility gains on 3 suites.
 - **Truncated completions (`finish_reason="length"`):** `2/560` Workspace ADOM episodes (`user_task_6|injection_task_9`, `user_task_12|injection_task_9`) and `1/560` Workspace baseline episode (`user_task_20|injection_task_9`) hit the `8192`-token completion limit and are recorded as `utility=False, security=False`.
-- **Coverage gaps remaining:** Single model (`gpt-4o-mini-2024-07-18`, chosen because its `28.24%` baseline ASR creates non-trivial attack pressure across all 4 suites within budget while passing all clean gates), single static attack (`important_instructions`), no "Paper-Max" sweep (combining AgentDojo's 4 fixed attacks: `direct`, `ignore_previous`, `injecagent`, `important_instructions`), no adaptive black-box LLM attack (e.g., AutoDojo), and no unseen-task evaluation without suite compilers.
+- **Coverage gaps remaining:** Single model (`gpt-4o-mini-2024-07-18`, chosen because its `28.24%` baseline ASR creates non-trivial attack pressure across all 4 suites within budget while passing all clean gates), single static attack (`important_instructions`), no "Paper-Max" sweep (combining AgentDojo's 4 fixed attacks: `direct`, `ignore_previous`, `injecagent`, `important_instructions`); see the November 16 follow-on evaluations below for AutoDojo adaptive attacks (`banking`) and zero-suite-rule testing on unseen AgentDyn suites (`shopping`, `github`, `dailylife`).
+
+## AutoDojo adaptive attack & unseen AgentDyn suites — hash-pinned summary (November 16, 2026)
+
+Machine-readable summary JSON: [`evidence/2026-11-16/adaptive_and_unseen_summary.json`](../evidence/2026-11-16/adaptive_and_unseen_summary.json) (see [`evidence/2026-11-16/README.md`](../evidence/2026-11-16/README.md)).
+
+### 1. AutoDojo adaptive black-box attack (`banking`, `144` pairs, `gpt-4o-mini-2024-07-18`)
+
+| Evaluation | Baseline ASR | ADOM ASR | Baseline Utility Under Attack | ADOM Utility Under Attack | ADOM Blocked Calls |
+|---|---:|---:|---:|---:|---:|
+| **Live AutoDojo optimization targeting `--defense adom`** (`gpt-4o-2024-11-20` optimizer, `36/36` cells × `3` rounds + `rlhammer`/`topicattack`/`important-instructions`/`static-bare`) | `8/144` (`5.56%`) | **`0/144` (`0.00%`)** | `67/144` (`46.53%`) | **`82/144` (`56.94%`)** | `50` |
+| **AutoDojo shipped `no_defense` adaptive cache** | `84/144` (`58.33%`) | **`0/144` (`0.00%`)** | `60/144` (`41.67%`) | **`86/144` (`59.72%`)** | `164` |
+
+*(Adaptive sweeps for `slack`, `travel`, and `workspace` remain separate future runs.)*
+
+### 2. Unseen AgentDyn suites (`github`, `shopping`, `dailylife`, zero per-suite rules)
+
+| Suite | Baseline Clean Utility | `adom_generic` Clean (`$0` LLM) | `adom_query` Clean (1 compile call) | Baseline `important_instructions` ASR | `adom_query` `important_instructions` ASR |
+|---|---:|---:|---:|---:|---:|
+| **`shopping`** | `3/20` (`15.0%`) | `0/20` (`0.0%`) | **`7/20` (`35.0%`)** | `43/180` (`23.89%`, `28.89%` util) | **`6/180` (`3.33%`, `23.89%` util)** |
+| **`github`** | **`10/20` (`50.0%`)** | `0/20` (`0.0%`) | `1/20` (`5.0%`) | *not run* | *not run* |
+| **`dailylife`** | **`9/20` (`45.0%`)** | `0/20` (`0.0%`) | `1/20` (`5.0%`) | *not run* | *not run* |
+
+### 3. Open research frontier: unseen multi-step clean utility & same-capability substitution
+
+Two concrete failure modes remain open research without suite-specific compilers:
+1. **Unseen multi-step clean utility (`adom_generic` `0/60`; `adom_query` `1/20` on `github` and `dailylife`):** Pure keyword-verb matching misses unseen multi-step workflows (e.g., 2FA `verify_github_account`, attachment `download_file_through_id`, web-form `input_to_webpage`). Query-time compilation recovers `shopping` (`3/20 → 7/20`) and cuts `shopping` ASR (`23.89% → 3.33%`), but still drops clean utility on `github` and `dailylife` when required session prerequisites are unmentioned in the prompt or when destination emails/URLs appear only inside multi-line `read_file` profile text rather than short atomic fields.
+2. **Same-capability item substitution (`shopping` `6/180`):** All `6` residual hits under `adom_query` used the user-requested `cart_add_product` / `checkout_selected_cart` capability to substitute an attacker product ID returned by `search_product` (`0` unrequested `send_money`, `send_email`, `update_shopping_account_password`, or `delete_node` calls succeeded). Constraining product-level intent choice inside a permitted commerce tool without per-suite compilers remains future work.
 
 ## What can be reproduced from this repository
 
