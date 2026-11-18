@@ -7,8 +7,8 @@
 **Assume the agent is compromised. Bound what it can do next.**
 
 > **60-Second Code Review:**
-> 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway 3.14+ Reference Architecture](docs/KONG_AI_GATEWAY_ARCHITECTURE.md)
-> 2. [Multi-Plane Gateway (`mediated_gateway.py`)](adom/enforcement/mediated_gateway.py) · [Egress Proxy & DNS Pinning (`egress_proxy.py`)](adom/enforcement/egress_proxy.py) · [MCP HTTP Proxy (`mcp_http_proxy.py`)](adom/integrations/mcp_http_proxy.py) · [Kong Guardrail Service (`kong_guardrail.py`)](adom/integrations/kong_guardrail.py)
+> 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway 3.14+ Reference Architecture](docs/KONG_AI_GATEWAY_ARCHITECTURE.md) · [UK AISI Inspect (`inspect_ai`) Integration](docs/UK_AISI_INSPECT_INTEGRATION.md)
+> 2. [Multi-Plane Gateway (`mediated_gateway.py`)](adom/enforcement/mediated_gateway.py) · [Egress Proxy & DNS Pinning (`egress_proxy.py`)](adom/enforcement/egress_proxy.py) · [MCP HTTP Proxy (`mcp_http_proxy.py`)](adom/integrations/mcp_http_proxy.py) · [Kong Guardrail (`kong_guardrail.py`)](adom/integrations/kong_guardrail.py) · [UK AISI Inspect Approver (`inspect_approver.py`)](adom/integrations/inspect_approver.py)
 > 3. [Pinned Upstream Bypass Reproductions](reproductions/) (Snyk `agent-scan`, NeMo Guardrails, OpenAI Agents SDK, Superagent, LiteLLM, OpenHands)
 
 - **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`, hash-pinned author summary):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** (using suite-compiled `FrozenTaskPolicy` contracts with clean-snapshot retry bindings; single model × static attack). [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
@@ -216,6 +216,7 @@ adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gate
 adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
 adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (ai-custom-guardrail + ai-mcp-proxy)
 adom kong-guard --port 8780 --approved-outbound corp.com        # stateful HTTP guardrail service for Kong ai-custom-guardrail
+adom inspect-policy --mode control_prefilter > adom-aisi.yaml   # UK AISI Inspect (inspect_ai) 2-stage AI-Control policy YAML
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
 ```
 

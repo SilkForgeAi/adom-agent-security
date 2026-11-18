@@ -23,8 +23,20 @@ class AdomCliTests(unittest.TestCase):
             timeout=10,
         )
         self.assertEqual(proc.returncode, 0)
-        for cmd in ("hook", "mcp-stdio", "mcp-http", "kong-guard", "verify-chain", "bench"):
+        for cmd in ("hook", "mcp-stdio", "mcp-http", "kong-guard", "inspect-policy", "verify-chain", "bench"):
             self.assertIn(cmd, proc.stdout)
+
+    def test_cli_inspect_policy_control_prefilter(self):
+        proc = subprocess.run(
+            [sys.executable, "-B", "-m", "adom.cli", "inspect-policy", "--mode", "control_prefilter"],
+            cwd=str(ROOT),
+            text=True,
+            capture_output=True,
+            timeout=10,
+        )
+        self.assertEqual(proc.returncode, 0)
+        self.assertIn("adom_agent_security/adom_approver", proc.stdout)
+        self.assertIn("control_prefilter", proc.stdout)
 
     def test_cli_kong_guard_emit_deck(self):
         proc = subprocess.run(

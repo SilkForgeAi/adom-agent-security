@@ -138,17 +138,49 @@ def _cmd_kong_guard(argv: List[str]) -> int:
     return 0
 
 
+def _cmd_inspect_policy(argv: List[str]) -> int:
+    from adom.integrations.inspect_approver import generate_inspect_policy_yaml
+
+    ap = argparse.ArgumentParser(prog="adom inspect-policy")
+    ap.add_argument(
+        "--mode",
+        choices=("enforce", "control_prefilter", "observe"),
+        default="enforce",
+        help="Approval mode: enforce (standalone), control_prefilter (Stage-1 before LLM/human monitor), or observe",
+    )
+    ap.add_argument("--allowed-tool", action="append", default=[], help="Grant an exact tool name (repeatable)")
+    ap.add_argument("--approved-outbound", action="append", default=[], help="Allowlist an outbound host/domain (repeatable)")
+    ap.add_argument("--downstream-approver", default="human", help="Stage-2 approver when mode=control_prefilter")
+    ap.add_argument("--audit-log", default="~/.adom/inspect/decisions.jsonl", help="Audit ChainLog path")
+    opts = ap.parse_args(argv)
+
+    tools = tuple(opts.allowed_tool) if opts.allowed_tool else ("read_file", "search_docs", "http_post")
+    hosts = tuple(opts.approved_outbound) if opts.approved_outbound else ("api.internal.example",)
+    print(
+        generate_inspect_policy_yaml(
+            mode=opts.mode,
+            allowed_tools=tools,
+            approved_outbound=hosts,
+            downstream_approver=opts.downstream_approver,
+            audit_log_path=opts.audit_log,
+        ),
+        end="",
+    )
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     parser = argparse.ArgumentParser(
         prog="adom",
-        description="ADOM assume-breach enforcement CLI (coding-agent hooks, MCP proxies, Kong AI Gateway guardrail, audit verification).",
+        description="ADOM assume-breach enforcement CLI (coding-agent hooks, MCP proxies, Kong AI Gateway guardrail, UK AISI Inspect approver, audit verification).",
     )
     sub = parser.add_subparsers(dest="cmd", required=True)
     sub.add_parser("hook", help="Run fail-closed coding-agent hook (cursor|claude-code|codex|github-copilot)", add_help=False)
     sub.add_parser("mcp-stdio", help="Run fail-closed stdio MCP gateway", add_help=False)
     sub.add_parser("mcp-http", help="Run SSRF-pinned HTTP MCP JSON-RPC proxy", add_help=False)
     sub.add_parser("kong-guard", help="Run HTTP guardrail backend for Kong AI Gateway (ai-custom-guardrail)", add_help=False)
+    sub.add_parser("inspect-policy", help="Emit UK AISI Inspect (inspect_ai) approval policy YAML", add_help=False)
     sub.add_parser("verify-chain", help="Verify tamper-evident JSONL audit chain", add_help=False)
     sub.add_parser("bench", help="Run deterministic latency & multi-encoding exfiltration benchmark", add_help=False)
 
@@ -158,6 +190,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "mcp-stdio": _cmd_mcp_stdio,
         "mcp-http": _cmd_mcp_http,
         "kong-guard": _cmd_kong_guard,
+        "inspect-policy": _cmd_inspect_policy,
         "verify-chain": _cmd_verify_chain,
         "bench": _cmd_bench,
     }
