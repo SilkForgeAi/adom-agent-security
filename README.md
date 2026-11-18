@@ -6,6 +6,11 @@
 
 **Assume the agent is compromised. Bound what it can do next.**
 
+> **60-Second Code Review:**
+> 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway 3.14+ Reference Architecture](docs/KONG_AI_GATEWAY_ARCHITECTURE.md)
+> 2. [Multi-Plane Gateway (`mediated_gateway.py`)](adom/enforcement/mediated_gateway.py) · [Egress Proxy & DNS Pinning (`egress_proxy.py`)](adom/enforcement/egress_proxy.py) · [MCP HTTP Proxy (`mcp_http_proxy.py`)](adom/integrations/mcp_http_proxy.py) · [Kong Guardrail Service (`kong_guardrail.py`)](adom/integrations/kong_guardrail.py)
+> 3. [Pinned Upstream Bypass Reproductions](reproductions/) (Snyk `agent-scan`, NeMo Guardrails, OpenAI Agents SDK, Superagent, LiteLLM, OpenHands)
+
 - **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`, hash-pinned author summary):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** (using suite-compiled `FrozenTaskPolicy` contracts with clean-snapshot retry bindings; single model × static attack). [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
 - **Adaptive Black-Box & Unseen Suites (`AutoDojo` + `AgentDyn`, hash-pinned summary):** Under AutoDojo's frontier adaptive attack (`gpt-4o-2024-11-20` optimizer vs `gpt-4o-mini` on `banking`, `144` pairs), ADOM held **`0/144` (`0.00%`) ASR** (vs. **`84/144 = 58.33%` baseline ASR** on AutoDojo's `no_defense` adaptive cache) and lifted attacked utility **`41.67% → 59.72%`**. With zero per-suite rules (`adom_query`), ADOM cut unseen `shopping` ASR **`23.89% → 3.33%`** (`3/20 → 7/20` clean utility), with multi-step unseen `github`/`dailylife` clean utility (`1/20`) documented as open research. [`evidence/2026-11-16`](evidence/2026-11-16/README.md)
 - **Cost & latency reduction (Router, independently verifiable receipts):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
@@ -209,6 +214,8 @@ adom bench                                                      # 5-component la
 adom hook --client codex < payload.json                         # offline fail-closed hook (cursor|claude-code|codex|github-copilot)
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
 adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
+adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (ai-custom-guardrail + ai-mcp-proxy)
+adom kong-guard --port 8780 --approved-outbound corp.com        # stateful HTTP guardrail service for Kong ai-custom-guardrail
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
 ```
 

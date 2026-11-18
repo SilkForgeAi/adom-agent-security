@@ -88,16 +88,67 @@ def _cmd_bench(_argv: List[str]) -> int:
     return bench_main()
 
 
+def _cmd_kong_guard(argv: List[str]) -> int:
+    from adom.enforcement.audit_chain import load_key
+    from adom.integrations.kong_guardrail import (
+        KongGuardrailEngine,
+        KongGuardrailServer,
+        generate_deck_config,
+    )
+
+    ap = argparse.ArgumentParser(prog="adom kong-guard")
+    ap.add_argument("--bind", default="127.0.0.1", help="Listen host (default: 127.0.0.1)")
+    ap.add_argument("--port", type=int, default=8780, help="Listen port (default: 8780)")
+    ap.add_argument("--allowed-tool", action="append", default=[], help="Grant an exact tool name (repeatable)")
+    ap.add_argument("--approved-outbound", action="append", default=[], help="Allowlist an outbound host/domain (repeatable)")
+    ap.add_argument("--audit-log", type=Path, default=None, help="Path to hash-chained JSONL audit log")
+    ap.add_argument("--audit-key-file", type=Path, default=None, help="Optional HMAC key file for ChainLog")
+    ap.add_argument("--emit-deck", action="store_true", help="Print Kong decK (_format_version 3.0) YAML and exit")
+    opts = ap.parse_args(argv)
+
+    guardrail_url = f"http://{opts.bind}:{opts.port}/v1/kong/guardrail"
+    if opts.emit_deck:
+        print(generate_deck_config(guardrail_url=guardrail_url), end="")
+        return 0
+
+    audit_path = opts.audit_log or (Path.home() / ".adom" / "kong" / "decisions.jsonl")
+    engine = KongGuardrailEngine(
+        allowed_tools=opts.allowed_tool,
+        approved_outbound=opts.approved_outbound,
+        strict_deny_unknown=bool(opts.allowed_tool),
+        audit_log_path=audit_path,
+        audit_key=load_key(opts.audit_key_file) if opts.audit_key_file else None,
+    )
+    srv = KongGuardrailServer(engine, bind_host=opts.bind, bind_port=opts.port)
+    srv.start()
+    print(f"ADOM Kong guardrail service listening on {srv.guardrail_url}", flush=True)
+    stop = False
+
+    def _handle_sig(_signum, _frame):
+        nonlocal stop
+        stop = True
+
+    signal.signal(signal.SIGINT, _handle_sig)
+    signal.signal(signal.SIGTERM, _handle_sig)
+    try:
+        while not stop:
+            time.sleep(0.25)
+    finally:
+        srv.close()
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     args = list(sys.argv[1:] if argv is None else argv)
     parser = argparse.ArgumentParser(
         prog="adom",
-        description="ADOM assume-breach enforcement CLI (coding-agent hooks, MCP proxies, audit verification).",
+        description="ADOM assume-breach enforcement CLI (coding-agent hooks, MCP proxies, Kong AI Gateway guardrail, audit verification).",
     )
     sub = parser.add_subparsers(dest="cmd", required=True)
     sub.add_parser("hook", help="Run fail-closed coding-agent hook (cursor|claude-code|codex|github-copilot)", add_help=False)
     sub.add_parser("mcp-stdio", help="Run fail-closed stdio MCP gateway", add_help=False)
     sub.add_parser("mcp-http", help="Run SSRF-pinned HTTP MCP JSON-RPC proxy", add_help=False)
+    sub.add_parser("kong-guard", help="Run HTTP guardrail backend for Kong AI Gateway (ai-custom-guardrail)", add_help=False)
     sub.add_parser("verify-chain", help="Verify tamper-evident JSONL audit chain", add_help=False)
     sub.add_parser("bench", help="Run deterministic latency & multi-encoding exfiltration benchmark", add_help=False)
 
@@ -106,6 +157,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "hook": _cmd_hook,
         "mcp-stdio": _cmd_mcp_stdio,
         "mcp-http": _cmd_mcp_http,
+        "kong-guard": _cmd_kong_guard,
         "verify-chain": _cmd_verify_chain,
         "bench": _cmd_bench,
     }
