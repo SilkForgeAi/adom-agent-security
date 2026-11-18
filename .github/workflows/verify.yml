@@ -36,6 +36,9 @@ jobs:
           (cd evidence/2026-11-14/provider_conformance && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-15 && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-16 && sha256sum -c MANIFEST.sha256)
+          (cd evidence/2026-11-17 && sha256sum -c MANIFEST.sha256)
+      - name: Compile check all Python modules
+        run: python3 -B -m compileall -q adom cursor_hook incident_replay
       - name: Verify selective-inference saved evidence (no API key)
         run: python -B benchmarks/request_grounding/verify.py
       - name: Test published selective-inference runtime

@@ -72,7 +72,8 @@ _IP_LITERAL_RX = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b|\[[0-9a-fA-F:]+\]")
 _FILE_EXT = {"txt", "csv", "json", "log", "png", "pdf", "doc", "docx", "xml", "md", "html",
              "htm", "jpg", "jpeg", "zip", "gz", "tar", "tmp", "dat", "bin", "yaml", "yml",
              "conf", "cfg", "ini", "key", "pem", "sh", "py", "js", "sql", "xlsx", "ppt",
-             "gif", "svg", "mp4", "wav", "parquet", "db", "sqlite"}
+             "gif", "svg", "mp4", "wav", "parquet", "db", "sqlite", "exe", "pass", "passwd",
+             "clouddrive"}
 
 
 def _network_dest(v: str) -> bool:

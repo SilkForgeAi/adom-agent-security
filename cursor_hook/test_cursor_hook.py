@@ -88,6 +88,25 @@ class SelfProtection(unittest.TestCase):
              "tool_input": json.dumps({"path": "~/.cursor/hooks.json", "content": "{}"})}
         self.assertTrue(blocks(C.check_self_protection("beforeMCPExecution", p), "self_protection"))
 
+    def test_mcp_and_agent_config_hijack_blocked(self):
+        targets = [
+            str(H / ".cursor" / "mcp.json"),
+            str(H / ".vscode" / "mcp.json"),
+            str(H / ".mcp.json"),
+            str(H / ".claude.json"),
+            str(H / ".codex" / "config.toml"),
+            str(H / "Library" / "Application Support" / "Claude" / "claude_desktop_config.json"),
+        ]
+        for path in targets:
+            p = {"hook_event_name": "preToolUse", "tool_name": "Write", "cwd": "/Users/dev/p",
+                 "tool_input": {"file_path": path, "contents": "{}"}}
+            self.assertTrue(blocks(C.check_self_protection("preToolUse", p), "self_protection"), path)
+        for cmd in ["echo '{}' > ~/.cursor/mcp.json",
+                    "cat > .mcp.json << 'EOF'",
+                    "cp /tmp/evil.json ~/claude_desktop_config.json"]:
+            self.assertTrue(blocks(C.check_self_protection("beforeShellExecution", shell(cmd)),
+                                   "self_protection"), cmd)
+
     def test_after_edit_of_protected_file_raises_alert(self):
         p = {"hook_event_name": "afterFileEdit", "file_path": str(C.HOOK_DIR / "watch.py"), "edits": []}
         f = C.check_self_protection("afterFileEdit", p)
