@@ -85,3 +85,11 @@ python3 -B -m unittest -v adom/integrations/tests/test_kong_guardrail.py
 ```bash
 python3 -B -m adom.cli verify-chain ~/.adom/kong/decisions.jsonl
 ```
+
+---
+
+## 4. Verification Scope & Kong 3.14 Enterprise Notes
+
+- **What runs offline in CI (`test_kong_guardrail.py`):** Live HTTP tests against `KongGuardrailServer` (`/v1/kong/guardrail`) and `McpHttpProxyServer` (`/mcp`), multi-provider payload parsing (`OpenAI Chat`, `/v1/responses`, `Anthropic`, `Gemini`, and flat `$(content)` strings), `BlastRadiusController` circuit-breaker trips, SHA-256 `ChainLog` verification, and a faithful reference of `Kong/kong` OSS `guard-prompt.lua` (`1c7a0aa71475`). `ai-custom-guardrail` and `ai-mcp-proxy` are `ai_gateway_enterprise`-tier plugins and are not executed inside an unlicensed OSS Kong container in CI.
+- **`$(content)` vs. structured `tool_calls` in `ai-custom-guardrail`:** With `text_source: concatenate_all_content`, Kong populates `$(content)` from extracted message text. To screen structured `choices[].message.tool_calls` when assistant `content` is `null`, either attach a lightweight `config.functions` Lua serializer in `ai-custom-guardrail` that forwards the full request/response table under `payload`, or enforce tool-call arguments at execution time on Plane 2 (`ai-mcp-proxy` `passthrough-listener` -> `adom mcp-http`).
+

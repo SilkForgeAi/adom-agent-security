@@ -21,6 +21,7 @@ classifiers = [
 adom = "adom.cli:main"
 
 [project.entry-points.inspect_ai]
+adom = "adom.integrations.inspect_approver"
 adom_agent_security = "adom.integrations.inspect_approver"
 adom-agent-security = "adom.integrations.inspect_approver"
 

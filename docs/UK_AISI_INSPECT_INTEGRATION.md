@@ -46,7 +46,7 @@ flowchart LR
 
 ## 3. Quickstart with `inspect eval`
 
-`pyproject.toml` registers `adom_agent_security` under `[project.entry-points.inspect_ai]` while keeping `adom-agent-security`'s core runtime 100% Python `3.10+` standard library.
+`pyproject.toml` registers `adom` under `[project.entry-points.inspect_ai]` while keeping `adom-agent-security`'s core runtime 100% Python `3.10+` standard library (and includes an alias workaround for `inspect_ai._util.package.package_is_installed_editable` when distribution name `adom-agent-security` differs from top-level import package `adom`).
 
 ```bash
 pip install -e .

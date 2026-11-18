@@ -255,7 +255,7 @@ class InspectApproverTests(unittest.TestCase):
 
     def test_generate_inspect_policy_yaml(self):
         yaml_enforce = generate_inspect_policy_yaml(mode="enforce")
-        self.assertIn("adom_agent_security/adom_approver", yaml_enforce)
+        self.assertIn("adom/adom_approver", yaml_enforce)
         yaml_control = generate_inspect_policy_yaml(mode="control_prefilter", downstream_approver="human")
         self.assertIn('mode: "control_prefilter"', yaml_control)
         self.assertIn("name: human", yaml_control)

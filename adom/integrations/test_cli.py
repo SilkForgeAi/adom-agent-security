@@ -35,7 +35,7 @@ class AdomCliTests(unittest.TestCase):
             timeout=10,
         )
         self.assertEqual(proc.returncode, 0)
-        self.assertIn("adom_agent_security/adom_approver", proc.stdout)
+        self.assertIn("adom/adom_approver", proc.stdout)
         self.assertIn("control_prefilter", proc.stdout)
 
     def test_cli_kong_guard_emit_deck(self):

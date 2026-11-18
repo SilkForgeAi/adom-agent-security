@@ -523,6 +523,22 @@ def create_adom_approver(
 
 if _inspect_approver_decorator is not None:
     adom_approver = _inspect_approver_decorator(name="adom_approver")(create_adom_approver)
+    # Work around upstream `inspect_ai._util.package.package_is_installed_editable` returning
+    # False on editable installs when distribution name (`adom-agent-security`) != top-level
+    # import package (`adom`), ensuring `adom/adom_approver` resolves in both editable and
+    # non-editable installs.
+    try:
+        from inspect_ai._util.registry import RegistryInfo, registry_add, registry_info  # type: ignore[import-not-found]
+
+        _info = registry_info(adom_approver)
+        for _alias in ("adom/adom_approver", "adom_agent_security/adom_approver"):
+            if _info.name != _alias:
+                registry_add(
+                    adom_approver,
+                    RegistryInfo(type="approver", name=_alias, metadata=dict(_info.metadata)),
+                )
+    except Exception:  # pragma: no cover
+        pass
 else:
     adom_approver = create_adom_approver
 
@@ -544,7 +560,7 @@ def generate_inspect_policy_yaml(
 #   inspect eval inspect_evals/b3 --approval adom-approval.yaml
 #   inspect eval inspect_evals/mcptox --approval adom-approval.yaml
 approvers:
-  - name: adom_agent_security/adom_approver
+  - name: adom/adom_approver
     tools: "*"
     mode: "{mode}"
     allowed_tools: {tools_yaml}
