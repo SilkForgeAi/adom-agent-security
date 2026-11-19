@@ -28,6 +28,8 @@ def _kong_guard_prompt_lua_reference(request: dict, *, deny_patterns=(), allow_p
                                      match_all_roles: bool = False) -> tuple[bool, str]:
     """Faithful Python reference of Kong `kong/plugins/ai-prompt-guard/filters/guard-prompt.lua`
     (`execute(request, conf)` at commit `1c7a0aa714752a93b9a61779597b1de66063d3a6`).
+    Kong Gateway is Copyright 2016-2026 Kong Inc., Apache License 2.0; translated to Python and
+    simplified (regex errors and logging omitted; Python `re` stands in for PCRE). See NOTICE.
 
     Demonstrates the two structural properties addressed by `KongGuardrailEngine`:
       1. `match_all_roles=False` (default) skips `role="tool"` messages completely.

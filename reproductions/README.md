@@ -1,8 +1,12 @@
-# Upstream bypass reproductions
+# Upstream policy-gap reproductions
 
-Each folder reproduces a tool-policy or guardrail bypass in a pinned commit of an open-source
-agent framework, then runs ADOM on the same input. Run one, or all four, from the repository
-root:
+Each folder reproduces a tool-policy or guardrail behavior in a pinned commit of an open-source
+agent framework that lets a risky action or payload through in a deployment expecting fail-closed
+enforcement, then runs ADOM on the same input. Several of these are documented or deliberate
+upstream design choices; each write-up says which. Upstream code is fetched at run time into
+`reproductions/.work/` and is not redistributed; licenses are listed in [NOTICE](../NOTICE).
+
+Run one, or all four, from the repository root:
 
 ```bash
 reproductions/run_reproduction.sh openai-agents     # openai/openai-agents-python @ 64fbde5
