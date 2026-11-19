@@ -5,3 +5,30 @@ This distribution contains a bounded reference implementation and synthetic eval
 Names of third-party products and organizations are used only to identify public reports and API
 compatibility; no endorsement or affiliation is implied.
 
+Third-party material
+--------------------
+
+Kong Gateway (https://github.com/Kong/kong)
+  Copyright 2016-2026 Kong Inc. Licensed under the Apache License, Version 2.0
+  (http://www.apache.org/licenses/LICENSE-2.0).
+  adom/integrations/tests/test_kong_guardrail.py contains `_kong_guard_prompt_lua_reference`,
+  a Python re-expression of the request-collection logic in
+  kong/plugins/ai-prompt-guard/filters/guard-prompt.lua at commit
+  1c7a0aa714752a93b9a61779597b1de66063d3a6. It is used only as a test reference and was
+  modified from the original (translated from Lua to Python; logging and error-response
+  handling omitted). The ai-custom-guardrail field names checked in the same test file were
+  transcribed from Kong's public plugin documentation; no Kong Enterprise source is included.
+
+Upstream reproductions (reproductions/)
+  The reproduction tests import and run code from the projects below at the pinned commits
+  listed in reproductions/run_reproduction.sh. That code is fetched at run time into
+  reproductions/.work/ (git-ignored) and is not redistributed here. The tests are new code;
+  no upstream source files are vendored. Upstream test identifiers and output that appear in
+  reproductions/*/evidence/ logs belong to their projects.
+    - openai/openai-agents-python  MIT License, Copyright (c) 2025 OpenAI
+    - NVIDIA-NeMo/Guardrails       Apache License 2.0, Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES
+    - snyk/agent-scan              Apache License 2.0, Copyright 2025 Invariant Labs AG
+    - superagent-ai/superagent     MIT License, Copyright (c) 2024 Superagent Technologies Inc.
+
+  The separately published LiteLLM and OpenHands reproductions linked from README.md live in
+  their own repositories and carry their own attribution.

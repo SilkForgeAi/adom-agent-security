@@ -83,7 +83,7 @@ def _cmd_verify_chain(argv: List[str]) -> int:
 
 
 def _cmd_bench(_argv: List[str]) -> int:
-    from benchmarks.latency_and_encoding.run import main as bench_main
+    from adom.bench import main as bench_main
 
     return bench_main()
 
@@ -104,11 +104,17 @@ def _cmd_kong_guard(argv: List[str]) -> int:
     ap.add_argument("--audit-log", type=Path, default=None, help="Path to hash-chained JSONL audit log")
     ap.add_argument("--audit-key-file", type=Path, default=None, help="Optional HMAC key file for ChainLog")
     ap.add_argument("--emit-deck", action="store_true", help="Print Kong decK (_format_version 3.0) YAML and exit")
+    ap.add_argument("--session-scope", default=None,
+                    help="With --emit-deck: send this value as X-Session-Id via $(conf.params.adom_session_scope) "
+                         "(scope the plugin to one consumer for per-consumer budgets)")
+    ap.add_argument("--anonymous-blast-radius", action="store_true",
+                    help="Apply budgets/circuit breaker to requests with no session identity "
+                         "(single-tenant gateways only: unidentified callers share one breaker)")
     opts = ap.parse_args(argv)
 
     guardrail_url = f"http://{opts.bind}:{opts.port}/v1/kong/guardrail"
     if opts.emit_deck:
-        print(generate_deck_config(guardrail_url=guardrail_url), end="")
+        print(generate_deck_config(guardrail_url=guardrail_url, session_scope=opts.session_scope), end="")
         return 0
 
     audit_path = opts.audit_log or (Path.home() / ".adom" / "kong" / "decisions.jsonl")
@@ -121,6 +127,7 @@ def _cmd_kong_guard(argv: List[str]) -> int:
         strict_deny_unknown=True,
         audit_log_path=audit_path,
         audit_key=load_key(opts.audit_key_file) if opts.audit_key_file else None,
+        anonymous_blast_radius=opts.anonymous_blast_radius,
     )
     srv = KongGuardrailServer(engine, bind_host=opts.bind, bind_port=opts.port)
     srv.start()

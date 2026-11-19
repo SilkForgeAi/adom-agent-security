@@ -1,4 +1,4 @@
-# NVIDIA NeMo Guardrails — Tool-Call Regex Fail-Open, Encoding Bypass, Secret-Filter Crash, & IORails Parser Scope
+# NVIDIA NeMo Guardrails — Per-Tool Regex Scope, Encoded Payloads, Secret-Filter Crash, & IORails Parser Scope
 
 - **Upstream Repository:** `NVIDIA-NeMo/Guardrails`
 - **Pinned Commit:** `5d7f4c1ca62fb6155066e6c581379d1a5ec11338` (`v0.25.0-rc1`, 2026-11-13)
@@ -10,12 +10,20 @@
 - **Reproduction Script:** `test_tool_call_regex_and_secrets_repro.py`
 - **Evidence Log:** `evidence/reproduction.log`
 
+## What this shows
+
+Finding 1 follows NeMo's design: regex patterns are configured per tool, and a tool with no
+configured patterns is not checked (the code logs "No regex patterns configured for tool" at
+debug level). It is listed because a deployment expecting a default deny would not get one.
+Finding 3 is a crash against `detect-secrets==1.5.0`; findings 2 and 4 are behaviors of the
+pinned commit. Whether 2–4 are intended is for the NeMo maintainers to say.
+
 ## Verified Findings
 
-1. **Fail-open default when a tool is absent from `regex_detection.tool_call`** (`nemoguardrails/library/regex/actions.py:153-162`):
+1. **No check when a tool is absent from `regex_detection.tool_call`** (`nemoguardrails/library/regex/actions.py:153-162`):
    - **Control:** Configured `send_email` carrying raw `AKIAIOSFODNN7EXAMPLE` returns `RailDecision.BLOCK`.
-   - **Bypass:** Tool `http_post` (present in `Toolset`, absent from `regex_detection.tool_call`) carrying the identical raw AWS key returns `RailDecision.ALLOW` (`detections == []`), diverging from sibling fail-closed behavior in `evaluate_tool_call_cel` (`cel/actions.py:48`).
-2. **Encoded payloads bypass configured tool regexes:**
+   - **Unconfigured tool:** Tool `http_post` (present in `Toolset`, absent from `regex_detection.tool_call`) carrying the identical raw AWS key returns `RailDecision.ALLOW` (`detections == []`), diverging from sibling fail-closed behavior in `evaluate_tool_call_cel` (`cel/actions.py:48`).
+2. **Encoded payloads are not matched by configured tool regexes:**
    - Even when `send_email` has `AKIA[0-9A-Z]{16}` configured, `base64`, `hex`, and reversed variants return `RailDecision.ALLOW` (`json.dumps` without canonical decoding).
 3. **Broken `detect-secrets` integration in `filter_secrets.contains_secrets`** (`filter_secrets.py:30`):
    - Calls `detect_secrets.scan_adhoc_string(resp)`, raising `AttributeError: module 'detect_secrets' has no attribute 'scan_adhoc_string'` on `detect-secrets==1.5.0`.
@@ -26,8 +34,16 @@
 
 ## How to Run
 
+From the repository root (needs `git`, `bash`, `curl` and Python 3.11–3.13):
+
 ```bash
-python -m unittest -v reproductions/nemo-guardrails-tool-policy-reproduction/test_tool_call_regex_and_secrets_repro.py
+reproductions/run_reproduction.sh nemo-guardrails
+```
+
+The script fetches `NVIDIA-NeMo/Guardrails` at the pinned commit into `reproductions/.work/nemo-guardrails`, checks the commit hash, installs it into its own virtualenv (`reproductions/.work/venv-nemo-guardrails`) and runs the test. Nothing outside `reproductions/.work/` is installed or changed. To rerun the test afterwards:
+
+```bash
+reproductions/.work/venv-nemo-guardrails/bin/python -m unittest -v reproductions/nemo-guardrails-tool-policy-reproduction/test_tool_call_regex_and_secrets_repro.py
 ```
 
 Expected output (`evidence/reproduction.log`): `Ran 6 tests in 0.049s — OK`.

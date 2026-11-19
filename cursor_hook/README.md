@@ -1,7 +1,8 @@
 # ADOM for coding agents (Cursor + Claude Code) - v0.5
 
 ADOM sits in front of AI coding agents and decides, before each action runs, whether it is
-allowed. Decisions are deterministic (no model in the decision path), take ~30-65 ms, and
+allowed. Decisions are deterministic (no model in the decision path), take ~30-65 ms per call on the
+author's Mac (86 ms median measured in a Linux container on 2026-11-19; most of it is Python start-up), and
 every one is written to a SHA-256 hash-chained log that anyone can verify.
 
 Supported agents: **Cursor** (hooks) and **Claude Code** (hooks). Both share one decision

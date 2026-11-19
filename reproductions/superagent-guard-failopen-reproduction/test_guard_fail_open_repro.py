@@ -18,8 +18,9 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
-SUPERAGENT_SRC = Path(os.environ.get("SUPERAGENT_SRC", "/tmp/oss_audit/superagent/sdk/python/src"))
 ADOM_ROOT = Path(os.environ.get("ADOM_ROOT", str(Path(__file__).resolve().parents[2])))
+# Pinned checkout made by reproductions/run_reproduction.sh (override with SUPERAGENT_SRC)
+SUPERAGENT_SRC = Path(os.environ.get("SUPERAGENT_SRC", str(ADOM_ROOT / "reproductions/.work/superagent/sdk/python/src")))
 for p in (SUPERAGENT_SRC, ADOM_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))
@@ -54,7 +55,7 @@ class SuperagentGuardFailOpenRepro(unittest.TestCase):
         self.assertEqual(resp.classification, "block")
 
     def test_02_bypass_missing_classification_key_defaults_to_pass(self) -> None:
-        """[BYPASS] Malformed JSON response lacking 'classification' silently defaults to 'pass' (client.py:282)."""
+        """[GAP] Malformed JSON response lacking 'classification' silently defaults to 'pass' (client.py:282)."""
         async def _run():
             with patch(
                 "safety_agent.client.call_provider",
@@ -67,7 +68,7 @@ class SuperagentGuardFailOpenRepro(unittest.TestCase):
         self.assertEqual(resp.violation_types, ["exfiltration"])
 
     def test_03_bypass_empty_extract_pdf_auto_passes_without_inspection(self) -> None:
-        """[BYPASS] PDF with zero extracted text returns classification='pass' with no OCR/vision check (client.py:414-427)."""
+        """[GAP] PDF with zero extracted text returns classification='pass' with no OCR/vision check (client.py:414-427)."""
         async def _run():
             with patch(
                 "safety_agent.client.process_input",

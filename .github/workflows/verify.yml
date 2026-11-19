@@ -19,12 +19,22 @@ jobs:
         run: |
           python -B -m unittest discover -s incident_replay -p 'test_*.py'
           python -B -m unittest discover -s adom/integrations -p 'test_*.py'
+          python -B -m unittest discover -s adom/api -p 'test_*.py'
           python -B cursor_hook/test_cursor_hook.py
           python -B cursor_hook/test_action_tiers.py
       - name: Run key-free latency, CLI, and encoding benchmark
         run: |
           python -B -m adom.cli --help > /dev/null
           python -B -m adom.cli bench
+      - name: Installed CLI works outside the source tree
+        run: |
+          python -m venv /tmp/adom-venv
+          /tmp/adom-venv/bin/pip install -q .
+          cd /tmp
+          /tmp/adom-venv/bin/adom --help > /dev/null
+          /tmp/adom-venv/bin/adom bench > /dev/null
+          /tmp/adom-venv/bin/adom kong-guard --emit-deck > /dev/null
+          /tmp/adom-venv/bin/adom inspect-policy > /dev/null
       - name: Verify deterministic evidence
         run: python -B incident_replay/verify.py incident_replay/results
       - name: Verify committed hashes
@@ -37,6 +47,8 @@ jobs:
           (cd evidence/2026-11-15 && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-16 && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-17 && sha256sum -c MANIFEST.sha256)
+          (cd evidence/2026-11-19/kong_konnect && sha256sum -c MANIFEST.sha256)
+          python -B -m adom.cli verify-chain evidence/2026-11-19/kong_konnect/decisions.jsonl
       - name: Compile check all Python modules
         run: python3 -B -m compileall -q adom cursor_hook incident_replay
       - name: Verify selective-inference saved evidence (no API key)

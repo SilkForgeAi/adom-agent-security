@@ -18,8 +18,9 @@ import unittest
 from pathlib import Path
 from typing import Any
 
-AGENTS_SRC = Path(os.environ.get("OPENAI_AGENTS_SRC", "/tmp/oss_audit/openai-agents-python/src"))
 ADOM_ROOT = Path(os.environ.get("ADOM_ROOT", str(Path(__file__).resolve().parents[2])))
+# Pinned checkout made by reproductions/run_reproduction.sh (override with OPENAI_AGENTS_SRC)
+AGENTS_SRC = Path(os.environ.get("OPENAI_AGENTS_SRC", str(ADOM_ROOT / "reproductions/.work/openai-agents/src")))
 if str(AGENTS_SRC) not in sys.path:
     sys.path.insert(0, str(AGENTS_SRC))
 if str(ADOM_ROOT) not in sys.path:
@@ -143,7 +144,7 @@ class OpenAIAgentsHandoffGuardrailRepro(unittest.TestCase):
         self.assertEqual(executed, [])
 
     def test_02_bypass_handoff_skips_destination_agent_input_guardrails(self) -> None:
-        """[BYPASS] Handing off from triage agent to privileged agent skips PrivilegedOps input_guardrails."""
+        """[GAP] Handing off from triage agent to privileged agent skips PrivilegedOps input_guardrails."""
         _, triage, run_cfg, guard_calls, executed = self._build_agents(
             [
                 [_tool_call("transfer_to_privileged_ops", {}, "c_handoff")],
@@ -219,7 +220,7 @@ class OpenAIAgentsHandoffGuardrailRepro(unittest.TestCase):
         self.assertEqual(get_status(service="billing"), "status:billing=ok")
 
     def test_05_adom_guard_openai_agent_closes_live_handoff_skip(self) -> None:
-        """[ADOM] Recursive guard_openai_agent closes the exact Runner.run NextStepHandoff bypass."""
+        """[ADOM] Recursive guard_openai_agent screens function tools after the NextStepHandoff."""
         _, triage, run_cfg, guard_calls, executed = self._build_agents(
             [
                 [_tool_call("transfer_to_privileged_ops", {}, "c_handoff")],

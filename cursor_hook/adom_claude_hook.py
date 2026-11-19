@@ -26,6 +26,28 @@ import adom_cursor_hook as engine  # noqa: E402
 
 _WRITE_TOOLS = {"Write", "Edit", "MultiEdit", "NotebookEdit"}
 _PATH_KEYS = ("file_path", "path", "notebook_path")
+
+# Claude Code events ADOM deliberately has no opinion on. PreToolUse is the only event that
+# can stop an action before it runs; PostToolUse fires after the tool already ran (ADOM only
+# inspects it for file writes); the rest are lifecycle notices. Exiting 2 on these does not
+# block anything: on PostToolUse it tells Claude a completed action was "blocked", which makes
+# it retry. They are listed explicitly so an event name ADOM has never seen (for example a
+# renamed PreToolUse) still fails closed in enforce mode instead of silently passing.
+UNGATED_EVENTS = frozenset({
+    "PostToolUse", "PostToolUseFailure", "Notification", "UserPromptSubmit", "Stop",
+    "SubagentStart", "SubagentStop", "PreCompact", "SessionStart", "SessionEnd",
+})
+
+
+def is_ungated(cc):
+    """True when the payload is a known Claude Code event that ADOM does not gate."""
+    if not isinstance(cc, dict):
+        return False
+    ev = cc.get("hook_event_name")
+    if ev not in UNGATED_EVENTS:
+        return False
+    # A PostToolUse for a write tool is inspected (translate() returns a payload for it).
+    return not (ev == "PostToolUse" and str(cc.get("tool_name") or "") in _WRITE_TOOLS)
 _NON_CONTENT_KEYS = set(_PATH_KEYS) | {"description", "start_line", "end_line",
                                        "old_string", "old_text", "replace_all", "cell_id",
                                        "cell_type", "edit_mode"}
@@ -94,7 +116,9 @@ def main():
             return 2
         return 0
     if payload is None:
-        # Unrecognized Claude Code shapes exit 0 historically — fail closed in enforce.
+        if is_ungated(cc):
+            return 0                     # known event ADOM has no opinion on (see UNGATED_EVENTS)
+        # Anything else ADOM cannot place (no event name, an unknown event) fails closed.
         if engine.MODE == "enforce":
             sys.stderr.write("ADOM blocked this action: unrecognized hook payload\n")
             return 2

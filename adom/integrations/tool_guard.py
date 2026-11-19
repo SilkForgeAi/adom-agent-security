@@ -179,9 +179,12 @@ def guard_openai_agent(agent: Any, policy: Optional[ModelProxyPolicy] = None,
     """Recursively bind shared ADOM tool-boundary screening across an OpenAI Agents SDK
     agent and all reachable ``handoffs``.
 
-    Closes the destination-agent ``input_guardrails`` skip on ``NextStepHandoff`` by
-    enforcing ADOM screening and cross-turn taint tracking directly at every ``FunctionTool``
-    invocation boundary.
+    The SDK runs input guardrails only for the first agent (documented); its recommended
+    alternative for handoff workflows is tool guardrails. This wraps every ``FunctionTool``
+    reachable through handoffs so each call is screened, with shared taint, whichever agent
+    makes it. Hosted and built-in tools (shell, apply-patch, computer, hosted MCP) have no
+    ``on_invoke_tool`` hook here and are not covered. Handoffs added after this call are not
+    wrapped.
     """
     import json as _json
 

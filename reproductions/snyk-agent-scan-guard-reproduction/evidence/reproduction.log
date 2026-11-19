@@ -1,15 +1,15 @@
 test_01_control_http_200_block_response_blocks_tool (reproductions.snyk-agent-scan-guard-reproduction.test_guard_fail_open_and_redact_repro.SnykAgentScanRepro.test_01_control_http_200_block_response_blocks_tool)
 [CONTROL] When guard backend returns HTTP 200 decision=block, hook outputs block JSON. ... ok
 test_02_bypass_http_503_and_401_fail_open_and_allow_dangerous_bash (reproductions.snyk-agent-scan-guard-reproduction.test_guard_fail_open_and_redact_repro.SnykAgentScanRepro.test_02_bypass_http_503_and_401_fail_open_and_allow_dangerous_bash)
-[BYPASS] Backend HTTP 503 or 401 causes snyk-agent-guard.sh to exit 0 and fail open. ... ok
+[GAP] Backend HTTP 503 or 401 causes snyk-agent-guard.sh to exit 0 and fail open. ... ok
 test_03_bypass_redact_args_misses_encoded_secrets_and_custom_canaries (reproductions.snyk-agent-scan-guard-reproduction.test_guard_fail_open_and_redact_repro.SnykAgentScanRepro.test_03_bypass_redact_args_misses_encoded_secrets_and_custom_canaries)
-[BYPASS] redact_args redacts raw AWS key but leaks base64, hex, reversed, and custom canaries. ... ok
+[GAP] redact_args redacts raw AWS key but leaks base64, hex, reversed, and custom canaries. ... ok
 test_04_ssrf_filter_blocks_cloud_metadata_but_allows_loopback_and_rfc1918 (reproductions.snyk-agent-scan-guard-reproduction.test_guard_fail_open_and_redact_repro.SnykAgentScanRepro.test_04_ssrf_filter_blocks_cloud_metadata_but_allows_loopback_and_rfc1918)
 [GAP] _create_mcp_http_client_without_redirects blocks 169.254.169.254 but allows loopback/RFC1918. ... ok
 test_05_adom_side_by_side_offline_fail_closed_and_encoded_secret_detection (reproductions.snyk-agent-scan-guard-reproduction.test_guard_fail_open_and_redact_repro.SnykAgentScanRepro.test_05_adom_side_by_side_offline_fail_closed_and_encoded_secret_detection)
 [ADOM] Offline strict ModelProxyPolicy + guard_mcp_handler block unknown/encoded exfil locally. ... ok
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.102s
+Ran 5 tests in 0.238s
 
 OK

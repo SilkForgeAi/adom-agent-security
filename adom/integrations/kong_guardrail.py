@@ -1,31 +1,28 @@
-"""ADOM HTTP Guardrail Service & Reference Architecture for Kong AI Gateway (3.14+).
+"""ADOM guardrail service for Kong AI Gateway (`ai-custom-guardrail`, Kong 3.14+).
 
-Integrates ADOM's deterministic, zero-LLM enforcement core with Kong AI Gateway across
-both LLM and MCP traffic planes:
+Kong calls `POST /v1/kong/guardrail` before a request reaches the model (INPUT) and after the
+reply comes back (OUTPUT); ADOM answers `{"block": ..., "block_message": ...}`.
 
-1. **LLM Plane (`ai-custom-guardrail`, `guarding_mode: BOTH`)** — `POST /v1/kong/guardrail`
-   - Safely parses multi-turn agent histories across OpenAI Chat (`/v1/chat/completions`),
-     OpenAI Responses (`/v1/responses`), Anthropic Messages (`/v1/messages`), Gemini
-     (`generateContent`), and flat `$(content)` text payloads—including `assistant`
-     messages with `content: null` + `tool_calls` and multimodal content arrays that
-     cause `ai-prompt-guard` (`guard-prompt.lua`) to reject valid tool-calling turns
-     when `match_all_roles=true`.
-   - Learns untrusted/sensitive tool outputs (`role="tool"`, `function_call_output`,
-     `tool_result`, `functionResponse`) into bounded per-session taint memory on `INPUT`.
-   - Screens `OUTPUT` tool calls (`tool_calls`, `function_call`, `tool_use`,
-     `functionCall`) and assistant text for raw/encoded secret exfiltration (`base64`,
-     `hex`, URL-encoded, reversed, chunked), SSRF destinations, ungranted tools
-     (`strict_deny_unknown=True`), and sliding-window consequence/retry budgets
-     (`BlastRadiusController`).
+What Kong actually sends with the generated config (verified on Kong Gateway Enterprise 3.16,
+evidence/2026-11-19): `{"source", "text"}`, where `text` is `$(content)`, the extracted message
+text. With that input this service blocks model replies that contain raw secret-shaped strings
+(AWS keys, `sk-` keys, private-key headers, GitHub/Slack tokens, password/secret pairs). It
+cannot see tool calls in replies (Kong makes no OUTPUT call for a tool-call-only reply), cannot
+tell which text came from a tool, and so learns no taint; encoded secrets are caught only for
+taint values the operator configures (`taint_values=`), which the CLI does not expose.
 
-2. **MCP Plane (`ai-mcp-proxy` `passthrough-listener` -> `adom mcp-http`)**
-   - Kong's `ai-mcp-proxy` enforces Consumer/Group ACLs on tool names but explicitly
-     documents `AI Guardrails: supported: false` on MCP routes. Placing `McpHttpProxyServer`
-     (`adom mcp-http`) as the upstream service behind Kong's `passthrough-listener` adds
-     argument-level policy screening, cross-tool taint tracking, strict SSRF IP-pinning,
-     and tamper-evident SHA-256 `ChainLog` audit receipts.
+The engine also accepts structured bodies (OpenAI Chat and Responses, Anthropic Messages,
+Gemini, null/array content) under `payload`/`body`/`request`/`response`. When a caller sends
+them, tool outputs feed per-session taint on INPUT and tool calls are screened on OUTPUT
+(deny-unknown tools, unapproved destinations, raw and encoded taint). Kong's documented
+variables do not provide such a body.
 
-Pure Python 3.10+ standard library; zero external runtime dependencies.
+Budgets and the circuit breaker apply only to identified sessions (see KongGuardrailEngine).
+
+The MCP plane is separate: Kong `ai-mcp-proxy` (passthrough-listener) in front of
+`adom mcp-http` (adom/integrations/mcp_http_proxy.py).
+
+Pure Python 3.10+ standard library.
 """
 from __future__ import annotations
 
@@ -56,6 +53,52 @@ from adom.enforcement.blast_radius import BlastRadiusController, Budget
 _MAX_HTTP_BODY = 4 * 1024 * 1024  # 4 MiB hard cap on guardrail HTTP payloads (DoS bound)
 _MAX_SESSIONS = 1024              # bounded LRU of active agent sessions
 _MAX_REGEX_TEXT = 65536           # bounded prompt text evaluated against optional regex rules
+DEFAULT_SESSION = "default-kong-session"
+
+# Kong's ai-custom-guardrail documents four template variables: $(source), $(conf...),
+# $(content) and $(resp). A value that still looks like "$(...)" when it reaches ADOM was
+# not rendered by Kong (an undocumented variable, a typo, a version mismatch). It carries no
+# data and must never be mistaken for content or for a session identity.
+_UNRENDERED_TEMPLATE = re.compile(r"^\s*\$\(.*\)\s*$", re.S)
+
+
+def _is_unrendered(value: Any) -> bool:
+    return isinstance(value, str) and bool(_UNRENDERED_TEMPLATE.match(value))
+
+
+def _usable_str(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip()) and not _is_unrendered(value)
+
+
+def _content_candidates(envelope: Dict[str, Any]) -> List[Any]:
+    """Every representation of the inspected content the guardrail request carries.
+
+    All of them are screened. Picking one (the first wrapper key present) let a wrapper that
+    Kong left empty or unrendered hide the `$(content)` text Kong did render, so a secret in
+    the model's reply passed the OUTPUT check.
+    """
+    out: List[Any] = [envelope]                     # top-level shapes and the `text` field
+    for key in ("payload", "body", "request", "response"):
+        val = envelope.get(key)
+        if val is None or _is_unrendered(val) or (isinstance(val, str) and not val.strip()):
+            continue
+        out.append(_parse_json_maybe(val))
+    text = envelope.get("text")
+    if _usable_str(text):
+        parsed = _parse_json_maybe(text)
+        if parsed is not text:                      # `text` was itself a serialized body
+            out.append(parsed)
+    return out
+
+
+def _looks_like_output(obj: Any) -> bool:
+    if not isinstance(obj, dict):
+        return False
+    if any(k in obj for k in ("choices", "candidates", "output")):
+        return True
+    content = obj.get("content")
+    return isinstance(content, list) and any(
+        isinstance(b, dict) and b.get("type") == "tool_use" for b in content)
 
 
 def _extract_content_text(content: Any) -> str:
@@ -331,7 +374,17 @@ class GuardrailVerdict:
 
 
 class KongGuardrailEngine:
-    """Stateful, fail-closed ADOM decision engine for Kong `ai-custom-guardrail`."""
+    """Stateful, fail-closed ADOM decision engine for Kong `ai-custom-guardrail`.
+
+    Session identity comes from the `X-Kong-Session-Id` / `X-Session-Id` / consumer headers
+    or a `session_id` / `conversation_id` body field. Kong's documented guardrail variables
+    carry no caller identity, so with the stock decK config every request is unidentified.
+    Unidentified requests get full per-request screening (deny-unknown tools, egress
+    allowlist, secret/taint scans) but no blast-radius budget or circuit breaker: a breaker
+    keyed on nothing is shared by every caller, so one caller's failures (or 200 ordinary
+    requests in a minute) would block the whole gateway. Pass an identity, or set
+    `anonymous_blast_radius=True` for a single-tenant gateway, to turn budgets back on.
+    """
 
     def __init__(
         self,
@@ -348,8 +401,10 @@ class KongGuardrailEngine:
         audit_log_path: Optional[Path] = None,
         audit_key: Optional[bytes] = None,
         max_sessions: int = _MAX_SESSIONS,
+        anonymous_blast_radius: bool = False,
     ):
         self.allowed_tools = tuple(allowed_tools)
+        self.anonymous_blast_radius = bool(anonymous_blast_radius)
         self.approved_outbound = tuple(approved_outbound)
         self.approved_payees = tuple(approved_payees)
         self.allowed_delete_paths = tuple(allowed_delete_paths)
@@ -409,6 +464,20 @@ class KongGuardrailEngine:
                 return f"output_text:pii_exfil:{pii}:critical"
         return None
 
+    # ---- blast radius only for sessions with a real identity ----
+    def _blast_check(self, sid: str, identified: bool, **kw: Any):
+        if not identified and not self.anonymous_blast_radius:
+            return None
+        return self.blast.check(sid, **kw)
+
+    def _blast_failure(self, sid: str, identified: bool) -> None:
+        if identified or self.anonymous_blast_radius:
+            self.blast.record_failure(sid)
+
+    def _blast_success(self, sid: str, identified: bool) -> None:
+        if identified or self.anonymous_blast_radius:
+            self.blast.record_success(sid)
+
     def evaluate(
         self,
         envelope: Any,
@@ -417,46 +486,41 @@ class KongGuardrailEngine:
     ) -> GuardrailVerdict:
         t0 = time.perf_counter()
         hdrs = {str(k).lower(): str(v) for k, v in (headers or {}).items()}
-        session_id = "default-kong-session"
+        session_id = DEFAULT_SESSION
+        identified = False
         phase = "INPUT"
 
         try:
             if not isinstance(envelope, dict):
                 raise ValueError("guardrail request body must be a JSON object")
 
+            # Session identity. Empty or unrendered ("$(...)") values are not an identity: a
+            # literal template string would put every caller into one shared session.
             for hk in ("x-kong-session-id", "x-session-id", "x-consumer-custom-id", "x-consumer-id", "x-consumer-username"):
-                if hdrs.get(hk, "").strip():
+                if _usable_str(hdrs.get(hk)):
                     session_id = _safe_label(hdrs[hk].strip(), limit=96)
+                    identified = True
                     break
             for bk in ("session_id", "conversation_id"):
-                if isinstance(envelope.get(bk), str) and envelope[bk].strip():
+                if _usable_str(envelope.get(bk)):
                     session_id = _safe_label(envelope[bk].strip(), limit=96)
+                    identified = True
                     break
+            anon_signals = [] if identified else ["kong:session_unidentified"]
+
+            candidates = _content_candidates(envelope)
 
             raw_source = str(envelope.get("source") or envelope.get("phase") or hdrs.get("x-kong-guard-phase") or "").upper()
             if raw_source in ("INPUT", "OUTPUT"):
                 phase = raw_source
-            elif any(k in envelope for k in ("choices", "candidates", "output")) or (
-                isinstance(envelope.get("content"), list)
-                and any(isinstance(b, dict) and b.get("type") == "tool_use" for b in envelope["content"])
-            ):
+            elif any(_looks_like_output(c) for c in candidates):
                 phase = "OUTPUT"
-
-            # Unwrap nested `payload` / `body` / `request` / `response` if wrapped by Kong `config.request.body`
-            inner: Any = envelope
-            for key in ("payload", "body", "request", "response"):
-                if key in envelope and envelope[key] is not None:
-                    inner = _parse_json_maybe(envelope[key])
-                    break
-            if inner is envelope and "text" in envelope and len(envelope) <= 4 and isinstance(envelope.get("text"), str):
-                parsed_text = _parse_json_maybe(envelope["text"])
-                inner = parsed_text
 
             policy = self._get_session_policy(session_id)
 
             if phase == "INPUT":
-                bv = self.blast.check(session_id, kind="action")
-                if not bv.allowed:
+                bv = self._blast_check(session_id, identified, kind="action")
+                if bv is not None and not bv.allowed:
                     return self._finalize(
                         t0=t0,
                         block=True,
@@ -467,7 +531,12 @@ class KongGuardrailEngine:
                         signals=list(bv.signals),
                     )
 
-                prompts, observations, _hist_calls = _extract_input_artifacts(inner)
+                prompts: List[str] = []
+                observations: List[Tuple[str, str]] = []
+                for cand in candidates:
+                    p, o, _hist_calls = _extract_input_artifacts(cand)
+                    prompts.extend(p)
+                    observations.extend(o)
                 for label, obs_text in observations:
                     policy.note_read(obs_text, path=label, untrusted=True)
 
@@ -477,7 +546,7 @@ class KongGuardrailEngine:
                     scan_target = f"{joined}\n{all_obs}"
                     for rx in self.deny_regexes:
                         if rx.search(scan_target):
-                            self.blast.record_failure(session_id)
+                            self._blast_failure(session_id, identified)
                             return self._finalize(
                                 t0=t0,
                                 block=True,
@@ -485,27 +554,41 @@ class KongGuardrailEngine:
                                 session_id=session_id,
                                 block_reason="prompt_deny_pattern",
                                 block_message="ADOM blocked request matching configured deny pattern",
-                                signals=["input:deny_pattern:high"],
+                                signals=["input:deny_pattern:high"] + anon_signals,
                             )
 
-                self.blast.record_success(session_id)
+                self._blast_success(session_id, identified)
                 return self._finalize(
                     t0=t0,
                     block=False,
                     phase=phase,
                     session_id=session_id,
-                    signals=["adom:input:ok"] + (["adom:taint_observed"] if observations else []),
+                    signals=["adom:input:ok"] + (["adom:taint_observed"] if observations else []) + anon_signals,
                 )
 
-            # OUTPUT phase: inspect tool calls + assistant text
-            calls, texts = _extract_output_artifacts(inner)
-            signals: List[str] = []
+            # OUTPUT phase: inspect tool calls + assistant text from every representation.
+            calls: List[Tuple[str, Any]] = []
+            texts: List[str] = []
+            seen_calls = set()
+            for cand in candidates:
+                c_calls, c_texts = _extract_output_artifacts(cand)
+                for tname, targs in c_calls:
+                    try:
+                        key = (tname, json.dumps(targs, sort_keys=True, default=str))
+                    except Exception:
+                        key = (tname, repr(targs))
+                    if key in seen_calls:          # same call seen in two representations
+                        continue
+                    seen_calls.add(key)
+                    calls.append((tname, targs))
+                texts.extend(t for t in c_texts if not _is_unrendered(t))
+            signals: List[str] = list(anon_signals)
             blocked_tools: List[str] = []
             reasons: List[str] = []
 
             if not calls:
-                bv = self.blast.check(session_id, kind="action")
-                if not bv.allowed:
+                bv = self._blast_check(session_id, identified, kind="action")
+                if bv is not None and not bv.allowed:
                     return self._finalize(
                         t0=t0,
                         block=True,
@@ -518,8 +601,8 @@ class KongGuardrailEngine:
 
             for tname, targs in calls:
                 kind, amt, nbytes = _consequence_for_call(tname, targs)
-                bv = self.blast.check(session_id, kind=kind, amount=amt, nbytes=nbytes)
-                if not bv.allowed:
+                bv = self._blast_check(session_id, identified, kind=kind, amount=amt, nbytes=nbytes)
+                if bv is not None and not bv.allowed:
                     signals.extend(bv.signals)
                     blocked_tools.append(_safe_label(tname or "<empty>"))
                     reasons.append(bv.reason)
@@ -528,20 +611,20 @@ class KongGuardrailEngine:
                 _frozen, v = screen_action(policy, tname, targs)
                 signals.extend(v.signals)
                 if v.action == "block":
-                    self.blast.record_failure(session_id)
+                    self._blast_failure(session_id, identified)
                     blocked_tools.append(_safe_label(tname or "<empty>"))
                     reasons.append(v.reason or f"tool '{_safe_label(tname)}' denied by ADOM")
 
             for txt in texts:
                 text_hit = self._scan_text_for_taints(policy, txt)
                 if text_hit:
-                    self.blast.record_failure(session_id)
+                    self._blast_failure(session_id, identified)
                     signals.append(text_hit)
                     reasons.append("assistant response leaks tainted secret or sensitive PII")
                     break
 
             if reasons:
-                primary = signals[0] if signals else "output_policy_violation"
+                primary = next((s for s in signals if s not in anon_signals), "output_policy_violation")
                 return self._finalize(
                     t0=t0,
                     block=True,
@@ -553,16 +636,21 @@ class KongGuardrailEngine:
                     blocked_tools=blocked_tools,
                 )
 
-            self.blast.record_success(session_id)
+            self._blast_success(session_id, identified)
+            if not any(s not in anon_signals for s in signals):
+                signals = ["adom:output:ok"] + anon_signals
             return self._finalize(
                 t0=t0,
                 block=False,
                 phase=phase,
                 session_id=session_id,
-                signals=signals or ["adom:output:ok"],
+                signals=signals,
             )
         except Exception as exc:
-            self.blast.record_failure(session_id)
+            try:
+                self._blast_failure(session_id, identified)
+            except Exception:
+                pass
             return self._finalize(
                 t0=t0,
                 block=True,
@@ -709,10 +797,23 @@ def generate_deck_config(
     guardrail_url: str = "http://adom-guardrail:8780/v1/kong/guardrail",
     adom_mcp_upstream_url: str = "http://adom-mcp-proxy:8765/mcp",
     llm_model: str = "gpt-4o",
+    session_scope: Optional[str] = None,
 ) -> str:
     """Emit a declarative Kong `decK` (`_format_version: "3.0"`) configuration pairing
     Kong AI Gateway 3.14+ (`ai-proxy-advanced`, `ai-custom-guardrail`, `ai-mcp-proxy`)
-    with ADOM across both LLM and MCP routes."""
+    with ADOM across both LLM and MCP routes.
+
+    Uses only the template variables Kong documents for `ai-custom-guardrail`: `$(source)`,
+    `$(conf.params.*)`, `$(content)` and `$(resp.*)`. `session_scope`, when given, is sent
+    as `X-Session-Id` through `$(conf.params.adom_session_scope)`; it identifies this plugin
+    instance (scope the plugin to one consumer to get per-consumer budgets). Without it,
+    requests reach ADOM unidentified: screened per request, with no shared circuit breaker.
+    """
+    if session_scope is not None and not re.fullmatch(r"[A-Za-z0-9._:-]{1,96}", session_scope):
+        raise ValueError("session_scope must be 1-96 characters of [A-Za-z0-9._:-]")
+    scope_param = f'\n                adom_session_scope: "{session_scope}"' if session_scope else ""
+    scope_header = ('\n                  X-Session-Id: "$(conf.params.adom_session_scope)"'
+                    if session_scope else "")
     return f'''_format_version: "3.0"
 
 services:
@@ -737,34 +838,32 @@ services:
             config:
               guarding_mode: BOTH
               text_source: concatenate_all_content
+              # Fail closed: stop the request if the guardrail call errors (Kong's default,
+              # stated explicitly), and verify TLS when adom_url is https (Kong defaults to off).
+              stop_on_error: true
+              ssl_verify: true
+              # Only Kong-documented variables: $(source), $(conf.params.*), $(content), $(resp.*).
+              # $(content) is extracted message TEXT: structured tool_calls with null content
+              # are not in it. Enforce tool calls at execution (adom mcp-http, tool guards).
               params:
-                adom_url: "{guardrail_url}"
+                adom_url: "{guardrail_url}"{scope_param}
               request:
                 url: "$(conf.params.adom_url)"
                 headers:
-                  Content-Type: application/json
-                  # Per-consumer / per-request session keys so blast-radius state is not shared.
-                  X-Session-Id: "$(headers['x-session-id'])"
-                  X-Kong-Session-Id: "$(headers['x-kong-request-id'])"
-                  X-Consumer-Id: "$(consumer.id)"
-                  X-Consumer-Username: "$(consumer.username)"
+                  Content-Type: application/json{scope_header}
                 body:
                   source: "$(source)"
                   text: "$(content)"
-                  # Forward the full LLM table so null-content tool_calls are not dropped
-                  # when $(content) is empty (see docs/KONG_AI_GATEWAY_ARCHITECTURE.md).
-                  payload: "$(request)"
-                  session_id: "$(headers['x-session-id'])"
               response:
                 block: "$(resp.block)"
                 block_message: "$(resp.block_message)"
               metrics:
                 block_reason: "$(resp.block_reason)"
-                block_details: "$(resp.audit_hash)"
+                block_detail: "$(resp.audit_hash)"
 
   # Kong `ai-mcp-proxy` documents `AI Guardrails: supported: false` on MCP routes.
   # Routing `passthrough-listener` to `adom mcp-http` preserves Kong AuthN/ACLs/OTel
-  # while adding ADOM per-argument taint, capability tiers, SSRF IP-pinning, and ChainLog.
+  # while adding ADOM argument screening, cross-tool taint, capability tiers and a DNS-pinned upstream.
   - name: governed-mcp-service
     url: {adom_mcp_upstream_url}
     routes:

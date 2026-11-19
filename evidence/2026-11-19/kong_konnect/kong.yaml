@@ -1,0 +1,49 @@
+_format_version: "3.0"
+
+services:
+  - name: enterprise-llm-service
+    url: https://api.openai.com/v1/chat/completions
+    routes:
+      - name: llm-chat-route
+        paths:
+          - /llm/v1/chat
+        plugins:
+          - name: ai-proxy-advanced
+            config:
+              targets:
+                - route_type: llm/v1/chat
+                  auth:
+                    header_name: Authorization
+                    header_value: Bearer ${{ env "DECK_OPENAI_API_KEY" }}
+                  model:
+                    provider: openai
+                    name: gpt-4o
+                    options:
+                      upstream_url: http://host.docker.internal:9100/v1/chat/completions
+          - name: ai-custom-guardrail
+            config:
+              guarding_mode: BOTH
+              text_source: concatenate_all_content
+              # Fail closed: stop the request if the guardrail call errors (Kong's default,
+              # stated explicitly), and verify TLS when adom_url is https (Kong defaults to off).
+              stop_on_error: true
+              ssl_verify: true
+              # Only Kong-documented variables: $(source), $(conf.params.*), $(content), $(resp.*).
+              # $(content) is extracted message TEXT: structured tool_calls with null content
+              # are not in it. Enforce tool calls at execution (adom mcp-http, tool guards).
+              params:
+                adom_url: "http://host.docker.internal:8781/v1/kong/guardrail"
+              request:
+                url: "$(conf.params.adom_url)"
+                headers:
+                  Content-Type: application/json
+                body:
+                  source: "$(source)"
+                  text: "$(content)"
+              response:
+                block: "$(resp.block)"
+                block_message: "$(resp.block_message)"
+              metrics:
+                block_reason: "$(resp.block_reason)"
+                block_detail: "$(resp.audit_hash)"
+

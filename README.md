@@ -9,14 +9,15 @@
 > **60-Second Code Review:**
 > 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway 3.14+ Reference Architecture](docs/KONG_AI_GATEWAY_ARCHITECTURE.md) · [UK AISI Inspect (`inspect_ai`) Integration](docs/UK_AISI_INSPECT_INTEGRATION.md)
 > 2. [Multi-Plane Gateway (`mediated_gateway.py`)](adom/enforcement/mediated_gateway.py) · [Egress Proxy & DNS Pinning (`egress_proxy.py`)](adom/enforcement/egress_proxy.py) · [MCP HTTP Proxy (`mcp_http_proxy.py`)](adom/integrations/mcp_http_proxy.py) · [Kong Guardrail (`kong_guardrail.py`)](adom/integrations/kong_guardrail.py) · [UK AISI Inspect Approver (`inspect_approver.py`)](adom/integrations/inspect_approver.py)
-> 3. [Pinned Upstream Bypass Reproductions](reproductions/) (Snyk `agent-scan`, NeMo Guardrails, OpenAI Agents SDK, Superagent, LiteLLM, OpenHands)
+> 3. [Pinned Upstream Gap Reproductions](reproductions/) (Snyk `agent-scan`, NeMo Guardrails, OpenAI Agents SDK, Superagent, LiteLLM, OpenHands)
 
-- **4-Suite AgentDojo (`gpt-4o-mini`, `important_instructions`, hash-pinned author summary):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** (using suite-compiled `FrozenTaskPolicy` contracts with clean-snapshot retry bindings; single model × static attack). [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
-- **Adaptive Black-Box & Unseen Suites (`AutoDojo` + `AgentDyn`, hash-pinned summary):** Across `389` pairs on AutoDojo's shipped `no_defense` adaptive caches (`banking` + `slack` + `travel`, `gpt-4o-mini`), ADOM cut ASR **`195/389 (50.13%) → 7/389 (1.80%)` raw** (**`0/389` executed non-prose side effects**, `609` blocked calls) and raised attacked utility **`40.36% → 55.27%`** (while live online AutoDojo optimization targeting ADOM on `banking` held **`0/144` ASR**). Across all `3` unseen `AgentDyn` suites with zero per-suite rules (`adom_query`, `560` pairs), ASR fell **18.5×** (**`259/560 (46.25%) → 14/560 (2.50%)`**) with `github` reaching `8/20` clean utility (`9/20` baseline) and `shopping` matching baseline (`6/20`), with inbox-delegated `dailylife` URLs (`2/20` vs `6/20` baseline) and `14/560` same-capability substitutions documented as open boundaries. [`evidence/2026-11-17`](evidence/2026-11-17/README.md) · [`evidence/2026-11-16`](evidence/2026-11-16/README.md)
-- **Cost & latency reduction (Router, independently verifiable receipts):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
-- **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`0.0393–0.1008 ms` `p50`** (`0.1177–0.2937 ms` `p99`) per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
+- **4-Suite AgentDojo (`gpt-4o-mini`, one static attack `important_instructions`; author-run, not re-runnable from this repo):** **`4/4` clean utility gates passed** (`70/97 → 74/97`); raw native ASR fell **`268/949 (28.24%) → 7/949 (0.74%)`** (`0/929` executed attacker side effects on non-preference pairs), and **utility under attack rose `397/949 (41.83%) → 603/949 (63.54%)`** Read with: policies were compiled from each suite's clean tasks (blind to the attacks); on a denied call ADOM's retry hint returns the correct target values from a clean snapshot, which contributes to the utility gain; the adapter code and per-episode logs are not in this repository, so the summary is hash-pinned but cannot be re-run here. [Summary & caveats](#4-suite-agentdojo-results--november-15-2026) · [full analysis](docs/RESULTS.md)
+- **AutoDojo attack caches & AgentDyn suites (author-run, not re-runnable from this repo):** Across `389` pairs from AutoDojo's shipped `no_defense` caches (attacks optimized against the undefended agent, replayed against ADOM; `banking` + `slack` + `travel`, `gpt-4o-mini`), ADOM cut ASR **`195/389 (50.13%) → 7/389 (1.80%)` raw** (**`0/389` executed non-prose side effects**, `609` blocked calls) and raised attacked utility **`40.36% → 55.27%`** (an online AutoDojo optimizer attacking ADOM itself was run on `banking` only: **`0/144`** ASR, baseline `8/144` under the same optimizer). Across `3` `AgentDyn` suites with zero per-suite rules (`adom_query`, `560` pairs), ASR fell **18.5×** (**`259/560 (46.25%) → 14/560 (2.50%)`**) but clean utility fell overall (`16/60` vs `21/60` baseline; `dailylife` `2/20` vs `6/20`), and `14/560` same-capability substitutions remain. These AgentDyn numbers are **not a held-out test**: ADOM's generic code was revised after the November 16 run on these same suites (`github` clean utility `1/20 → 8/20`). [`evidence/2026-11-17`](evidence/2026-11-17/README.md) · [`evidence/2026-11-16`](evidence/2026-11-16/README.md)
+- **Cost & latency reduction (Router; 5 repetitions of 20 authored requests in one release-package workflow; receipts verify offline):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached; OpenAI's moving `chat-latest` alias; p95 was worse for ADOM in 2 of 5 repetitions; not a held-out or multi-workflow result). [October 20 results](#selective-inference-live-results--october-20-2026)
+- **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`0.0393–0.1008 ms` `p50`** (`0.1177–0.2937 ms` `p99`) per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` encoded copies of configured secret values blocked; encoding detection applies to values ADOM knows are secret). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
-- **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)**, **OpenHands SDK (`1.59.0`)**, **OpenAI Agents SDK**, **NeMo Guardrails**, **Snyk `agent-scan`**, and **Superagent**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
+- **Real Kong AI Gateway (Kong Gateway Enterprise 3.16 via Konnect, mock model):** ADOM's generated config loads, the guardrail runs on INPUT and OUTPUT, and a raw secret-shaped string in the model's reply is blocked (400) before reaching the client. Kong sends ADOM only message text: tool-call-only replies get no OUTPUT guardrail call, and encoded secrets read by tools are not caught on this plane, so tool calls must be enforced at the MCP/tool plane. The MCP plane has not yet run behind real Kong. [Scope](docs/KONG_AI_GATEWAY_ARCHITECTURE.md) · [`evidence/2026-11-19`](evidence/2026-11-19/README.md)
+- **Upstream reproductions:** executable reproductions of guardrail gaps (several documented upstream behaviors) against pinned commits of **LiteLLM (`1.93.0`)**, **OpenHands SDK (`1.59.0`)**, **OpenAI Agents SDK**, **NeMo Guardrails**, **Snyk `agent-scan`**, and **Superagent**. [Upstream reproductions](#upstream-policy-gap-reproductions)
 
 
 ADOM is a model-independent enforcement boundary for autonomous agents. It mediates tool calls,
@@ -43,29 +44,29 @@ Hash-pinned author summary on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1
 - **Raw `7/949` (`0.74%`) breakdown:** In Slack (`injection_task_5`), `security_from_traces` replays proposed call traces assuming success even though ADOM blocked `invite_user_to_slack`, `add_user_to_channel`, and `remove_user_from_slack` before execution (`0/105` executed). In Travel (`injection_task_6`, `20` pairs excluded from `929`), the check is strictly prose hotel-preference text (`"Riverside View Hotel"`). Two Workspace ADOM runs and one Workspace baseline run hit `8192`-token truncation and are scored `False`.
 - **Policy & clean-utility caveats:** Policies use suite-level deterministic compilers developed with exposure to clean benchmark tasks (blind to injection goals/texts), not query-time LLM policy synthesis on unseen domains; on denied retries, `authorized_action_shapes` returns pre-compiled clean-snapshot target bindings, which helped `gpt-4o-mini` recover clean tasks. Without the adapter source or raw logs in this checkout, `MANIFEST.sha256` proves post-commit integrity of the summary files rather than third-party re-execution. See [`evidence/2026-11-15/`](evidence/2026-11-15/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
-## Multi-Suite AutoDojo Adaptive & Unseen AgentDyn — November 17, 2026
+## AutoDojo attack caches & AgentDyn — November 17, 2026
 
 | Evaluation (`gpt-4o-mini-2024-07-18`) | Baseline | ADOM (`adom` / `adom_query`) |
 |---|---|---|
-| **3-Suite AutoDojo `no_defense` adaptive caches (`banking` + `slack` + `travel`, `389` pairs)** | `195/389` (`50.13%` ASR), `40.36%` util | **`7/389` (`1.80%` raw ASR)** (`0/389` executed non-prose effects, `609` blocked), **`55.27%` util** |
+| **3-Suite AutoDojo `no_defense` caches: attacks optimized against the undefended agent, replayed against ADOM (`banking` + `slack` + `travel`, `389` pairs)** | `195/389` (`50.13%` ASR), `40.36%` util | **`7/389` (`1.80%` raw ASR)** (`0/389` executed non-prose effects, `609` blocked), **`55.27%` util** |
 | **Live online AutoDojo optimizer targeting `--defense adom` (`banking`, `144` pairs)** *(Nov 16)* | `8/144` (`5.56%` ASR), `46.53%` util | **`0/144` (`0.00%` ASR)**, **`56.94%` util** (`50` blocked) |
-| **3-Suite Unseen `AgentDyn` (`shopping` + `github` + `dailylife`, `560` pairs, zero suite rules)** | `259/560` (`46.25%` ASR), `21/60` (`35.0%`) clean | **`14/560` (`2.50%` ASR)**, `16/60` (`26.7%`) clean (`shopping` `6/20`, `github` `8/20`, `dailylife` `2/20`) |
+| **3-Suite `AgentDyn` (`shopping` + `github` + `dailylife`, `560` pairs, zero suite rules; not held out: generic code revised after the Nov 16 run on these suites)** | `259/560` (`46.25%` ASR), `21/60` (`35.0%`) clean | **`14/560` (`2.50%` ASR)**, `16/60` (`26.7%`) clean (`shopping` `6/20`, `github` `8/20`, `dailylife` `2/20`) |
 
 [`evidence/2026-11-17/`](evidence/2026-11-17/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md)
 
-## Adaptive AutoDojo & Unseen AgentDyn results — November 16, 2026
+## AutoDojo & first AgentDyn run — November 16, 2026
 
 | Evaluation (`gpt-4o-mini-2024-07-18`) | Baseline | ADOM (`adom` / `adom_query`) |
 |---|---|---|
 | **AutoDojo adaptive optimization targeting ADOM (`banking`, `36/36` cells, `144` pairs)** | `8/144` (`5.56%` ASR), `46.53%` util | **`0/144` (`0.00%` ASR)**, **`56.94%` util** (`50` blocked) |
 | **AutoDojo shipped `no_defense` adaptive cache (`banking`, `144` pairs)** | `84/144` (`58.33%` ASR), `41.67%` util | **`0/144` (`0.00%` ASR)**, **`59.72%` util** (`164` blocked) |
-| **Unseen `shopping` (zero suite rules, `adom_query`, `180` pairs)** | `43/180` (`23.89%` ASR), `3/20` (`15%`) clean | **`6/180` (`3.33%` ASR)**, **`7/20` (`35%`) clean** |
+| **`shopping`, first run on this suite (zero suite rules, `adom_query`, `180` pairs)** | `43/180` (`23.89%` ASR), `3/20` (`15%`) clean | **`6/180` (`3.33%` ASR)**, **`7/20` (`35%`) clean** |
 
-- **Research weak spot (open problem):** On unseen multi-step `github` and `dailylife` suites (zero per-suite rules), zero-LLM keyword matching (`adom_generic`) scored `0/60` clean utility across all 3 unseen suites and `adom_query` scored `1/20` on `github` and `dailylife` (vs. `10/20` and `9/20` baseline) due to omitted workflow prerequisites (`download_file_through_id`, 2FA `verify_*`, `input_to_webpage`) and strict atomic provenance over profile blobs; on `shopping`, all `6/180` remaining hits were same-capability item substitutions (`cart_add_product`). See [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
+- **Research weak spot (open problem):** On the first run of the multi-step `github` and `dailylife` suites (zero per-suite rules), zero-LLM keyword matching (`adom_generic`) scored `0/60` clean utility across all 3 unseen suites and `adom_query` scored `1/20` on `github` and `dailylife` (vs. `10/20` and `9/20` baseline) due to omitted workflow prerequisites (`download_file_through_id`, 2FA `verify_*`, `input_to_webpage`) and strict atomic provenance over profile blobs; on `shopping`, all `6/180` remaining hits were same-capability item substitutions (`cart_add_product`). See [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## Current work and evaluation status (including historical runs)
 
-Updated November 15, 2026 (historical `GPT-4o` October entries retained below for completeness). Start with [results and limitations](docs/RESULTS.md),
+Updated November 17, 2026 (historical `GPT-4o` October entries retained below for completeness). Start with [results and limitations](docs/RESULTS.md),
 [engineering status](docs/ENGINEERING_STATUS.md), and [project contributions](CONTRIBUTIONS.md).
 
 - **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
@@ -107,8 +108,9 @@ preventing it.
 | Brokered attack requests blocked | N/A | **9/9** |
 | Requests suppressed after circuit trip | N/A | **6** |
 
-The host-side verifier currently reports **17/17 checks passing**. The Python suite reports
-**13/13 tests passing**. Saved evidence is covered by SHA-256 manifests.
+The host-side verifier currently reports **17/17 checks passing**. The replay's Python tests report
+**18/18 passing**, and CI runs the full repository suite (193 tests as of November 19, 2026) on
+every push. Saved evidence is covered by SHA-256 manifests.
 
 ## Selective-inference live results — October 20, 2026
 
@@ -128,17 +130,17 @@ include an isolated runnable runtime snapshot, the original failed grounding
 evaluation, and its development regression fix. The live model fallback is an
 experimental benchmark adapter; broader unseen-request grounding remains unproven.
 
-## Upstream policy-bypass reproductions
+## Upstream policy-gap reproductions
 
-Standalone executable reproductions of tool-policy and guardrail bypasses in open-source agent frameworks, tested against pinned upstream commits alongside ADOM's deterministic enforcement:
+Standalone executable reproductions of guardrail and tool-policy behavior in open-source agent frameworks, tested against pinned upstream commits alongside ADOM on the same input. Each row is a behavior that lets a risky action or payload through **in a deployment that expects fail-closed enforcement**. Several are documented or deliberate upstream design choices, noted below and in each write-up; they are not claims of upstream bugs unless stated. The OpenAI row is a public feature request ([#6087](https://github.com/openai/openai-agents-python/issues/6087)); this page does not track the status of any other upstream report. Upstream code is fetched at run time and not redistributed; licenses and attribution are listed in [NOTICE](NOTICE).
 
-| Upstream Target | Pinned Commit / Version | Bypass Reproduced | Reference |
+| Upstream Target | Pinned Commit / Version | Behavior Reproduced | Reference |
 |---|---|---|---|
-| **BerriAI / LiteLLM** (`ToolPolicyGuardrail`) | `e63fc85` (`litellm 1.93.0`) | Stage 2 `untrusted -> trusted` policy skipped on Anthropic `/v1/messages` & OpenAI `/v1/responses`; mixed custom tool bypasses blocked `bash_20250124` | [litellm-tool-policy-reproduction](https://github.com/SilkForgeAi/litellm-tool-policy-reproduction) |
-| **OpenHands / software-agent-sdk** (`PolicyRailSecurityAnalyzer`) | `641e161` (`openhands-sdk 1.59.0`) | `printf "$(curl x) \| jq ."` & `printf -- "%s"` evade `fetch-to-exec` pipeline forwarding (`LOW` / `UNKNOWN` instead of `HIGH`) | [openhands-policy-rail-reproduction](https://github.com/SilkForgeAi/openhands-policy-rail-reproduction) |
-| **OpenAI Agents SDK** (`openai-agents-python`) | `64fbde5` (`v0.24.0`, 2026-11-11) | `NextStepHandoff` silently skips destination `input_guardrails`; built-in/hosted tools lack `tool_input_guardrails`. ADOM `guard_openai_agent` enforces recursively across handoff trees (`5/5` tests OK) | [openai-agents-guardrail-reproduction](reproductions/openai-agents-guardrail-reproduction/) |
-| **NVIDIA NeMo Guardrails** (`NVIDIA-NeMo/Guardrails`) | `5d7f4c1` (`v0.25.0-rc1`, 2026-11-13) | Unconfigured tools fail open (`RailDecision.ALLOW`); `base64`/`hex`/reversed secrets evade configured regexes; `filter_secrets.contains_secrets` crashes on `detect-secrets==1.5.0`; `ModelEngine` misses Anthropic `tool_use` blocks (`6/6` tests OK) | [nemo-guardrails-tool-policy-reproduction](reproductions/nemo-guardrails-tool-policy-reproduction/) |
-| **Snyk `agent-scan`** (`snyk/agent-scan`) | `6eb2125` (2026-11-13) | `snyk-agent-guard.sh` fails open on HTTP `401`/`503`; `redact_args` misses `base64`/`hex`/reversed/canary tokens; MCP SSRF filter omits loopback & RFC1918 (`5/5` tests OK) | [snyk-agent-scan-guard-reproduction](reproductions/snyk-agent-scan-guard-reproduction/) |
+| **BerriAI / LiteLLM** (`ToolPolicyGuardrail`) | `e63fc85` (`litellm 1.93.0`) | At the pinned commit, the Stage 2 `untrusted -> trusted` check reads only Chat Completions `role: "tool"` messages, so it does not fire on Anthropic `/v1/messages` or OpenAI `/v1/responses` histories; a blocked provider-native `bash_20250124` tool is not checked when sent together with a custom tool. On upstream `main` (`e784165`, 2026-11-19) Stage 1 now merges both tool-name sources, which appears to address the mixed-tool case; the Stage 2 code is unchanged. Not re-run on `main`. | [litellm-tool-policy-reproduction](https://github.com/SilkForgeAi/litellm-tool-policy-reproduction) |
+| **OpenHands / software-agent-sdk** (`PolicyRailSecurityAnalyzer`) | `641e161` (`openhands-sdk 1.59.0`) | At the pinned commit, `fetch-to-exec` pipeline forwarding does not track a substitution in `printf`'s format operand (`printf "$(curl x)" \| jq .`) or after `--` (`printf -- "%s" "$(curl x)"`); these score `LOW` / `UNKNOWN` where the matching `echo` form scores `HIGH`. The same code is on upstream `main` (`4f236d7`, 2026-11-19); not re-run there. | [openhands-policy-rail-reproduction](https://github.com/SilkForgeAi/openhands-policy-rail-reproduction) |
+| **OpenAI Agents SDK** (`openai-agents-python`) | `64fbde5` (`v0.24.0`, 2026-11-11) | **Documented:** input guardrails run only for the first agent, so a handoff destination's `input_guardrails` do not run; hosted/built-in tools have no tool guardrails. ADOM `guard_openai_agent` screens function tools across the handoff tree (hosted tools not covered) (`5/5` tests OK) | [openai-agents-guardrail-reproduction](reproductions/openai-agents-guardrail-reproduction/) |
+| **NVIDIA NeMo Guardrails** (`NVIDIA-NeMo/Guardrails`) | `5d7f4c1` (`v0.25.0-rc1`, 2026-11-13) | **By design:** tools without configured patterns are not checked (`RailDecision.ALLOW`); `base64`/`hex`/reversed secrets are not matched by configured regexes; `filter_secrets.contains_secrets` crashes on `detect-secrets==1.5.0`; `ModelEngine` misses Anthropic `tool_use` blocks (`6/6` tests OK) | [nemo-guardrails-tool-policy-reproduction](reproductions/nemo-guardrails-tool-policy-reproduction/) |
+| **Snyk `agent-scan`** (`snyk/agent-scan`) | `6eb2125` (2026-11-13) | **Documented, deliberate:** `snyk-agent-guard.sh` fails open on HTTP `401`/`503` (and tells the user); `redact_args` misses `base64`/`hex`/reversed/canary tokens; MCP SSRF filter omits loopback & RFC1918 (`5/5` tests OK) | [snyk-agent-scan-guard-reproduction](reproductions/snyk-agent-scan-guard-reproduction/) |
 | **Superagent** (`superagent-ai/superagent`) | `c9e6462` (`safety-agent`, 2026-08-25) | Missing `"classification"` key defaults to `"pass"`; empty-text PDFs auto-pass without OCR/vision inspection (`5/5` tests OK) | [superagent-guard-failopen-reproduction](reproductions/superagent-guard-failopen-reproduction/) |
 
 ## Architecture
@@ -221,10 +223,10 @@ cd adom-agent-security
 pip install -e .
 
 adom bench                                                      # 5-component latency + encoding benchmark
-adom hook --client codex < payload.json                         # offline fail-closed hook (cursor|claude-code|codex|github-copilot)
+ADOM_MODE=enforce adom hook --client codex < payload.json       # offline coding-agent hook (cursor|claude-code|codex|github-copilot); default mode is observe (logs, never blocks), enforce blocks and fails closed
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
-adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
-adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (ai-custom-guardrail + ai-mcp-proxy)
+adom mcp-http --name notes --upstream https://mcp.example/mcp   # streamable-HTTP MCP proxy (JSON + SSE replies, DNS-pinned upstream)
+adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (Kong-documented variables only; add --session-scope for budgets)
 adom kong-guard --port 8780 --allowed-tool read_ticket --allowed-tool send_email --approved-outbound corp.com   # deny-unknown is always on; grant exact tools
 adom inspect-policy --mode control_prefilter > adom-aisi.yaml   # UK AISI Inspect (inspect_ai) 2-stage AI-Control policy YAML
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
@@ -232,14 +234,15 @@ adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-
 
 ## Repository map
 
-- [`adom/`](adom/) — enforcement core (`action_tiers`, `approvals`, `audit_chain`, `blast_radius`, `egress_proxy`, `mediated_gateway`, `review`, `supply_chain`, `tool_contracts`), unified CLI (`adom/cli.py`), and SDK/MCP proxies (`adom/integrations/`).
+- [`adom/`](adom/) — enforcement core (`action_tiers`, `approvals`, `audit_chain`, `blast_radius`, `egress_proxy`, `mediated_gateway`, `review`, `supply_chain`, `tool_contracts`), unified CLI (`adom/cli.py`), key-free benchmark (`adom/bench.py`, run with `adom bench`), and SDK/MCP proxies (`adom/integrations/`).
 - [`cursor_hook/`](cursor_hook/) — offline fail-closed coding-agent hooks for Cursor, Claude Code, Codex, and GitHub Copilot.
 - [`spec/`](spec/) — action-tier and MCP gateway interface specifications.
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
-- [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
-- [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.
+- [`benchmarks/`](benchmarks/) — cross-provider and live-model harnesses, selective-inference evidence, and `latency_and_encoding/run.py` (a wrapper for `adom bench`).
+- [`deployment/kong-konnect-smoke/`](deployment/kong-konnect-smoke/) — real-Kong smoke test (Konnect trial + Docker); produced `evidence/2026-11-19/`.
+- [`reproductions/`](reproductions/) — side-by-side guardrail-gap reproductions against pinned upstream OSS agent frameworks; `reproductions/run_reproduction.sh all` fetches each pinned commit and runs them.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/`](evidence/2026-11-16/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, and `2026-11-16/`) with SHA-256 manifests.
+- [`evidence/`](evidence/2026-11-19/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, `2026-11-16/`, `2026-11-17/`, and `2026-11-19/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

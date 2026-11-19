@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-19",
+  "gateway": "kong/kong-gateway:3.16 (Kong Gateway Enterprise), hybrid data plane in Docker Desktop on macOS arm64",
+  "control_plane": "Kong Konnect, us region, created by Kong's quickstart as 'adom-smoke' and deleted after the run",
+  "license": "Konnect free trial (delivered to the data plane by the control plane)",
+  "adom_commit": "dc75847 (branch kong-konnect-smoke: PR #4 head 8e9417b plus this harness)",
+  "harness": "deployment/kong-konnect-smoke/run.sh",
+  "python": "3.12.14",
+  "upstream_model": "local mock (deployment/kong-konnect-smoke/mock_llm.py); no real model or API key",
+  "notes": "Setup logs (quickstart.log) are not included: they contain Konnect account identifiers."
+}

