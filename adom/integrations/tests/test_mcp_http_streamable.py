@@ -11,12 +11,18 @@ import base64
 import http.client
 import http.server
 import json
+import socket
 import tempfile
 import threading
 import unittest
 from pathlib import Path
 
-from adom.integrations.mcp_http_proxy import McpHttpProxyServer, parse_sse_messages
+from adom.integrations.mcp_http_proxy import (
+    McpHttpProxyServer,
+    UnsafeUpstreamUrl,
+    _PinnedUpstreamClient,
+    parse_sse_messages,
+)
 
 SECRET = "AKIA" + "5566778899001122"
 SESSION = "sess-7f3a"
@@ -100,7 +106,7 @@ class StreamableHttpProxyTests(unittest.TestCase):
                                       "approved_outbound": ["corp.com"]},
         }}))
         self.proxy = McpHttpProxyServer(
-            f"http://localhost:{self.upstream.server_address[1]}/mcp", "spec",
+            f"http://127.0.0.1:{self.upstream.server_address[1]}/mcp", "spec",
             registry_path=reg, client_prompts_confirmed=True, allow_loopback=True)
         self.proxy.start()
 
@@ -228,6 +234,51 @@ class StreamableHttpProxyTests(unittest.TestCase):
             status_line = s.recv(256).split(b"\r\n", 1)[0]
         self.assertIn(b" 413 ", status_line)
         self.assertEqual(_SpecServer.log, [])                # nothing reached upstream
+
+
+class DualStackPinningTests(unittest.TestCase):
+    """A name that resolves IPv6-first (CI runners: localhost -> ::1, 127.0.0.1) must still
+    work when only the IPv4 address answers, without ever resolving again."""
+
+    def setUp(self) -> None:
+        _SpecServer.log = []
+        self.upstream = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _SpecServer)
+        threading.Thread(target=self.upstream.serve_forever, daemon=True).start()
+        self.port = self.upstream.server_address[1]
+        self.lookups = 0
+
+    def tearDown(self) -> None:
+        self.upstream.shutdown()
+        self.upstream.server_close()
+
+    def _resolver(self, answers):
+        def resolve(host, port, *a, **k):
+            self.lookups += 1
+            return [(socket.AF_INET6 if ":" in ip else socket.AF_INET, socket.SOCK_STREAM, 6, "",
+                     (ip, port, 0, 0) if ":" in ip else (ip, port)) for ip in answers]
+        return resolve
+
+    def test_falls_back_to_next_validated_address_without_reresolving(self) -> None:
+        # ::1 first; the fake server listens on 127.0.0.1 only (or the host has no IPv6 at all)
+        c = _PinnedUpstreamClient(f"http://mcp.test:{self.port}/mcp", allow_loopback=True,
+                                  resolver=self._resolver(["::1", "127.0.0.1"]))
+        self.assertEqual(c.pinned_ips, ["::1", "127.0.0.1"])
+        reply = c.post(json.dumps({"jsonrpc": "2.0", "id": 1, "method": "initialize"}).encode())
+        self.assertEqual(reply.session_id, SESSION)
+        self.assertEqual(c.pinned_ip, "127.0.0.1")
+        self.assertEqual(self.lookups, 1)
+
+    def test_any_blocked_answer_refuses_the_whole_url(self) -> None:
+        with self.assertRaises(UnsafeUpstreamUrl):
+            _PinnedUpstreamClient(f"http://mcp.test:{self.port}/mcp", allow_loopback=True,
+                                  resolver=self._resolver(["127.0.0.1", "10.0.0.5"]))
+
+    def test_no_reachable_address_fails_closed(self) -> None:
+        free = socket.socket(); free.bind(("127.0.0.1", 0)); dead_port = free.getsockname()[1]; free.close()
+        c = _PinnedUpstreamClient(f"http://mcp.test:{dead_port}/mcp", allow_loopback=True,
+                                  resolver=self._resolver(["127.0.0.1"]))
+        with self.assertRaises(RuntimeError):
+            c.post(b'{"jsonrpc":"2.0","id":1,"method":"ping"}')
 
 
 class ParseSseTests(unittest.TestCase):

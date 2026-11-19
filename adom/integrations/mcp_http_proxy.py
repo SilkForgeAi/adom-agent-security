@@ -66,13 +66,28 @@ def validate_upstream_url(
     url: str,
     *,
     allow_loopback: bool = False,
-    resolver=socket.getaddrinfo,
+    resolver=None,
 ) -> Tuple[urllib.parse.ParseResult, str]:
     """Validate an upstream MCP HTTP(S) URL once and return ``(parsed, pinned_ip)``.
 
     Connecting via the returned ``pinned_ip`` prevents DNS-rebinding TOCTOU races between
     validation and TCP connect.
     """
+    parsed, ips = validate_upstream_ips(url, allow_loopback=allow_loopback, resolver=resolver)
+    return parsed, ips[0]
+
+
+def validate_upstream_ips(
+    url: str,
+    *,
+    allow_loopback: bool = False,
+    resolver=None,
+) -> Tuple[urllib.parse.ParseResult, List[str]]:
+    """Resolve once and return ``(parsed, ips)``: every address the name resolved to, in
+    resolver order, each validated. Any blocked answer refuses the whole URL. The proxy dials
+    only these addresses (falling back in order, so a dual-stack host with an unreachable IPv6
+    route still works) and never resolves again, so DNS rebinding cannot swap one in."""
+    resolver = resolver or socket.getaddrinfo
     parsed = urllib.parse.urlparse(str(url or "").strip())
     if parsed.scheme not in ("http", "https"):
         raise UnsafeUpstreamUrl(f"unsupported scheme {parsed.scheme!r}; only http/https allowed")
@@ -101,7 +116,7 @@ def validate_upstream_url(
 
     if not ips:
         raise UnsafeUpstreamUrl(f"no usable IP addresses resolved for {host!r}")
-    return parsed, ips[0]
+    return parsed, ips
 
 
 def _jsonrpc_error(mid: Any, code: int, message: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -196,11 +211,14 @@ def parse_sse_messages(raw: bytes) -> List[Dict[str, Any]]:
 class _PinnedUpstreamClient:
     """Dials strictly the DNS-pinned IP returned by ``validate_upstream_url``."""
 
-    def __init__(self, upstream_url: str, *, allow_loopback: bool = False, timeout: float = 10.0):
+    def __init__(self, upstream_url: str, *, allow_loopback: bool = False, timeout: float = 10.0,
+                 resolver=None):
         self.upstream_url = upstream_url
         self.allow_loopback = allow_loopback
         self.timeout = timeout
-        self.parsed, self.pinned_ip = validate_upstream_url(upstream_url, allow_loopback=allow_loopback)
+        self.parsed, self.pinned_ips = validate_upstream_ips(
+            upstream_url, allow_loopback=allow_loopback, resolver=resolver)
+        self.pinned_ip = self.pinned_ips[0]
 
     def _connect(self) -> Tuple[http.client.HTTPConnection, str, str]:
         port = self.parsed.port or (443 if self.parsed.scheme == "https" else 80)
@@ -209,12 +227,25 @@ class _PinnedUpstreamClient:
             path = f"{path}?{self.parsed.query}"
         hostname = self.parsed.hostname or ""
         host_header = hostname if port in (80, 443) else f"{hostname}:{port}"
-        if self.parsed.scheme == "https":
-            conn: http.client.HTTPConnection = _PinnedHTTPSConnection(
-                self.pinned_ip, server_hostname=hostname, port=port, timeout=self.timeout)
-        else:
-            conn = http.client.HTTPConnection(self.pinned_ip, port=port, timeout=self.timeout)
-        return conn, path, host_header
+        last_exc: Optional[BaseException] = None
+        for ip in self.pinned_ips:                 # only addresses validated at startup
+            if self.parsed.scheme == "https":
+                conn: http.client.HTTPConnection = _PinnedHTTPSConnection(
+                    ip, server_hostname=hostname, port=port, timeout=self.timeout)
+            else:
+                conn = http.client.HTTPConnection(ip, port=port, timeout=self.timeout)
+            try:
+                conn.connect()
+            except ssl.SSLError:
+                conn.close()
+                raise                              # a certificate problem is not a routing one
+            except OSError as exc:
+                conn.close()
+                last_exc = exc
+                continue
+            self.pinned_ip = ip                    # remember the address that worked
+            return conn, path, host_header
+        raise RuntimeError(f"no validated upstream address reachable: {last_exc}")
 
     def post(self, body: bytes, extra_headers: Optional[Dict[str, str]] = None) -> UpstreamReply:
         """POST one JSON-RPC message or batch. Raises (so the caller fails closed) on transport
