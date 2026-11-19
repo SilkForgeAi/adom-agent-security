@@ -1,5 +1,14 @@
 # Changelog
 
+## Fail-closed integration fixes, reproducible repros & packaging — 2026-11-19
+
+- **Model API proxy:** streaming responses are blocked (HTTP 502) until the stream inspector ships, and inspection errors on non-streaming responses block instead of forwarding uninspected bytes.
+- **Coding-agent hooks:** unrecognized payloads fail closed in enforce mode; known non-gated Claude Code events (PostToolUse after non-write tools, Stop, SessionStart, ...) get "no opinion" so finished actions are not reported as blocked.
+- **Kong AI Gateway:** `kong-guard` always denies unknown tools; the engine screens `$(content)` text and any structured body together and ignores unrendered `$(...)` values; unidentified sessions get per-request screening without a shared gateway-wide breaker or budget (`--session-scope`, `--anonymous-blast-radius`); the decK config uses only Kong-documented template variables. Not yet run against a licensed Kong Enterprise instance.
+- **`adom mcp-http`:** TLS with SNI to pinned upstream IPs; MCP streamable HTTP (session id returned to the client, 202 notification replies, SSE replies parsed and screened, GET 405, DELETE forwarded); taint learned from `resources/read` and `prompts/get`; fallback across validated addresses for dual-stack upstreams.
+- **Packaging:** `adom bench` works from a normal `pip install` (benchmark moved to `adom/bench.py`; `benchmarks/latency_and_encoding/run.py` remains as a wrapper). CI checks the installed CLI outside the source tree and runs the `adom/api` tests.
+- **Reproductions:** `reproductions/run_reproduction.sh` fetches each pinned upstream commit into its own virtualenv and runs the side-by-side tests; machine-specific default paths removed. All four (21/21 tests) re-verified from a clean checkout.
+
 ## Adaptive AutoDojo & Unseen AgentDyn Evaluation Summary — 2026-11-16
 
 - Added hash-pinned adaptive attack and unseen-suite generalization summary under [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) with CI manifest verification:

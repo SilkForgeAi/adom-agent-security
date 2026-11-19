@@ -24,8 +24,16 @@
 
 ## How to Run
 
+From the repository root (needs `git`, `bash`, `curl` and Python 3.11–3.13):
+
 ```bash
-python -m unittest -v reproductions/snyk-agent-scan-guard-reproduction/test_guard_fail_open_and_redact_repro.py
+reproductions/run_reproduction.sh snyk-agent-scan
+```
+
+The script fetches `snyk/agent-scan` at the pinned commit into `reproductions/.work/snyk-agent-scan`, checks the commit hash, installs it into its own virtualenv (`reproductions/.work/venv-snyk-agent-scan`) and runs the test. Nothing outside `reproductions/.work/` is installed or changed. To rerun the test afterwards:
+
+```bash
+reproductions/.work/venv-snyk-agent-scan/bin/python -m unittest -v reproductions/snyk-agent-scan-guard-reproduction/test_guard_fail_open_and_redact_repro.py
 ```
 
 Expected output (`evidence/reproduction.log`): `Ran 5 tests in 0.102s — OK`.

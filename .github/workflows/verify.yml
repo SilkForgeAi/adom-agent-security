@@ -26,6 +26,15 @@ jobs:
         run: |
           python -B -m adom.cli --help > /dev/null
           python -B -m adom.cli bench
+      - name: Installed CLI works outside the source tree
+        run: |
+          python -m venv /tmp/adom-venv
+          /tmp/adom-venv/bin/pip install -q .
+          cd /tmp
+          /tmp/adom-venv/bin/adom --help > /dev/null
+          /tmp/adom-venv/bin/adom bench > /dev/null
+          /tmp/adom-venv/bin/adom kong-guard --emit-deck > /dev/null
+          /tmp/adom-venv/bin/adom inspect-policy > /dev/null
       - name: Verify deterministic evidence
         run: python -B incident_replay/verify.py incident_replay/results
       - name: Verify committed hashes

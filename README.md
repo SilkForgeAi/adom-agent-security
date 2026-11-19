@@ -65,7 +65,7 @@ Hash-pinned author summary on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1
 
 ## Current work and evaluation status (including historical runs)
 
-Updated November 15, 2026 (historical `GPT-4o` October entries retained below for completeness). Start with [results and limitations](docs/RESULTS.md),
+Updated November 17, 2026 (historical `GPT-4o` October entries retained below for completeness). Start with [results and limitations](docs/RESULTS.md),
 [engineering status](docs/ENGINEERING_STATUS.md), and [project contributions](CONTRIBUTIONS.md).
 
 - **Execution engineering:** later local work adds authorization-before-dispatch, durable delivery,
@@ -107,8 +107,9 @@ preventing it.
 | Brokered attack requests blocked | N/A | **9/9** |
 | Requests suppressed after circuit trip | N/A | **6** |
 
-The host-side verifier currently reports **17/17 checks passing**. The Python suite reports
-**13/13 tests passing**. Saved evidence is covered by SHA-256 manifests.
+The host-side verifier currently reports **17/17 checks passing**. The replay's Python tests report
+**18/18 passing**, and CI runs the full repository suite (189 tests as of November 19, 2026) on
+every push. Saved evidence is covered by SHA-256 manifests.
 
 ## Selective-inference live results — October 20, 2026
 
@@ -223,8 +224,8 @@ pip install -e .
 adom bench                                                      # 5-component latency + encoding benchmark
 adom hook --client codex < payload.json                         # offline fail-closed hook (cursor|claude-code|codex|github-copilot)
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
-adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
-adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (ai-custom-guardrail + ai-mcp-proxy)
+adom mcp-http --name notes --upstream https://mcp.example/mcp   # streamable-HTTP MCP proxy (JSON + SSE replies, DNS-pinned upstream)
+adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (Kong-documented variables only; add --session-scope for budgets)
 adom kong-guard --port 8780 --allowed-tool read_ticket --allowed-tool send_email --approved-outbound corp.com   # deny-unknown is always on; grant exact tools
 adom inspect-policy --mode control_prefilter > adom-aisi.yaml   # UK AISI Inspect (inspect_ai) 2-stage AI-Control policy YAML
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
@@ -232,14 +233,14 @@ adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-
 
 ## Repository map
 
-- [`adom/`](adom/) — enforcement core (`action_tiers`, `approvals`, `audit_chain`, `blast_radius`, `egress_proxy`, `mediated_gateway`, `review`, `supply_chain`, `tool_contracts`), unified CLI (`adom/cli.py`), and SDK/MCP proxies (`adom/integrations/`).
+- [`adom/`](adom/) — enforcement core (`action_tiers`, `approvals`, `audit_chain`, `blast_radius`, `egress_proxy`, `mediated_gateway`, `review`, `supply_chain`, `tool_contracts`), unified CLI (`adom/cli.py`), key-free benchmark (`adom/bench.py`, run with `adom bench`), and SDK/MCP proxies (`adom/integrations/`).
 - [`cursor_hook/`](cursor_hook/) — offline fail-closed coding-agent hooks for Cursor, Claude Code, Codex, and GitHub Copilot.
 - [`spec/`](spec/) — action-tier and MCP gateway interface specifications.
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
-- [`benchmarks/`](benchmarks/) — key-free latency/encoding microbenchmark (`latency_and_encoding/`), cross-provider, and live-model harnesses.
-- [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails.
+- [`benchmarks/`](benchmarks/) — cross-provider and live-model harnesses, selective-inference evidence, and `latency_and_encoding/run.py` (a wrapper for `adom bench`).
+- [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails; `reproductions/run_reproduction.sh all` fetches each pinned commit and runs them.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/`](evidence/2026-11-16/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, and `2026-11-16/`) with SHA-256 manifests.
+- [`evidence/`](evidence/2026-11-17/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, `2026-11-16/`, and `2026-11-17/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

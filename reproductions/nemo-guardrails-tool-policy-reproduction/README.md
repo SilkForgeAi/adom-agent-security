@@ -26,8 +26,16 @@
 
 ## How to Run
 
+From the repository root (needs `git`, `bash`, `curl` and Python 3.11–3.13):
+
 ```bash
-python -m unittest -v reproductions/nemo-guardrails-tool-policy-reproduction/test_tool_call_regex_and_secrets_repro.py
+reproductions/run_reproduction.sh nemo-guardrails
+```
+
+The script fetches `NVIDIA-NeMo/Guardrails` at the pinned commit into `reproductions/.work/nemo-guardrails`, checks the commit hash, installs it into its own virtualenv (`reproductions/.work/venv-nemo-guardrails`) and runs the test. Nothing outside `reproductions/.work/` is installed or changed. To rerun the test afterwards:
+
+```bash
+reproductions/.work/venv-nemo-guardrails/bin/python -m unittest -v reproductions/nemo-guardrails-tool-policy-reproduction/test_tool_call_regex_and_secrets_repro.py
 ```
 
 Expected output (`evidence/reproduction.log`): `Ran 6 tests in 0.049s — OK`.

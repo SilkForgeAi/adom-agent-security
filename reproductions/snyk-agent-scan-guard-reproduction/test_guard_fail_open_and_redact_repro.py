@@ -27,8 +27,9 @@ import threading
 import unittest
 from pathlib import Path
 
-SNYK_SRC = Path(os.environ.get("SNYK_AGENT_SCAN_SRC", "/tmp/oss_audit/snyk-agent-scan/src"))
 ADOM_ROOT = Path(os.environ.get("ADOM_ROOT", str(Path(__file__).resolve().parents[2])))
+# Pinned checkout made by reproductions/run_reproduction.sh (override with SNYK_AGENT_SCAN_SRC)
+SNYK_SRC = Path(os.environ.get("SNYK_AGENT_SCAN_SRC", str(ADOM_ROOT / "reproductions/.work/snyk-agent-scan/src")))
 for p in (SNYK_SRC, ADOM_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))

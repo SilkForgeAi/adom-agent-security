@@ -20,8 +20,16 @@
 
 ## How to Run
 
+From the repository root (needs `git`, `bash`, `curl` and Python 3.11–3.13):
+
 ```bash
-python -m unittest -v reproductions/openai-agents-guardrail-reproduction/test_handoff_guardrail_repro.py
+reproductions/run_reproduction.sh openai-agents
+```
+
+The script fetches `openai/openai-agents-python` at the pinned commit into `reproductions/.work/openai-agents`, checks the commit hash, installs it into its own virtualenv (`reproductions/.work/venv-openai-agents`) and runs the test. Nothing outside `reproductions/.work/` is installed or changed. To rerun the test afterwards:
+
+```bash
+reproductions/.work/venv-openai-agents/bin/python -m unittest -v reproductions/openai-agents-guardrail-reproduction/test_handoff_guardrail_repro.py
 ```
 
 Expected output (`evidence/reproduction.log`): `Ran 5 tests — OK`.

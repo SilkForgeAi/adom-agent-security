@@ -83,7 +83,7 @@ def _cmd_verify_chain(argv: List[str]) -> int:
 
 
 def _cmd_bench(_argv: List[str]) -> int:
-    from benchmarks.latency_and_encoding.run import main as bench_main
+    from adom.bench import main as bench_main
 
     return bench_main()
 

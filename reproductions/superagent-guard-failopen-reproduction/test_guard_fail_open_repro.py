@@ -18,8 +18,9 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
-SUPERAGENT_SRC = Path(os.environ.get("SUPERAGENT_SRC", "/tmp/oss_audit/superagent/sdk/python/src"))
 ADOM_ROOT = Path(os.environ.get("ADOM_ROOT", str(Path(__file__).resolve().parents[2])))
+# Pinned checkout made by reproductions/run_reproduction.sh (override with SUPERAGENT_SRC)
+SUPERAGENT_SRC = Path(os.environ.get("SUPERAGENT_SRC", str(ADOM_ROOT / "reproductions/.work/superagent/sdk/python/src")))
 for p in (SUPERAGENT_SRC, ADOM_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))

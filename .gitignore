@@ -18,3 +18,6 @@ incident_replay/live-results/
 !benchmarks/request_grounding/runs/**
 __pycache__/
 *.py[cod]
+
+# Pinned upstream checkouts and virtualenvs made by reproductions/run_reproduction.sh
+reproductions/.work/

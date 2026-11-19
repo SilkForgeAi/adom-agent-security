@@ -21,8 +21,9 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 
-NEMO_ROOT = Path(os.environ.get("NEMO_GUARDRAILS_ROOT", "/tmp/oss_audit/nemo-guardrails"))
 ADOM_ROOT = Path(os.environ.get("ADOM_ROOT", str(Path(__file__).resolve().parents[2])))
+# Pinned checkout made by reproductions/run_reproduction.sh (override with NEMO_GUARDRAILS_ROOT)
+NEMO_ROOT = Path(os.environ.get("NEMO_GUARDRAILS_ROOT", str(ADOM_ROOT / "reproductions/.work/nemo-guardrails")))
 for p in (NEMO_ROOT, ADOM_ROOT):
     if str(p) not in sys.path:
         sys.path.insert(0, str(p))

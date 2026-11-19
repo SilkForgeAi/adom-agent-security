@@ -20,8 +20,16 @@
 
 ## How to Run
 
+From the repository root (needs `git`, `bash`, `curl` and Python 3.11–3.13):
+
 ```bash
-python -m unittest -v reproductions/superagent-guard-failopen-reproduction/test_guard_fail_open_repro.py
+reproductions/run_reproduction.sh superagent
+```
+
+The script fetches `superagent-ai/superagent` at the pinned commit into `reproductions/.work/superagent`, checks the commit hash, installs it into its own virtualenv (`reproductions/.work/venv-superagent`) and runs the test. Nothing outside `reproductions/.work/` is installed or changed. To rerun the test afterwards:
+
+```bash
+reproductions/.work/venv-superagent/bin/python -m unittest -v reproductions/superagent-guard-failopen-reproduction/test_guard_fail_open_repro.py
 ```
 
 Expected output (`evidence/reproduction.log`): `Ran 5 tests in 0.391s — OK`.
