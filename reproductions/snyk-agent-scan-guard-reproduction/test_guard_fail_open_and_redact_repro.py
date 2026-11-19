@@ -104,7 +104,7 @@ class SnykAgentScanRepro(unittest.TestCase):
         self.assertEqual(parsed["decision"], "block")
 
     def test_02_bypass_http_503_and_401_fail_open_and_allow_dangerous_bash(self) -> None:
-        """[BYPASS] Backend HTTP 503 or 401 causes snyk-agent-guard.sh to exit 0 and fail open."""
+        """[GAP] Backend HTTP 503 or 401 causes snyk-agent-guard.sh to exit 0 and fail open."""
         for status_code in (503, 401):
             with socketserver.TCPServer(("127.0.0.1", 0), _make_handler(status_code, b'{"error":"down"}')) as srv:
                 port = srv.server_address[1]
@@ -119,7 +119,7 @@ class SnykAgentScanRepro(unittest.TestCase):
             self.assertIn("failing open", proc.stderr)
 
     def test_03_bypass_redact_args_misses_encoded_secrets_and_custom_canaries(self) -> None:
-        """[BYPASS] redact_args redacts raw AWS key but leaks base64, hex, reversed, and custom canaries."""
+        """[GAP] redact_args redacts raw AWS key but leaks base64, hex, reversed, and custom canaries."""
         raw_aws = "AKIAIOSFODNN7EXAMPLE"
         canary = "CANARY-secret-99887766"
 

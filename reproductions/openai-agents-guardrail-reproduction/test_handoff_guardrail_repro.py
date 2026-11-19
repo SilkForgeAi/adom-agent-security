@@ -144,7 +144,7 @@ class OpenAIAgentsHandoffGuardrailRepro(unittest.TestCase):
         self.assertEqual(executed, [])
 
     def test_02_bypass_handoff_skips_destination_agent_input_guardrails(self) -> None:
-        """[BYPASS] Handing off from triage agent to privileged agent skips PrivilegedOps input_guardrails."""
+        """[GAP] Handing off from triage agent to privileged agent skips PrivilegedOps input_guardrails."""
         _, triage, run_cfg, guard_calls, executed = self._build_agents(
             [
                 [_tool_call("transfer_to_privileged_ops", {}, "c_handoff")],
@@ -220,7 +220,7 @@ class OpenAIAgentsHandoffGuardrailRepro(unittest.TestCase):
         self.assertEqual(get_status(service="billing"), "status:billing=ok")
 
     def test_05_adom_guard_openai_agent_closes_live_handoff_skip(self) -> None:
-        """[ADOM] Recursive guard_openai_agent closes the exact Runner.run NextStepHandoff bypass."""
+        """[ADOM] Recursive guard_openai_agent screens function tools after the NextStepHandoff."""
         _, triage, run_cfg, guard_calls, executed = self._build_agents(
             [
                 [_tool_call("transfer_to_privileged_ops", {}, "c_handoff")],
