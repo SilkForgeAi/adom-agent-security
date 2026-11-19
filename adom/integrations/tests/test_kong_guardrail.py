@@ -503,5 +503,76 @@ class KongTemplateAndSessionTests(unittest.TestCase):
             generate_deck_config(session_scope='x" injected: "y')
 
 
+# Kong ai-custom-guardrail `config` schema (Kong Gateway 3.14-3.16), as published in the Konnect
+# provider's GatewayPluginAiCustomGuardrail reference (pulumi.com/registry/packages/konnect,
+# checked 2026-11-19). A real Konnect data plane rejected `metrics.block_details` with
+# "validation error: unknown field" (the field is `block_detail`); this keeps that from recurring.
+_KONG_GUARDRAIL_SCHEMA = {
+    "": {"guarding_mode", "text_source", "params", "request", "response", "functions", "metrics",
+         "custom_metrics", "allow_masking", "response_buffer_size", "ssl_verify",
+         "stop_on_error", "timeout"},
+    "request": {"url", "auth", "body", "headers", "queries"},
+    "response": {"block", "block_message"},
+    "metrics": {"block_detail", "block_reason", "masked"},
+}
+_FREE_MAPS = {"params", "functions", "custom_metrics", "request.body", "request.headers", "request.queries"}
+
+
+def _guardrail_config_keys(deck_yaml: str) -> list:
+    """(parent path, key) for every key under the ai-custom-guardrail plugin's `config:`."""
+    import re
+    lines = deck_yaml.splitlines()
+    start = next(i for i, l in enumerate(lines) if l.strip() == "- name: ai-custom-guardrail")
+    plugin_indent = len(lines[start]) - len(lines[start].lstrip())
+    out, stack, cfg_indent = [], [], None
+    for line in lines[start + 1:]:
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        indent = len(line) - len(line.lstrip())
+        if indent <= plugin_indent:
+            break                                            # next plugin or service
+        m = re.match(r"^\s*([A-Za-z_][\w-]*):", line)
+        if not m:
+            continue
+        key = m.group(1)
+        if cfg_indent is None:
+            if key == "config":
+                cfg_indent = indent
+            continue
+        if indent <= cfg_indent:
+            break
+        while stack and stack[-1][0] >= indent:
+            stack.pop()
+        parent = ".".join(k for _, k in stack)
+        out.append((parent, key))
+        stack.append((indent, key))
+    return out
+
+
+class KongSchemaConformanceTests(unittest.TestCase):
+    def test_generated_guardrail_config_uses_only_kong_schema_fields(self) -> None:
+        for scope in (None, "team-a"):
+            keys = _guardrail_config_keys(generate_deck_config(session_scope=scope))
+            self.assertTrue(keys)
+            for parent, key in keys:
+                if parent in _FREE_MAPS or any(parent.startswith(f + ".") for f in _FREE_MAPS):
+                    continue
+                self.assertIn(parent, _KONG_GUARDRAIL_SCHEMA, f"unexpected nesting {parent}.{key}")
+                self.assertIn(key, _KONG_GUARDRAIL_SCHEMA[parent], f"unknown Kong field {parent}.{key}".lstrip("."))
+
+    def test_fail_closed_options_are_explicit(self) -> None:
+        keys = set(_guardrail_config_keys(generate_deck_config()))
+        self.assertIn(("", "stop_on_error"), keys)
+        self.assertIn(("", "ssl_verify"), keys)
+        self.assertIn("stop_on_error: true", generate_deck_config())
+        self.assertIn("ssl_verify: true", generate_deck_config())
+
+    def test_schema_check_catches_the_real_failure(self) -> None:
+        bad = generate_deck_config().replace("block_detail:", "block_details:")
+        flagged = [(p, k) for p, k in _guardrail_config_keys(bad)
+                   if p == "metrics" and k not in _KONG_GUARDRAIL_SCHEMA["metrics"]]
+        self.assertEqual(flagged, [("metrics", "block_details")])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
