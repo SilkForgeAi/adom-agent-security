@@ -60,6 +60,33 @@ command -v curl >/dev/null || die "curl is not installed."
 [ -s "$TOKEN_FILE" ] || die "No Konnect token at $TOKEN_FILE. Generate one in Konnect (Personal access tokens) and save it there."
 case "$REGION" in us|eu|au|me|in) ;; *) die "KONNECT_REGION must be one of us, eu, au, me, in (got '$REGION')";; esac
 
+konnect_status() {   # HTTP status of a Konnect API call in region $1; token never on argv
+  printf 'header = "Authorization: Bearer %s"\n' "$(cat "$TOKEN_FILE")" \
+    | curl -s -K - -o /dev/null -w '%{http_code}' "https://$1.api.konghq.com/v2/control-planes?page%5Bsize%5D=1"
+}
+TOKEN_PREFIX="$(head -c 5 "$TOKEN_FILE")"
+case "$TOKEN_PREFIX" in kpat_|spat_) ;; *)
+  die "$TOKEN_FILE does not look like a Konnect token (it should start with kpat_). Copy the token again and resave it." ;;
+esac
+if [ -n "$(LC_ALL=C tr -d 'A-Za-z0-9_\n' < "$TOKEN_FILE")" ]; then
+  die "$TOKEN_FILE contains characters a Konnect token never has (spaces or other text). Copy the token again and resave it."
+fi
+CODE="$(konnect_status "$REGION")"
+case "$CODE" in
+  200) echo "Konnect token accepted ($REGION)" ;;
+  401)
+    for r in us eu au me in; do
+      [ "$r" = "$REGION" ] && continue
+      if [ "$(konnect_status "$r")" = "200" ]; then
+        die "Your token works in the '$r' region, not '$REGION'. Rerun with: KONNECT_REGION=$r $0"
+      fi
+    done
+    die "Konnect rejected the token (401) in every region. Generate a new personal access token and save it to $TOKEN_FILE." ;;
+  403) die "The token is valid but not allowed to manage control planes (403). Use a token from an org admin account." ;;
+  000) die "Could not reach https://$REGION.api.konghq.com (network?)." ;;
+  *) die "Unexpected Konnect API response $CODE in region '$REGION'." ;;
+esac
+
 PY=""
 for cand in python3.13 python3.12 python3.11 python3.10 python3; do
   if command -v "$cand" >/dev/null && "$cand" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)' 2>/dev/null; then
@@ -79,20 +106,22 @@ rm -f "$WORK"/*.jsonl "$WORK"/results.json "$WORK"/*.log
 
 # ---- ADOM, capture proxy, mock model --------------------------------------------------
 step "Installing ADOM from $ROOT into $WORK/venv"
-"$PY" -m venv "$WORK/venv"
-"$WORK/venv/bin/python" -m pip install -q --upgrade pip
-"$WORK/venv/bin/python" -m pip install -q "$ROOT"
+{ "$PY" -m venv "$WORK/venv" \
+  && "$WORK/venv/bin/python" -m pip install -q --upgrade pip \
+  && "$WORK/venv/bin/python" -m pip install -q "$ROOT"; } > "$WORK/pip.log" 2>&1 \
+  || die "Installing ADOM failed; see $WORK/pip.log"
+echo "installed"
 VPY="$WORK/venv/bin/python"
 
 step "Starting ADOM guardrail (:$ADOM_PORT), capture proxy (:$GUARD_PORT) and mock model (:$MOCK_PORT)"
 "$WORK/venv/bin/adom" kong-guard --bind 127.0.0.1 --port "$ADOM_PORT" \
   --allowed-tool read_ticket --approved-outbound corp.com \
   --audit-log "$WORK/decisions.jsonl" > "$WORK/adom.log" 2>&1 &
-PIDS+=($!)
+PIDS+=($!); disown "$!" 2>/dev/null || true
 "$VPY" "$HERE/capture_proxy.py" "$GUARD_PORT" "$ADOM_PORT" "$WORK" > "$WORK/capture.log" 2>&1 &
-PIDS+=($!)
+PIDS+=($!); disown "$!" 2>/dev/null || true
 "$VPY" "$HERE/mock_llm.py" "$MOCK_PORT" "$WORK" > "$WORK/mock.log" 2>&1 &
-PIDS+=($!)
+PIDS+=($!); disown "$!" 2>/dev/null || true
 for i in $(seq 1 30); do
   curl -sf "http://127.0.0.1:$GUARD_PORT/healthz" >/dev/null && curl -sf "http://127.0.0.1:$MOCK_PORT/" >/dev/null && break
   sleep 0.5
