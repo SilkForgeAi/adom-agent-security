@@ -16,6 +16,7 @@
 - **Cost & latency reduction (Router, independently verifiable receipts):** supported exact tasks run with **no model call**; across `100` legitimate executions per arm, API spend per task dropped **`-66.98%` (`$0.0158 → $0.0052`)**, API calls **`120 → 40`**, and median latency **`-97.72%` (`1,426 ms → 32.49 ms`)** (`100/100` completions; `59.89%` savings uncached). [October 20 results](#selective-inference-live-results--october-20-2026)
 - **Zero-LLM guardrail cost (`$0` judge overhead):** deterministic runtime screening adds **`0` secondary LLM calls** and **`0.0393–0.1008 ms` `p50`** (`0.1177–0.2937 ms` `p99`) per tool call across `ModelProxyPolicy`, `action_kernel`, `MCP Decider`, and coding-agent hooks (`9/9` obfuscated exfil payloads blocked). [`evidence/2026-11-15`](evidence/2026-11-15/README.md)
 - **Incident replay:** target-side effects **7 → 0**, with **9/9 attack requests blocked**. [Committed replay](#committed-reference-replay-result)
+- **Real Kong AI Gateway (Kong Gateway Enterprise 3.16 via Konnect, mock model):** ADOM's generated config loads, the guardrail runs on INPUT and OUTPUT, and a secret in the model's reply is blocked (400) before reaching the client; tool-call-only replies get no OUTPUT guardrail call from Kong, so tool calls must be enforced at the MCP/tool plane. [`evidence/2026-11-19`](evidence/2026-11-19/README.md)
 - **Upstream reproductions:** executable tool-policy bypasses verified against pinned commits of **LiteLLM (`1.93.0`)**, **OpenHands SDK (`1.59.0`)**, **OpenAI Agents SDK**, **NeMo Guardrails**, **Snyk `agent-scan`**, and **Superagent**. [Upstream reproductions](#upstream-policy-bypass-reproductions)
 
 
@@ -108,7 +109,7 @@ preventing it.
 | Requests suppressed after circuit trip | N/A | **6** |
 
 The host-side verifier currently reports **17/17 checks passing**. The replay's Python tests report
-**18/18 passing**, and CI runs the full repository suite (189 tests as of November 19, 2026) on
+**18/18 passing**, and CI runs the full repository suite (192 tests as of November 19, 2026) on
 every push. Saved evidence is covered by SHA-256 manifests.
 
 ## Selective-inference live results — October 20, 2026
@@ -238,9 +239,10 @@ adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-
 - [`spec/`](spec/) — action-tier and MCP gateway interface specifications.
 - [`incident_replay/`](incident_replay/) — deterministic and containerized incident replay.
 - [`benchmarks/`](benchmarks/) — cross-provider and live-model harnesses, selective-inference evidence, and `latency_and_encoding/run.py` (a wrapper for `adom bench`).
+- [`deployment/kong-konnect-smoke/`](deployment/kong-konnect-smoke/) — real-Kong smoke test (Konnect trial + Docker); produced `evidence/2026-11-19/`.
 - [`reproductions/`](reproductions/) — side-by-side policy-bypass reproductions against pinned upstream OSS agent guardrails; `reproductions/run_reproduction.sh all` fetches each pinned commit and runs them.
 - [`docs/`](docs/) — architecture, threat model, claims, results, engineering status, and reproduction guide.
-- [`evidence/`](evidence/2026-11-17/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, `2026-11-16/`, and `2026-11-17/`) with SHA-256 manifests.
+- [`evidence/`](evidence/2026-11-19/README.md) — committed machine-readable evidence bundles (`2026-10-08/`, `2026-11-14/`, `2026-11-15/`, `2026-11-16/`, `2026-11-17/`, and `2026-11-19/`) with SHA-256 manifests.
 - [`CONTRIBUTIONS.md`](CONTRIBUTIONS.md) — project authorship and a technical walkthrough outline.
 
 ## Sources

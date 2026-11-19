@@ -47,6 +47,8 @@ jobs:
           (cd evidence/2026-11-15 && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-16 && sha256sum -c MANIFEST.sha256)
           (cd evidence/2026-11-17 && sha256sum -c MANIFEST.sha256)
+          (cd evidence/2026-11-19/kong_konnect && sha256sum -c MANIFEST.sha256)
+          python -B -m adom.cli verify-chain evidence/2026-11-19/kong_konnect/decisions.jsonl
       - name: Compile check all Python modules
         run: python3 -B -m compileall -q adom cursor_hook incident_replay
       - name: Verify selective-inference saved evidence (no API key)

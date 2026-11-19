@@ -1,0 +1,66 @@
+{
+  "results": [
+    {
+      "test": "config reached the data plane",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "last status 200: {\"id\": \"chatcmpl-adom-smoke\", \"object\": \"chat.completion\", \"created\": 1795106818, \"model\": \"gpt-4o\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"Hello! This is a benign reply"
+    },
+    {
+      "test": "benign request passes",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "status 200: {\"id\": \"chatcmpl-adom-smoke\", \"object\": \"chat.completion\", \"created\": 1795106818, \"model\": \"gpt-4o\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \""
+    },
+    {
+      "test": "secret in model reply is blocked",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "status 400, key reached client: False, body: {\"error\":{\"message\":\"ADOM blocked response: assistant response leaks tainted secret or sensitive PII\"}}"
+    },
+    {
+      "test": "40 benign requests, none blocked",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "non-200 statuses: []"
+    },
+    {
+      "test": "tool-call-only reply (content null)",
+      "result": "INFO",
+      "kind": "limit",
+      "detail": "status 200, tool call reached client: True"
+    },
+    {
+      "test": "tool-read secret echoed base64 in reply",
+      "result": "INFO",
+      "kind": "limit",
+      "detail": "status 200, encoded secret reached client: True"
+    },
+    {
+      "test": "guardrail called on INPUT and OUTPUT",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "89 guardrail calls; phases seen: ['INPUT', 'OUTPUT']"
+    },
+    {
+      "test": "no unrendered $(...) values reached ADOM",
+      "result": "PASS",
+      "kind": "check",
+      "detail": "0 calls with unrendered values; body keys seen: ['source', 'text']"
+    },
+    {
+      "test": "ADOM sessions seen",
+      "result": "INFO",
+      "kind": "observation",
+      "detail": "['default-kong-session']"
+    }
+  ],
+  "body_keys": [
+    "source",
+    "text"
+  ],
+  "phases": [
+    "INPUT",
+    "OUTPUT"
+  ]
+}

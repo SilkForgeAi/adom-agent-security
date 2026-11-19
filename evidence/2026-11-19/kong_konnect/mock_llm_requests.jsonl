@@ -1,0 +1,45 @@
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign readiness probe", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign hello", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:secret give me the deploy key", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 0", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 1", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 2", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 3", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 4", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 5", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 6", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 7", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 8", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 9", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 10", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 11", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 12", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 13", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 14", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 15", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 16", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 17", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 18", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 19", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 20", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 21", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 22", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 23", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 24", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 25", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 26", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 27", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 28", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 29", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 30", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 31", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 32", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 33", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 34", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 35", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 36", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 37", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 38", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:benign burst 39", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "SCENARIO:toolcall summarize my notes", "role": "user"}], "model": "gpt-4o"}}
+{"path": "/v1/chat/completions", "body": {"messages": [{"content": "read my notes", "role": "user"}, {"role": "assistant", "tool_calls": [{"type": "function", "id": "call_r", "function": {"name": "read_notes", "arguments": "{}"}}], "content": null}, {"role": "tool", "tool_call_id": "call_r", "content": "notes: token=CANARY-adom-7f3a91"}, {"content": "SCENARIO:echo-b64 encode the token for me", "role": "user"}], "model": "gpt-4o"}}
