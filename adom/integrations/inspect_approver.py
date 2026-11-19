@@ -24,10 +24,12 @@ into UK AI Security Institute's `inspect_ai` `Approver` extension API:
    - Returns `decision="escalate"` on schema- and taint-clean calls so Inspect's
      `PolicyApprover` hands off subtle semantic review to the downstream monitor.
 
-3. **Exact Tool-Grant & `parse_error` Fail-Closed Semantics:**
-   Closes `tool_call_matcher`'s prefix-glob expansion (`tools="read"` matching
-   `read_secret_store`), missing-key argument fallthrough, and malformed JSON
-   `ToolCall.parse_error` pass-through.
+3. **Exact Tool Grants:**
+   Unlike `tool_call_matcher`, which turns a bare tool name into a prefix glob
+   (`tools="read"` matches `read_secret_store`) and checks argument rules on top-level keys
+   only, ADOM grants exact tool names and scans every argument value. It also rejects a call
+   carrying `ToolCall.parse_error`; inspect_ai 0.3.291 already stops those before approval,
+   so this is defense in depth.
 
 Zero external runtime dependencies: runs standalone on Python 3.10+ stdlib and
 automatically registers with `@inspect_ai.approval.approver` when `inspect_ai` is installed.
