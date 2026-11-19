@@ -1,31 +1,28 @@
-"""ADOM HTTP Guardrail Service & Reference Architecture for Kong AI Gateway (3.14+).
+"""ADOM guardrail service for Kong AI Gateway (`ai-custom-guardrail`, Kong 3.14+).
 
-Integrates ADOM's deterministic, zero-LLM enforcement core with Kong AI Gateway across
-both LLM and MCP traffic planes:
+Kong calls `POST /v1/kong/guardrail` before a request reaches the model (INPUT) and after the
+reply comes back (OUTPUT); ADOM answers `{"block": ..., "block_message": ...}`.
 
-1. **LLM Plane (`ai-custom-guardrail`, `guarding_mode: BOTH`)** — `POST /v1/kong/guardrail`
-   - Safely parses multi-turn agent histories across OpenAI Chat (`/v1/chat/completions`),
-     OpenAI Responses (`/v1/responses`), Anthropic Messages (`/v1/messages`), Gemini
-     (`generateContent`), and flat `$(content)` text payloads—including `assistant`
-     messages with `content: null` + `tool_calls` and multimodal content arrays that
-     cause `ai-prompt-guard` (`guard-prompt.lua`) to reject valid tool-calling turns
-     when `match_all_roles=true`.
-   - Learns untrusted/sensitive tool outputs (`role="tool"`, `function_call_output`,
-     `tool_result`, `functionResponse`) into bounded per-session taint memory on `INPUT`.
-   - Screens `OUTPUT` tool calls (`tool_calls`, `function_call`, `tool_use`,
-     `functionCall`) and assistant text for raw/encoded secret exfiltration (`base64`,
-     `hex`, URL-encoded, reversed, chunked), SSRF destinations, ungranted tools
-     (`strict_deny_unknown=True`), and sliding-window consequence/retry budgets
-     (`BlastRadiusController`).
+What Kong actually sends with the generated config (verified on Kong Gateway Enterprise 3.16,
+evidence/2026-11-19): `{"source", "text"}`, where `text` is `$(content)`, the extracted message
+text. With that input this service blocks model replies that contain raw secret-shaped strings
+(AWS keys, `sk-` keys, private-key headers, GitHub/Slack tokens, password/secret pairs). It
+cannot see tool calls in replies (Kong makes no OUTPUT call for a tool-call-only reply), cannot
+tell which text came from a tool, and so learns no taint; encoded secrets are caught only for
+taint values the operator configures (`taint_values=`), which the CLI does not expose.
 
-2. **MCP Plane (`ai-mcp-proxy` `passthrough-listener` -> `adom mcp-http`)**
-   - Kong's `ai-mcp-proxy` enforces Consumer/Group ACLs on tool names but explicitly
-     documents `AI Guardrails: supported: false` on MCP routes. Placing `McpHttpProxyServer`
-     (`adom mcp-http`) as the upstream service behind Kong's `passthrough-listener` adds
-     argument-level policy screening, cross-tool taint tracking, strict SSRF IP-pinning,
-     and tamper-evident SHA-256 `ChainLog` audit receipts.
+The engine also accepts structured bodies (OpenAI Chat and Responses, Anthropic Messages,
+Gemini, null/array content) under `payload`/`body`/`request`/`response`. When a caller sends
+them, tool outputs feed per-session taint on INPUT and tool calls are screened on OUTPUT
+(deny-unknown tools, unapproved destinations, raw and encoded taint). Kong's documented
+variables do not provide such a body.
 
-Pure Python 3.10+ standard library; zero external runtime dependencies.
+Budgets and the circuit breaker apply only to identified sessions (see KongGuardrailEngine).
+
+The MCP plane is separate: Kong `ai-mcp-proxy` (passthrough-listener) in front of
+`adom mcp-http` (adom/integrations/mcp_http_proxy.py).
+
+Pure Python 3.10+ standard library.
 """
 from __future__ import annotations
 
@@ -866,7 +863,7 @@ services:
 
   # Kong `ai-mcp-proxy` documents `AI Guardrails: supported: false` on MCP routes.
   # Routing `passthrough-listener` to `adom mcp-http` preserves Kong AuthN/ACLs/OTel
-  # while adding ADOM per-argument taint, capability tiers, SSRF IP-pinning, and ChainLog.
+  # while adding ADOM argument screening, cross-tool taint, capability tiers and a DNS-pinned upstream.
   - name: governed-mcp-service
     url: {adom_mcp_upstream_url}
     routes:

@@ -1,11 +1,14 @@
 """Remote MCP (streamable HTTP, JSON or SSE replies) reverse proxy backed by ADOM Decider + strict SSRF defense.
 
-Fixes both architectural gaps identified in competing OSS proxies/scanners:
-  1. Argument-level & cross-tool taint inspection (unlike OpenShell, which inspects
-     only ``tools/call`` ``params.name`` and ignores ``params.arguments``).
-  2. Fail-closed HTTP relay + strict SSRF IP-pinning blocking loopback, RFC1918,
-     CGNAT, ULA, link-local, metadata endpoints, and DNS-rebinding TOCTOU windows
-     (unlike snyk/agent-scan, which fails open on 4xx/5xx and allows RFC1918/loopback).
+  1. Argument-level screening and cross-tool taint: every `tools/call` is decided on its
+     name and arguments; tool, resource and prompt results feed taint for later calls.
+  2. Fail-closed relay: upstream errors, timeouts and content it cannot screen return an
+     error to the client. The upstream is resolved once and dialed only at validated public
+     addresses (loopback, RFC1918, CGNAT, ULA, link-local and metadata ranges refused), so
+     DNS rebinding cannot swap in an internal target. Compare the fail-open and SSRF-range
+     findings in reproductions/snyk-agent-scan-guard-reproduction.
+
+Unlike the stdio gateway (mcp_gateway.py), this proxy writes no audit log.
 """
 
 from __future__ import annotations

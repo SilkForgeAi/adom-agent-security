@@ -22,5 +22,5 @@ run shows which `$(...)` variables Kong really renders. Results and logs go to
 
 | Row | Meaning |
 |---|---|
-| PASS / FAIL | A claim the Kong integration makes: benign traffic passes, a secret in the model reply is blocked, no shared breaker throttles callers, the guardrail is called on INPUT and OUTPUT, no unrendered variables reach ADOM |
+| PASS / FAIL | A claim the Kong integration makes: benign traffic passes, a raw secret-shaped string in the model reply is blocked, no shared breaker throttles callers, the guardrail is called on INPUT and OUTPUT, no unrendered variables reach ADOM |
 | INFO | A known limit of the text-only `$(content)` plane, recorded so a real run confirms it: tool-call-only replies and cross-turn taint are not visible to the guardrail |
