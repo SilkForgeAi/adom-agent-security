@@ -223,7 +223,7 @@ cd adom-agent-security
 pip install -e .
 
 adom bench                                                      # 5-component latency + encoding benchmark
-adom hook --client codex < payload.json                         # offline fail-closed hook (cursor|claude-code|codex|github-copilot)
+ADOM_MODE=enforce adom hook --client codex < payload.json       # offline coding-agent hook (cursor|claude-code|codex|github-copilot); default mode is observe (logs, never blocks), enforce blocks and fails closed
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
 adom mcp-http --name notes --upstream https://mcp.example/mcp   # streamable-HTTP MCP proxy (JSON + SSE replies, DNS-pinned upstream)
 adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (Kong-documented variables only; add --session-scope for budgets)

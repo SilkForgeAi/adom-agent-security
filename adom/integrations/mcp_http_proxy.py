@@ -367,8 +367,13 @@ class McpHttpProxyServer:
                                 _jsonrpc_error(None, -32600, "ADOM refused request body size"))
                     return
                 raw = self.rfile.read(length) if length > 0 else b""
-                status, response_obj, session_id = proxy._handle_payload(
-                    raw, client_headers=self._passthrough())
+                try:
+                    status, response_obj, session_id = proxy._handle_payload(
+                        raw, client_headers=self._passthrough())
+                except Exception as exc:      # any internal error: block, never forward
+                    status, session_id = 500, None
+                    response_obj = _jsonrpc_error(
+                        None, -32003, f"ADOM internal error, request blocked (fail-closed): {type(exc).__name__}")
                 self._reply(status, response_obj, session_id)
 
             def do_GET(self) -> None:  # noqa: N802

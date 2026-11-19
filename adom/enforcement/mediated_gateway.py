@@ -26,10 +26,11 @@ independently sufficient to stop a secret exfil; blast-radius accounting additio
 unbounded retries and consequence accumulation.
 
 Honest scope: the software here guarantees mediation *if the deployment routes through it*.
-The unbypassability itself is enforced at the OS/container layer (network namespace +
-forced HTTP(S)_PROXY + dropped caps + seccomp) — `deployment_manifest()` emits that exact
-binding, and `container_hardening.py` supplies the runtime flags. Python cannot enforce a
-network namespace on its own; that is a deployment requirement, stated plainly.
+The unbypassability itself is enforced at the OS/container layer (an internal Docker network,
+forced HTTP(S)_PROXY, dropped capabilities). `deployment_manifest()` emits that binding with
+basic hardening flags. A seccomp profile, a container-hardening module and a mediation-path
+attestor are referenced by earlier designs but are NOT included in this repository. Python
+cannot enforce a network namespace on its own; that is a deployment requirement, stated plainly.
 """
 from __future__ import annotations
 
@@ -95,7 +96,7 @@ class MediatedAgentGateway:
         # Optional ToolAttestationRegistry. When supplied, PLANE 3 enforces the capability
         # ENVELOPE each tool was vetted for. Without this wiring the envelope logic existed
         # only inside its own unit test — a control that reports green while protecting
-        # nothing (see scripts/_scan_unreachable_controls.py).
+        # nothing.
         self.attestation = attestation
         self.mediation_attestor = mediation_attestor
         self.blast_radius = blast_radius
@@ -307,12 +308,11 @@ class MediatedAgentGateway:
         The correct shape is an INTERNAL docker network (no route off-host) shared by the agent
         and the proxy. The agent's only reachable peer is the proxy; the proxy is the only
         container with an external route. Egress is sole-path by topology, not by convention.
+
+        `seccomp_path` is accepted for compatibility and not used: no seccomp profile ships in
+        this repository, so the agent container gets only the flags below.
         """
-        try:
-            from adom.enforcement.container_hardening import hardened_run_flags
-            flags = hardened_run_flags(seccomp_path=seccomp_path, network=None)
-        except Exception:
-            flags = ["--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--read-only"]
+        flags = ["--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--read-only"]
         return (
             "# ADOM sole-mediated-path deployment.\n"
             "# 1. An INTERNAL network has no route off the host, so nothing on it can reach the\n"
@@ -334,21 +334,23 @@ class MediatedAgentGateway:
             f"  -e NO_PROXY= -e no_proxy= \\\n"
             f"  {image}\n"
             "\n"
-            "# 4. VERIFY the binding rather than assuming it. The agent should run\n"
-            "#    MediationPathAttestor.require_mediation() at startup and keep .start()\n"
-            "#    running: it sends a canary to an un-allowlisted host and fails closed unless\n"
-            "#    ADOM refuses it. Env vars and netns can be misconfigured; the canary is\n"
-            "#    end-to-end proof, produced by the same stack the agent uses.\n"
+            "# 4. VERIFY the binding rather than assuming it. From inside the agent container,\n"
+            "#    a request to a host that is not allowlisted must come back 403 with an\n"
+            "#    X-ADOM-Blocked header, and a direct connection with the proxy variables unset\n"
+            "#    must fail. (ADOM's automated path attestor is not included in this repository.)\n"
         )
 
     def path_attestor(self, egress_host: str = "127.0.0.1", egress_port: int = 8888,
                       **kwargs):
-        """A MediationPathAttestor bound to this gateway's egress proxy.
+        """Not available in this repository.
 
-        Convenience so the deployment-precondition check lives next to the thing it protects.
+        The mediation-path attestor (a canary that proves the agent's only route is the egress
+        proxy) is not included here. Pass your own object with `require_current_mediation()` as
+        `mediation_attestor=` to make the gateway fail closed when mediation is unverified.
         """
-        from adom.enforcement.path_attestation import MediationPathAttestor
-        return MediationPathAttestor(f"http://{egress_host}:{egress_port}", **kwargs)
+        raise NotImplementedError(
+            "ADOM's MediationPathAttestor is not included in this repository; supply your own "
+            "mediation_attestor with require_current_mediation()")
 
 
 def _flatten(args: Dict) -> str:

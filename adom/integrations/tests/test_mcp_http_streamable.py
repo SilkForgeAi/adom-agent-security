@@ -225,6 +225,20 @@ class StreamableHttpProxyTests(unittest.TestCase):
         self.assertEqual(h.get("authorization"), "Bearer t0k")
         self.assertIn("text/event-stream", h["accept"])                 # proxy sets Accept
 
+    def test_internal_error_blocks_with_jsonrpc_error(self) -> None:
+        sid = self._handshake()
+        calls_before = len(self._upstream_tool_calls())
+
+        def boom(*a, **k):
+            raise RuntimeError("decider failure")
+        self.proxy.decider.decide = boom
+        st, _, body = self._http("POST", {"jsonrpc": "2.0", "id": 11, "method": "tools/call",
+                                          "params": {"name": "read_note", "arguments": {}}},
+                                 {"Mcp-Session-Id": sid})
+        self.assertEqual(st, 500)
+        self.assertIn("fail-closed", body["error"]["message"])
+        self.assertEqual(len(self._upstream_tool_calls()), calls_before)
+
     def test_oversized_client_body_refused(self) -> None:
         # Refused from the declared length, before the body is read (so send headers only).
         import socket
