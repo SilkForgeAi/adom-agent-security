@@ -841,6 +841,10 @@ services:
             config:
               guarding_mode: BOTH
               text_source: concatenate_all_content
+              # Fail closed: stop the request if the guardrail call errors (Kong's default,
+              # stated explicitly), and verify TLS when adom_url is https (Kong defaults to off).
+              stop_on_error: true
+              ssl_verify: true
               # Only Kong-documented variables: $(source), $(conf.params.*), $(content), $(resp.*).
               # $(content) is extracted message TEXT: structured tool_calls with null content
               # are not in it. Enforce tool calls at execution (adom mcp-http, tool guards).
@@ -858,7 +862,7 @@ services:
                 block_message: "$(resp.block_message)"
               metrics:
                 block_reason: "$(resp.block_reason)"
-                block_details: "$(resp.audit_hash)"
+                block_detail: "$(resp.audit_hash)"
 
   # Kong `ai-mcp-proxy` documents `AI Guardrails: supported: false` on MCP routes.
   # Routing `passthrough-listener` to `adom mcp-http` preserves Kong AuthN/ACLs/OTel
