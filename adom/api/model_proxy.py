@@ -1099,9 +1099,8 @@ _UPSTREAM = {"openai": "api.openai.com", "anthropic": "api.anthropic.com",
 
 # Every provider `detect_provider` can return. A provider that is ROUTABLE but not PARSEABLE is
 # the worst failure mode this proxy has: the response is forwarded uninspected while the headers
-# report it as inspected and allowed. The registry assertions below make that state impossible
-# to ship for non-streaming responses — the process refuses to import instead. (The streaming
-# inspector, stream_inspect, is not included in this repository; streaming responses are blocked.)
+# report it as inspected and allowed. The registry assertions below (and the matching one in
+# stream_inspect) make that state impossible to ship — the process refuses to import instead.
 SUPPORTED_PROVIDERS = ("openai", "anthropic", "gemini")
 _RESPONSE_PARSERS = {"openai", "anthropic", "gemini"}
 
