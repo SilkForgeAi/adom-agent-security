@@ -19,6 +19,7 @@ jobs:
         run: |
           python -B -m unittest discover -s incident_replay -p 'test_*.py'
           python -B -m unittest discover -s adom/integrations -p 'test_*.py'
+          python -B -m unittest discover -s adom/api -p 'test_*.py'
           python -B cursor_hook/test_cursor_hook.py
           python -B cursor_hook/test_action_tiers.py
       - name: Run key-free latency, CLI, and encoding benchmark

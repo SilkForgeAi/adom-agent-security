@@ -106,6 +106,11 @@ def main(argv: list[str] | None = None) -> int:
         payload = _translate_generic(opts.client, raw)
 
     if payload is None:
+        # Known Claude Code events ADOM does not gate (PostToolUse after a non-write tool,
+        # Stop, SessionStart, ...) get "no opinion". Blocking them does not stop anything;
+        # on PostToolUse it tells the agent a finished action was blocked.
+        if opts.client == "claude-code" and claude_adapter.is_ungated(raw):
+            return 0
         # Unrecognized shapes must not fail open in enforce mode (same class of bug ADOM
         # reports in third-party hooks). Observe mode still allows and logs nothing here.
         if mode == "enforce":

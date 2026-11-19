@@ -50,10 +50,23 @@ class AdomCliTests(unittest.TestCase):
         self.assertIn("ai-custom-guardrail", proc.stdout)
         self.assertIn("ai-mcp-proxy", proc.stdout)
         self.assertIn("passthrough-listener", proc.stdout)
-        # Session isolation + structured payload forwarding (fail-closed defaults)
-        self.assertIn("X-Consumer-Id", proc.stdout)
-        self.assertIn("X-Session-Id", proc.stdout)
-        self.assertIn('payload: "$(request)"', proc.stdout)
+        # Only template variables Kong documents for ai-custom-guardrail. An undocumented one
+        # ($(request), $(headers[...]), $(consumer.*)) reaches ADOM unrendered or empty.
+        import re
+        used = set(re.findall(r"\$\(([^)]*)\)", proc.stdout))
+        undocumented = {v for v in used
+                        if not (v in ("source", "content") or v.startswith(("conf.params.", "resp.")))}
+        self.assertEqual(undocumented, set())
+        self.assertNotIn("X-Session-Id", proc.stdout)          # no identity unless a scope is given
+
+        scoped = subprocess.run(
+            [sys.executable, "-B", "-m", "adom.cli", "kong-guard", "--emit-deck",
+             "--session-scope", "team-a"],
+            cwd=str(ROOT), text=True, capture_output=True, timeout=10,
+        )
+        self.assertEqual(scoped.returncode, 0)
+        self.assertIn('X-Session-Id: "$(conf.params.adom_session_scope)"', scoped.stdout)
+        self.assertIn('adom_session_scope: "team-a"', scoped.stdout)
 
     def test_cli_hook_codex_blocks_shell_exfil_fail_closed(self):
         import os
