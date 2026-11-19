@@ -50,6 +50,10 @@ class AdomCliTests(unittest.TestCase):
         self.assertIn("ai-custom-guardrail", proc.stdout)
         self.assertIn("ai-mcp-proxy", proc.stdout)
         self.assertIn("passthrough-listener", proc.stdout)
+        # Session isolation + structured payload forwarding (fail-closed defaults)
+        self.assertIn("X-Consumer-Id", proc.stdout)
+        self.assertIn("X-Session-Id", proc.stdout)
+        self.assertIn('payload: "$(request)"', proc.stdout)
 
     def test_cli_hook_codex_blocks_shell_exfil_fail_closed(self):
         import os

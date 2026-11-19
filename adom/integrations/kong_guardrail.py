@@ -743,9 +743,18 @@ services:
                 url: "$(conf.params.adom_url)"
                 headers:
                   Content-Type: application/json
+                  # Per-consumer / per-request session keys so blast-radius state is not shared.
+                  X-Session-Id: "$(headers['x-session-id'])"
+                  X-Kong-Session-Id: "$(headers['x-kong-request-id'])"
+                  X-Consumer-Id: "$(consumer.id)"
+                  X-Consumer-Username: "$(consumer.username)"
                 body:
                   source: "$(source)"
                   text: "$(content)"
+                  # Forward the full LLM table so null-content tool_calls are not dropped
+                  # when $(content) is empty (see docs/KONG_AI_GATEWAY_ARCHITECTURE.md).
+                  payload: "$(request)"
+                  session_id: "$(headers['x-session-id'])"
               response:
                 block: "$(resp.block)"
                 block_message: "$(resp.block_message)"

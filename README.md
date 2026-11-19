@@ -225,7 +225,7 @@ adom hook --client codex < payload.json                         # offline fail-c
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
 adom mcp-http --name notes --upstream https://mcp.example/mcp   # SSRF-pinned remote HTTP MCP proxy
 adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (ai-custom-guardrail + ai-mcp-proxy)
-adom kong-guard --port 8780 --approved-outbound corp.com        # stateful HTTP guardrail service for Kong ai-custom-guardrail
+adom kong-guard --port 8780 --allowed-tool read_ticket --allowed-tool send_email --approved-outbound corp.com   # deny-unknown is always on; grant exact tools
 adom inspect-policy --mode control_prefilter > adom-aisi.yaml   # UK AISI Inspect (inspect_ai) 2-stage AI-Control policy YAML
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
 ```

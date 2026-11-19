@@ -112,10 +112,13 @@ def _cmd_kong_guard(argv: List[str]) -> int:
         return 0
 
     audit_path = opts.audit_log or (Path.home() / ".adom" / "kong" / "decisions.jsonl")
+    # Always fail closed on unknown tools. An empty --allowed-tool list means deny every
+    # tool call (operators must grant exact names). Previously deny-unknown was gated on
+    # whether any --allowed-tool was passed, so the README quickstart ran fail-open.
     engine = KongGuardrailEngine(
         allowed_tools=opts.allowed_tool,
         approved_outbound=opts.approved_outbound,
-        strict_deny_unknown=bool(opts.allowed_tool),
+        strict_deny_unknown=True,
         audit_log_path=audit_path,
         audit_key=load_key(opts.audit_key_file) if opts.audit_key_file else None,
     )

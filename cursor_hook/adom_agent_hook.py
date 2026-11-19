@@ -106,6 +106,18 @@ def main(argv: list[str] | None = None) -> int:
         payload = _translate_generic(opts.client, raw)
 
     if payload is None:
+        # Unrecognized shapes must not fail open in enforce mode (same class of bug ADOM
+        # reports in third-party hooks). Observe mode still allows and logs nothing here.
+        if mode == "enforce":
+            code, body = _format_reply(
+                opts.client,
+                False,
+                "ADOM blocked unrecognized hook payload (fail-closed)",
+                "unknown",
+            )
+            if body:
+                print(body)
+            return code
         return 0
 
     res = engine.evaluate(payload, opts.client.replace("-", "_"))

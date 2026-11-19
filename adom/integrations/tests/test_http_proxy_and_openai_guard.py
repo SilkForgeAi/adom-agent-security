@@ -17,7 +17,12 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from adom.api.model_proxy import ModelProxyPolicy
-from adom.integrations.mcp_http_proxy import McpHttpProxyServer, UnsafeUpstreamUrl, validate_upstream_url
+from adom.integrations.mcp_http_proxy import (
+    McpHttpProxyServer,
+    UnsafeUpstreamUrl,
+    _PinnedHTTPSConnection,
+    validate_upstream_url,
+)
 from adom.integrations.tool_guard import ToolBlocked, guard_openai_agent
 
 
@@ -209,6 +214,91 @@ class TestMcpHttpProxyAndSsrf(unittest.TestCase):
                 proxy.close()
                 upstream.shutdown()
                 upstream.server_close()
+
+    def test_pinned_https_connection_sets_server_hostname(self) -> None:
+        conn = _PinnedHTTPSConnection(
+            "93.184.216.34",
+            server_hostname="mcp.example.com",
+            port=443,
+            timeout=5.0,
+        )
+        self.assertEqual(conn.host, "93.184.216.34")
+        self.assertEqual(conn._adom_server_hostname, "mcp.example.com")
+
+    def test_http_proxy_screens_resources_read_and_passes_auth_headers(self) -> None:
+        seen_headers: list[dict] = []
+
+        class _UpstreamHandler(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):  # noqa: N802
+                length = int(self.headers.get("Content-Length", "0"))
+                raw = self.rfile.read(length) if length else b"{}"
+                seen_headers.append({k.lower(): v for k, v in self.headers.items()})
+                req = json.loads(raw.decode())
+                body = json.dumps({
+                    "jsonrpc": "2.0",
+                    "id": req.get("id"),
+                    "result": {"contents": [{"uri": "ok", "text": "fine"}]},
+                }).encode()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, format, *args):  # noqa: A003
+                return
+
+        upstream = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _UpstreamHandler)
+        threading.Thread(target=upstream.serve_forever, daemon=True).start()
+        proxy = McpHttpProxyServer(
+            f"http://127.0.0.1:{upstream.server_address[1]}/mcp",
+            "notes",
+            allow_loopback=True,
+            bind_host="127.0.0.1",
+            bind_port=0,
+            mode="enforce",
+        )
+        proxy.start()
+        try:
+            def _post(payload, extra_headers=None):
+                data = json.dumps(payload).encode()
+                req = urllib.request.Request(
+                    proxy.url,
+                    data=data,
+                    method="POST",
+                    headers={"Content-Type": "application/json", **(extra_headers or {})},
+                )
+                try:
+                    with urllib.request.urlopen(req, timeout=5) as resp:
+                        return resp.status, json.loads(resp.read().decode())
+                except urllib.error.HTTPError as e:
+                    return e.code, json.loads(e.read().decode())
+
+            st, err = _post({
+                "jsonrpc": "2.0",
+                "id": 1,
+                "method": "resources/read",
+                "params": {"uri": "file:///Users/me/.ssh/id_rsa"},
+            })
+            self.assertEqual(st, 403)
+            self.assertIn("resources/read", err["error"]["message"])
+
+            st, _ok = _post(
+                {"jsonrpc": "2.0", "id": 2, "method": "ping", "params": {}},
+                extra_headers={
+                    "Authorization": "Bearer test-token",
+                    "Mcp-Session-Id": "sess-abc",
+                },
+            )
+            self.assertEqual(st, 200)
+            self.assertTrue(seen_headers)
+            last = seen_headers[-1]
+            self.assertEqual(last.get("authorization"), "Bearer test-token")
+            self.assertEqual(last.get("mcp-session-id"), "sess-abc")
+        finally:
+            proxy.close()
+            upstream.shutdown()
+            upstream.server_close()
 
 
 if __name__ == "__main__":

@@ -94,6 +94,10 @@ def main():
             return 2
         return 0
     if payload is None:
+        # Unrecognized Claude Code shapes exit 0 historically — fail closed in enforce.
+        if engine.MODE == "enforce":
+            sys.stderr.write("ADOM blocked this action: unrecognized hook payload\n")
+            return 2
         return 0
     r = engine.evaluate(payload, "claude_code")
     if r["allow"]:

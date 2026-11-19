@@ -19,11 +19,11 @@ executable exfil/delete/transfer instruction.
 
 Supported for deep inspection: OpenAI Chat Completions (/v1/chat/completions) and
 Anthropic Messages (/v1/messages). Every other path is forwarded untouched to the
-correct upstream. Non-streaming JSON is fully inspected; STREAMING (stream=true) is now
-inspected too — see adom/api/stream_inspect.py, which withholds tool-call deltas, assembles
-them, scores the completed call, and releases the bytes only if permitted (text deltas pass
-through immediately). This closes what was the widest bypass, since streaming is the default
-in most agent frameworks.
+correct upstream. Non-streaming JSON is fully inspected and FAIL-CLOSED on inspect errors
+(the original upstream bytes are never returned unscreened). STREAMING (stream=true) is
+inspected when ``adom.api.stream_inspect.StreamInspector`` is available; until that module
+ships, streaming responses are blocked (HTTP 502) rather than forwarded uninspected —
+streaming is the default in most agent frameworks and was previously the widest bypass.
 
 Pure stdlib. Live verification against the real APIs is deferred until keys are funded;
 the request/response inspection and blocking logic below are unit-tested offline.
@@ -1383,13 +1383,27 @@ def make_proxy_handler(policy: ModelProxyPolicy,
                     if verdict.signals:
                         extra["X-ADOM-Signals"] = ",".join(verdict.signals)[:400]
                     data = json.dumps(newr).encode()
-                except Exception:
-                    extra["X-ADOM-Inspected"] = "error"
+                except Exception as e:
+                    # Fail closed: never forward uninspected model bytes on parse/inspect error.
+                    m = json.dumps({
+                        "error": {
+                            "message": (
+                                f"ADOM blocked uninspected response (fail-closed): "
+                                f"{type(e).__name__}"
+                            ),
+                            "type": "adom_inspect_error",
+                        }
+                    }).encode()
+                    return self._send(
+                        502,
+                        [("Content-Type", "application/json")],
+                        m,
+                        {**extra, "X-ADOM-Inspected": "error", "X-ADOM-Action": "block"},
+                    )
             elif provider and streaming and resp.status == 200:
-                # Streaming used to be forwarded UNINSPECTED — the common path in most agent
-                # frameworks, and therefore the widest bypass. Now the SSE body is run through
-                # the stream inspector: tool-call deltas are withheld, assembled, scored, and
-                # released only if permitted (text deltas pass straight through).
+                # Streaming used to be forwarded UNINSPECTED on any inspector error — the
+                # widest bypass. Fail closed: release bytes only when StreamInspector runs;
+                # if the module is missing or inspection raises, block the response.
                 try:
                     from adom.api.stream_inspect import StreamInspector
                     insp = StreamInspector(provider, policy, on_decision=on_decision)
@@ -1400,8 +1414,27 @@ def make_proxy_handler(policy: ModelProxyPolicy,
                         extra["X-ADOM-Signals"] = ",".join(insp.verdict.signals)[:400]
                     if on_decision:
                         on_decision("stream", insp.verdict)
-                except Exception:
-                    extra["X-ADOM-Inspected"] = "stream-error"
+                except Exception as e:
+                    m = json.dumps({
+                        "error": {
+                            "message": (
+                                "ADOM blocked streaming response (fail-closed): "
+                                f"{type(e).__name__}. Retry with stream=false until the "
+                                "stream inspector is available."
+                            ),
+                            "type": "adom_stream_blocked",
+                        }
+                    }).encode()
+                    return self._send(
+                        502,
+                        [("Content-Type", "application/json")],
+                        m,
+                        {
+                            **extra,
+                            "X-ADOM-Inspected": "stream-blocked",
+                            "X-ADOM-Action": "block",
+                        },
+                    )
             else:
                 extra["X-ADOM-Inspected"] = "false"
             return self._send(resp.status, hdrs, data, extra)

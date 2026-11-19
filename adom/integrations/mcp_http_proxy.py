@@ -15,12 +15,22 @@ import http.server
 import ipaddress
 import json
 import socket
+import ssl
 import threading
 import urllib.parse
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from adom.enforcement import action_tiers as tiers
 from adom.integrations.mcp_gateway import Decider
+
+# Client headers that must reach a remote MCP server for auth and session continuity.
+_PASSTHROUGH_HEADERS = frozenset({
+    "authorization",
+    "mcp-session-id",
+    "mcp-protocol-version",
+    "accept",
+})
 
 _CGNAT_NET = ipaddress.ip_network("100.64.0.0/10")
 _ALIBABA_META = ipaddress.ip_network("100.100.100.200/32")
@@ -98,6 +108,28 @@ def _jsonrpc_error(mid: Any, code: int, message: str, data: Optional[Dict[str, A
     return {"jsonrpc": "2.0", "id": mid, "error": err}
 
 
+class _PinnedHTTPSConnection(http.client.HTTPSConnection):
+    """HTTPSConnection that dials a pinned IP but presents ``server_hostname`` for SNI/certs.
+
+    Dialing ``HTTPSConnection(pinned_ip)`` without SNI makes certificate hostname checks
+    fail against every real HTTPS MCP server. Keep the pin for DNS-rebinding defense and
+    wrap the socket with the original hostname.
+    """
+
+    def __init__(self, pinned_ip: str, *, server_hostname: str, port: int, timeout: float):
+        ctx = ssl.create_default_context()
+        super().__init__(pinned_ip, port=port, timeout=timeout, context=ctx)
+        self._adom_server_hostname = server_hostname
+
+    def connect(self) -> None:  # noqa: D401
+        sock = socket.create_connection((self.host, self.port), self.timeout)
+        if getattr(self, "_tunnel_host", None):
+            self.sock = sock
+            self._tunnel()
+            sock = self.sock
+        self.sock = self._context.wrap_socket(sock, server_hostname=self._adom_server_hostname)
+
+
 class _PinnedUpstreamClient:
     """Dials strictly the DNS-pinned IP returned by ``validate_upstream_url``."""
 
@@ -107,25 +139,46 @@ class _PinnedUpstreamClient:
         self.timeout = timeout
         self.parsed, self.pinned_ip = validate_upstream_url(upstream_url, allow_loopback=allow_loopback)
 
-    def post_json(self, body: bytes) -> Dict[str, Any]:
+    def post_json(
+        self,
+        body: bytes,
+        extra_headers: Optional[Dict[str, str]] = None,
+    ) -> Dict[str, Any]:
         port = self.parsed.port or (443 if self.parsed.scheme == "https" else 80)
         path = self.parsed.path or "/"
         if self.parsed.query:
             path = f"{path}?{self.parsed.query}"
-        conn_cls = http.client.HTTPSConnection if self.parsed.scheme == "https" else http.client.HTTPConnection
-        conn = conn_cls(self.pinned_ip, port=port, timeout=self.timeout)
+        hostname = self.parsed.hostname or ""
+        host_header = hostname if port in (80, 443) else f"{hostname}:{port}"
+        if self.parsed.scheme == "https":
+            conn: http.client.HTTPConnection = _PinnedHTTPSConnection(
+                self.pinned_ip,
+                server_hostname=hostname,
+                port=port,
+                timeout=self.timeout,
+            )
+        else:
+            conn = http.client.HTTPConnection(self.pinned_ip, port=port, timeout=self.timeout)
         try:
             headers = {
-                "Host": self.parsed.netloc,
+                "Host": host_header,
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 "Content-Length": str(len(body)),
             }
+            for key, value in (extra_headers or {}).items():
+                if key.lower() in _PASSTHROUGH_HEADERS and key.lower() not in ("content-type", "content-length", "host"):
+                    headers[key] = value
             conn.request("POST", path, body=body, headers=headers)
             resp = conn.getresponse()
             raw = resp.read()
             if resp.status >= 400:
                 raise RuntimeError(f"upstream returned HTTP {resp.status}")
+            ctype = (resp.getheader("Content-Type") or "").lower()
+            if "text/event-stream" in ctype:
+                # SSE / streamable-HTTP is not supported in this proxy yet — fail closed
+                # rather than returning an opaque byte stream the JSON-RPC path cannot screen.
+                raise RuntimeError("upstream returned SSE/streamable-HTTP; use stdio MCP gateway or disable SSE")
             parsed = json.loads(raw.decode("utf-8"))
             if not isinstance(parsed, dict):
                 raise RuntimeError("upstream response is not a JSON object")
@@ -159,7 +212,11 @@ class McpHttpProxyServer:
             def do_POST(self) -> None:  # noqa: N802
                 length = int(self.headers.get("Content-Length", "0"))
                 raw = self.rfile.read(length) if length > 0 else b""
-                status, response_obj = proxy._handle_payload(raw)
+                passthrough = {
+                    k: v for k, v in self.headers.items()
+                    if k.lower() in _PASSTHROUGH_HEADERS
+                }
+                status, response_obj = proxy._handle_payload(raw, client_headers=passthrough)
                 encoded = json.dumps(response_obj, separators=(",", ":")).encode("utf-8")
                 self.send_response(status)
                 self.send_header("Content-Type", "application/json")
@@ -188,7 +245,11 @@ class McpHttpProxyServer:
         if self._thread is not None:
             self._thread.join(timeout=2)
 
-    def _handle_payload(self, raw: bytes) -> Tuple[int, Any]:
+    def _handle_payload(
+        self,
+        raw: bytes,
+        client_headers: Optional[Dict[str, str]] = None,
+    ) -> Tuple[int, Any]:
         try:
             msg = json.loads(raw.decode("utf-8"))
         except Exception as exc:
@@ -197,16 +258,49 @@ class McpHttpProxyServer:
             results = []
             status = 200
             for item in msg:
-                st, res = self._handle_one(item)
+                st, res = self._handle_one(item, client_headers=client_headers)
                 if st != 200:
                     status = st
                 results.append(res)
             return status, results
         if not isinstance(msg, dict):
             return 400, _jsonrpc_error(None, -32600, "JSON-RPC payload must be an object or array")
-        return self._handle_one(msg)
+        return self._handle_one(msg, client_headers=client_headers)
 
-    def _handle_one(self, msg: Any) -> Tuple[int, Dict[str, Any]]:
+    @staticmethod
+    def _screen_auxiliary(method: str, params: Dict[str, Any]) -> Tuple[bool, str]:
+        """Mirror stdio gateway credential screens for resources/read and prompts/get."""
+        if method == "resources/read":
+            uri = params.get("uri")
+            if not isinstance(uri, str) or not uri.strip():
+                return False, "resources/read without a valid URI"
+            target = uri[7:] if uri.lower().startswith("file://") else uri
+            cred = tiers.credential_label(target)
+            if cred:
+                return False, f"credential containment: resources/read blocked ({cred})"
+            if tiers._DOTENV_RX.search(target.lower()) and not tiers._DOTENV_SAFE_RX.search(target.lower()):
+                return False, "credential containment: resources/read blocked (.env)"
+            secs = tiers.secret_labels([uri])
+            if secs:
+                return False, f"resources/read carries a credential-shaped value ({', '.join(secs)})"
+            return True, ""
+        if method == "prompts/get":
+            pargs = params.get("arguments") or {}
+            secs = tiers.secret_labels(tiers.strings(pargs))
+            if secs:
+                return False, f"prompts/get carries a credential-shaped value ({', '.join(secs)})"
+            for path in tiers.paths_in(pargs, everywhere=True):
+                cred = tiers.credential_label(path)
+                if cred:
+                    return False, f"credential containment: prompts/get blocked ({cred})"
+            return True, ""
+        return True, ""
+
+    def _handle_one(
+        self,
+        msg: Any,
+        client_headers: Optional[Dict[str, str]] = None,
+    ) -> Tuple[int, Dict[str, Any]]:
         if not isinstance(msg, dict):
             return 400, _jsonrpc_error(None, -32600, "Invalid Request")
         mid = msg.get("id")
@@ -226,9 +320,16 @@ class McpHttpProxyServer:
                     f"ADOM blocked MCP tool '{tool_name}': {rec['reason']}",
                     data={"signals": rec["signals"]},
                 )
+        elif method in ("resources/read", "prompts/get"):
+            ok, why = self._screen_auxiliary(method, params)
+            if not ok and self.mode == "enforce":
+                return 403, _jsonrpc_error(mid, -32001, f"ADOM blocked {method}: {why}")
 
         try:
-            upstream_resp = self.upstream.post_json(json.dumps(msg).encode("utf-8"))
+            upstream_resp = self.upstream.post_json(
+                json.dumps(msg).encode("utf-8"),
+                extra_headers=client_headers,
+            )
         except Exception as exc:
             # Fail closed on upstream HTTP >= 400, timeout, or transport failure
             return 502, _jsonrpc_error(mid, -32002, f"ADOM upstream fail-closed: {exc}")

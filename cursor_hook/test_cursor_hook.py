@@ -751,6 +751,23 @@ class HookEndToEnd(unittest.TestCase):
         self.assertEqual(p_bad.returncode, 2)
         self.assertEqual(json.loads(p_bad.stdout)["decision"], "block")
 
+        # Unrecognized payload shapes must fail closed in enforce (not exit 0)
+        p_unknown = subprocess.run(
+            [sys.executable, agent_hook, "--client", "codex"],
+            input=json.dumps({"foo": "bar", "unexpected": True}),
+            text=True, capture_output=True, env=env, timeout=10,
+        )
+        self.assertEqual(p_unknown.returncode, 2)
+        self.assertEqual(json.loads(p_unknown.stdout)["decision"], "block")
+
+        p_cc = subprocess.run(
+            [sys.executable, str(HERE / "adom_claude_hook.py")],
+            input=json.dumps({"hook_event_name": "SessionStart", "tool_name": ""}),
+            text=True, capture_output=True, env=env, timeout=10,
+        )
+        self.assertEqual(p_cc.returncode, 2)
+        self.assertIn("unrecognized hook payload", p_cc.stderr)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)
