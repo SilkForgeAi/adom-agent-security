@@ -7,7 +7,7 @@
 **Assume the agent is compromised. Bound what it can do next.**
 
 > **60-Second Code Review:**
-> 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway 3.14+ Reference Architecture](docs/KONG_AI_GATEWAY_ARCHITECTURE.md) · [UK AISI Inspect (`inspect_ai`) Integration](docs/UK_AISI_INSPECT_INTEGRATION.md)
+> 1. [Architecture & Trust Boundaries](docs/ARCHITECTURE.md) · [Kong AI Gateway Reference Architecture (3.14+, verified on 3.16)](docs/KONG_AI_GATEWAY_ARCHITECTURE.md) · [UK AISI Inspect (`inspect_ai`) Integration](docs/UK_AISI_INSPECT_INTEGRATION.md)
 > 2. [Multi-Plane Gateway (`mediated_gateway.py`)](adom/enforcement/mediated_gateway.py) · [Egress Proxy & DNS Pinning (`egress_proxy.py`)](adom/enforcement/egress_proxy.py) · [MCP HTTP Proxy (`mcp_http_proxy.py`)](adom/integrations/mcp_http_proxy.py) · [Kong Guardrail (`kong_guardrail.py`)](adom/integrations/kong_guardrail.py) · [UK AISI Inspect Approver (`inspect_approver.py`)](adom/integrations/inspect_approver.py)
 > 3. [Pinned Upstream Gap Reproductions](reproductions/) (Snyk `agent-scan`, NeMo Guardrails, OpenAI Agents SDK, Superagent, LiteLLM, OpenHands)
 
@@ -59,10 +59,10 @@ Hash-pinned author summary on `gpt-4o-mini-2024-07-18` (AgentDojo `0.1.35` / `v1
 | Evaluation (`gpt-4o-mini-2024-07-18`) | Baseline | ADOM (`adom` / `adom_query`) |
 |---|---|---|
 | **AutoDojo adaptive optimization targeting ADOM (`banking`, `36/36` cells, `144` pairs)** | `8/144` (`5.56%` ASR), `46.53%` util | **`0/144` (`0.00%` ASR)**, **`56.94%` util** (`50` blocked) |
-| **AutoDojo shipped `no_defense` adaptive cache (`banking`, `144` pairs)** | `84/144` (`58.33%` ASR), `41.67%` util | **`0/144` (`0.00%` ASR)**, **`59.72%` util** (`164` blocked) |
+| **AutoDojo shipped `no_defense` cache, optimized against the undefended agent and replayed (`banking`, `144` pairs)** | `84/144` (`58.33%` ASR), `41.67%` util | **`0/144` (`0.00%` ASR)**, **`59.72%` util** (`164` blocked) |
 | **`shopping`, first run on this suite (zero suite rules, `adom_query`, `180` pairs)** | `43/180` (`23.89%` ASR), `3/20` (`15%`) clean | **`6/180` (`3.33%` ASR)**, **`7/20` (`35%`) clean** |
 
-- **Research weak spot (open problem):** On the first run of the multi-step `github` and `dailylife` suites (zero per-suite rules), zero-LLM keyword matching (`adom_generic`) scored `0/60` clean utility across all 3 unseen suites and `adom_query` scored `1/20` on `github` and `dailylife` (vs. `10/20` and `9/20` baseline) due to omitted workflow prerequisites (`download_file_through_id`, 2FA `verify_*`, `input_to_webpage`) and strict atomic provenance over profile blobs; on `shopping`, all `6/180` remaining hits were same-capability item substitutions (`cart_add_product`). See [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
+- **Research weak spot (open problem):** On the first run of the multi-step `github` and `dailylife` suites (zero per-suite rules), zero-LLM keyword matching (`adom_generic`) scored `0/60` clean utility across all 3 suites on their first run and `adom_query` scored `1/20` on `github` and `dailylife` (vs. `10/20` and `9/20` baseline) due to omitted workflow prerequisites (`download_file_through_id`, 2FA `verify_*`, `input_to_webpage`) and strict atomic provenance over profile blobs; on `shopping`, all `6/180` remaining hits were same-capability item substitutions (`cart_add_product`). See [`evidence/2026-11-16/`](evidence/2026-11-16/README.md) · [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## Current work and evaluation status (including historical runs)
 
@@ -226,7 +226,7 @@ adom bench                                                      # 5-component la
 ADOM_MODE=enforce adom hook --client codex < payload.json       # offline coding-agent hook (cursor|claude-code|codex|github-copilot); default mode is observe (logs, never blocks), enforce blocks and fails closed
 adom mcp-stdio --name notes -- python3 server.py                # stdio MCP gateway with action-tier & taint enforcement
 adom mcp-http --name notes --upstream https://mcp.example/mcp   # streamable-HTTP MCP proxy (JSON + SSE replies, DNS-pinned upstream)
-adom kong-guard --emit-deck > kong-adom.yaml                    # Kong AI Gateway 3.14+ decK config (Kong-documented variables only; add --session-scope for budgets)
+adom kong-guard --emit-deck > kong-adom.yaml                    # decK config for Kong AI Gateway 3.14+ (verified on 3.16) (Kong-documented variables only; add --session-scope for budgets)
 adom kong-guard --port 8780 --allowed-tool read_ticket --allowed-tool send_email --approved-outbound corp.com   # deny-unknown is always on; grant exact tools
 adom inspect-policy --mode control_prefilter > adom-aisi.yaml   # UK AISI Inspect (inspect_ai) 2-stage AI-Control policy YAML
 adom verify-chain ~/.adom/cursor/decisions.jsonl                # verify tamper-evident SHA-256 audit chain
